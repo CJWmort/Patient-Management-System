@@ -21,7 +21,7 @@ input[type=checkbox]{
     transform: scale(1.5);
 }
 body{
-    background-image: url("../images/abc.jpeg");
+    background-image: url("../images/clouds.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
 }

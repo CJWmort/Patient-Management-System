@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+<body>
+    <div class="login_div">
+        <form action="#" method="GET">
+            <div>
+                <p><img class="loginlogo" src="../images/thkh-logo.jpg" alt="logo"></p>
+                <p class="logintitle">LOG IN</p>
+                <p><input class="loginID" type="text" placeholder="Login ID"></p>
+                <p><input class="password" type="text" placeholder="Password"></p>
+                <p class="remember"><input class="logincheck" type="checkbox"><label>Remember Password</label></p>
+                <p class="forgot"><a href="#">Forgot Password  ?</a></p>
+                <button class="login_button">Log In</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

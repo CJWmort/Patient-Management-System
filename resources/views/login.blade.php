@@ -9,7 +9,8 @@
 </head>
 <body>
     <div class="login_div">
-        <form action="#" method="GET">
+        <form action="#" method="POST">
+            {{ csrf_field() }}
             <div>
                 <p><img class="loginlogo" src="../images/thkh-logo.jpg" alt="logo"></p>
                 <p class="logintitle">LOG IN</p>
@@ -17,7 +18,7 @@
                 <p><input class="password" type="text" placeholder="Password"></p>
                 <p class="remember"><input class="logincheck" type="checkbox"><label>Remember Password</label></p>
                 <p class="forgot"><a href="#">Forgot Password  ?</a></p>
-                <button class="login_button">Log In</button>
+                <p><input class="login_button" type="submit" value="Log In"></p>
             </div>
         </form>
     </div>

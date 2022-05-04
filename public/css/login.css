@@ -36,12 +36,18 @@ body{
     margin-right: -50%;
     transform: translate(-50%, -50%);
 }
-.remember,
 .forgot{
     text-align: left;
 }
 .remember{
     margin-bottom: 15px;
+    text-align: left;
+    justify-content: space-around;
+}
+.remember b{
+    text-align: right;
+    color: red;
+    margin-left: 75px;
 }
 .forgot{
     font-size: 18px;
@@ -58,7 +64,7 @@ body{
     font-weight: bold;
 }
 .login_button:hover{
-    background-color: rgb(245, 245, 245, 0.5);
+    background-color: rgb(245, 245, 245, 0.4);
     outline: 2px solid black;
 }
 .login_button:hover{

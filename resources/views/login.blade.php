@@ -9,14 +9,19 @@
 </head>
 <body>
     <div class="login_div">
-        <form action="/main" method="POST">
+        <form action="{{route('login-user')}}" method="POST">
         {{ csrf_field() }}
             <div>
                 <p><img class="loginlogo" src="../images/thkh-logo.jpg" alt="logo"></p>
                 <p class="logintitle">LOG IN</p>
                 <p><input class="loginID" name="login_id" type="text" placeholder="Login ID" required></p>
                 <p><input class="password" name="password" type="password" placeholder="Password" required></p>
-                <p class="remember"><input class="logincheck" type="checkbox"><label>Remember Password</label></p>
+                <p class="remember">
+                    <input class="logincheck" type="checkbox"><label>Remember Password</label>
+                    @if($errors->any())
+                        <b>{{$errors->first()}}</b>
+                    @endif
+                </p>
                 <p class="forgot"><a href="#">Forgot Password  ?</a></p>
                 <p><input class="login_button" name="login" type="submit" value="Log In"></p>
             </div>

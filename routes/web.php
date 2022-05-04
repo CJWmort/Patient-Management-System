@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,13 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/login', [UserController::class, 'login'])->middleware('alreadyLoggedIn');
+Route::post('/login-user', [UserController::class, 'loginUser'])->name('login-user');
+Route::get('/main', [UserController::class, 'main'])->middleware('isLoggedIn');
+Route::get('/logout', [UserController::class, 'logout']);
 
-Route::get('/login', function () {
-    return view('login');
-});
 
-Route::post('/main', function () {
-    return view('main');
-});
+
 
 

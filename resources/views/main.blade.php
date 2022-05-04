@@ -8,6 +8,6 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-    logged in
+    <h1>This is the main page</h1>
 </body>
 </html>

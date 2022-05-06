@@ -7,6 +7,8 @@
     <title>THKH - Main</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
+<!--Include Nav Bar When Page Loads-->
+@include('layouts/header')
 <body>
     <h1>This is the main page</h1>
     <p>Name: {{$data->name}}</p>

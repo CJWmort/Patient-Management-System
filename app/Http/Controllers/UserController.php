@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Session;
+use Hash;
 
 class UserController extends Controller
 {
@@ -14,12 +15,11 @@ class UserController extends Controller
     }
     public function loginUser(Request $request)
     {
+        //check for valid login id
         $user = User::where('login_id', '=', $request->login_id)->first();
         if($user){
             //check for correct password
-            $userPass = $user->password; //$userPass is user input password
-            $databasePass = $request->password; //$databasePass is password of user in database
-            if($databasePass == $userPass){
+            if(Hash::check($request->password, $user->password)){
                 $request->session()->put('loginId', $user->id);
                 return redirect('main');
             }

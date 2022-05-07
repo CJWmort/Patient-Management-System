@@ -13,14 +13,17 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        //Create Users Table in your "thkh" database
+        //Run command "php artisan migrate"
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('login_id')->unique();
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('phone_number', 8);
+            $table->string('profile_pic');
+            $table->enum('role', ['Reporting Staff', 'Supervisor', 'Doctor', 'Pharmacy', 'Head of Department', 'Admin', 'Director']);
         });
     }
 

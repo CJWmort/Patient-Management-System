@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THKH - Login</title>
-    <link rel="stylesheet" type="text/css" href="<?php echo asset('public/css/login.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo asset('public/css/login.css?v=<?php echo time();') ?>">
 </head>
 <body>
     <div class="login_div">

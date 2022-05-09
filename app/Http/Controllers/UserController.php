@@ -11,7 +11,9 @@ class UserController extends Controller
 {
     public function login()
     {
-        return view('login');
+        $login = require 'thkh/html/login.php';
+        // return view('login');
+        return $login;
     }
     public function loginUser(Request $request)
     {

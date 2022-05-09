@@ -11,9 +11,7 @@ class UserController extends Controller
 {
     public function login()
     {
-        $login = require 'thkh/html/login.php';
-        // return view('login');
-        return $login;
+        return view('login');
     }
     public function loginUser(Request $request)
     {
@@ -23,7 +21,7 @@ class UserController extends Controller
             //check for correct password
             if(Hash::check($request->password, $user->password)){
                 $request->session()->put('loginId', $user->id);
-                return redirect('main');
+                return redirect('api/main');
             }
             else{
                 return back()->withErrors(['msg' => ['Invaid Login Details']]);
@@ -47,7 +45,7 @@ class UserController extends Controller
         //pull the loginId and send them back to login page
         if(Session::has('loginId')){
             Session::pull('loginId');
-            return redirect ('login');
+            return redirect ('api/login');
         }
     }
 }

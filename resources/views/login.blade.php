@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THKH - Login</title>
-    <link rel="stylesheet" type="text/css" href="<?php echo asset('public/css/login.css?v=<?php echo time();') ?>">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('public/css/login.css')}}">
 </head>
 <body>
     <div class="login_div">
         <form action="login-user" method="POST">
             {{ csrf_field() }}
             <div>
-                <p><img class="loginlogo" src="<?php echo asset('public/images/thkh-logo.jpg') ?>" alt="logo"></p>
+                <p><img class="loginlogo" src="{{URL::asset('public/images/thkh-logo.jpg')}}" alt="logo"></p>
                 <p class="logintitle">LOG IN</p>
                 <p><input class="loginID" name="login_id" type="text" placeholder="Login ID" required></p>
                 <p><input class="password" name="password" type="password" placeholder="Password" required></p>

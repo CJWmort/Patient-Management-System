@@ -26,6 +26,7 @@
     transform: translateY(-15px);
     width: 350px;
     color: white;
+    padding: 5px;
 }
 .searchInput::placeholder{
     color: white;

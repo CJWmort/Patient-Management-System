@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('public/css/nav.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('public/css/nav.css?v=').time()}}">
 </head>
 <div class="navigation">
     <div class="top-nav">
@@ -22,7 +22,6 @@
             <p><b>Role: </b>{{$data->role}}</p>
         </div>
     </div>
-    <a href="#" class="view-profile">View Profile</a>
     <a href="#" class="edit-profile">Edit Profile</a>
     <a href="#" class="change-password">Change Password</a>
     <a href="logout" class="logout">Logout</a>

@@ -85,7 +85,6 @@ a{
     font-weight: bold;
     text-align: left;
 }
-.view-profile,
 .edit-profile,
 .change-password,
 .logout{
@@ -96,7 +95,6 @@ a{
     transition: 0.3s;
     border-top: 3px solid #333;
 }
-.view-profile:hover,
 .edit-profile:hover,
 .change-password:hover,
 .logout:hover{
@@ -106,6 +104,7 @@ a{
 .logout{
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
+    color: red;
 }
 .closeBtn{
     cursor: pointer;

@@ -4,10 +4,13 @@
 <div class="navigation">
     <div class="top-nav">
         <img src="{{URL::asset('public/images/thkh-logo.jpg')}}" class="nav-logo" alt="logo">
-        <div class="search">
-            <button class="searchBtn"><img src="{{URL::asset('public/images/search.png')}}" width="40px" alt="search"></button>
-            <input type="text" class="searchInput" placeholder="Search By HOR No. / Year ...">
-        </div>
+        <form action="#" method="#">
+            {{ csrf_field() }}
+            <div class="search">
+                <button class="searchBtn"><img src="{{URL::asset('public/images/search.png')}}" width="40px" alt="search"></button>
+                <input type="text" class="searchInput" placeholder="Search By HOR No. / Year ...">
+            </div>
+        </form>
         <img onclick="toggleNav();" src="{{URL::asset('public/images/user.png')}}" class="nav-profile" alt="accountLogo">
     </div>
 </div>
@@ -15,8 +18,8 @@
     <div class="first-row">
         <img onclick="toggleNav();" src="{{URL::asset('public/images/close.png')}}" alt="close" class="closeBtn">
         <div class="user-detail">
-            <p>Name: {{$data->name}}</p>
-            <p>Role: {{$data->role}}</p>
+            <p><b>Name: </b>{{$data->name}}</p>
+            <p><b>Role: </b>{{$data->role}}</p>
         </div>
     </div>
     <a href="#" class="view-profile">View Profile</a>

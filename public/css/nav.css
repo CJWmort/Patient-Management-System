@@ -117,3 +117,6 @@ a{
 .closeBtn:hover{
     transform: scale(1.2);
 }
+.user-detail p{
+    font-weight: normal;
+}

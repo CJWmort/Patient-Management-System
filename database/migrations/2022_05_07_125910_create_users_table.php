@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('login_id')->unique();
+            $table->string('email');
+            $table->string('login_id');
             $table->string('password');
             $table->string('phone_number', 8);
             $table->string('profile_pic');

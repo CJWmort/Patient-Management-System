@@ -3,7 +3,7 @@
 </head>
 <div class="navigation">
     <div class="top-nav">
-        <img src="{{URL::asset('public/images/thkh-logo.jpg')}}" class="nav-logo" alt="logo">
+        <a href="main"><img src="{{URL::asset('public/images/thkh-logo.jpg')}}" class="nav-logo" alt="logo"></a>
         <form action="#" method="#">
             {{ csrf_field() }}
             <div class="search">
@@ -22,7 +22,7 @@
             <p><b>Role: </b>{{$data->role}}</p>
         </div>
     </div>
-    <a href="#" class="edit-profile">Edit Profile</a>
+    <a href="profile" class="edit-profile">Edit Profile</a>
     <a href="#" class="change-password">Change Password</a>
     <a href="logout" class="logout">Logout</a>
 </div>

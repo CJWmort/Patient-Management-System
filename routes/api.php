@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,4 @@ Route::get('/login', [UserController::class, 'login'])->middleware('alreadyLogge
 Route::post('/login-user', [UserController::class, 'loginUser'])->name('login-user');
 Route::get('/main', [UserController::class, 'main'])->middleware('isLoggedIn');
 Route::get('/logout', [UserController::class, 'logout']);
+Route::get('/profile', [PageController::class, 'profile'])->middleware('isLoggedIn');

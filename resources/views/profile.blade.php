@@ -10,6 +10,14 @@
 <!--Include Nav Bar When Page Loads-->
 @include('layouts/navigation')
 <body>
-    view profile
+    <div class="profile">
+        <p>Name: {{$data->name}}</p>
+        <p>Email: {{$data->email}}</p>
+        <p>Login ID: {{$data->login_id}}</p>
+        <p>Phone Number: {{$data->phone_number}}</p>
+        <p>Role: {{$data->role}}</p>
+        <a class="edit-profile" href="edit-profile">Edit Profile</a>
+        <a class="change-password" href="password">Change Password</a>
+    </div>
 </body>
 </html>

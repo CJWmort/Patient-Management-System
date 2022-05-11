@@ -70,17 +70,17 @@ a{
     right: 30px;
     transform: translateY(-400px);
     transition-duration: 0.5s;
+    overflow: hidden;
 }
 .showusernav{
     transform: translateY(60px);
 }
 .first-row{
     padding: 10px;
-    display: flex;
     user-select: none;
+    width: 180px;
 }
 .user-detail p{
-    margin-left: 20px;
     margin-bottom: 5px;
     font-weight: bold;
     text-align: left;

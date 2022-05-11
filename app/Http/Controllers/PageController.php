@@ -32,4 +32,14 @@ class PageController extends Controller
         }
         return view('password', compact('data'));
     }
+    public function manageuser()
+    {
+        $data = array();
+        $allusers = array();
+        if (Session::has('loginId')){
+            $data = User::where('id', '=', Session::get('loginId'))->first();
+            $allusers = User::all();
+        }
+        return view('user', compact('data', 'allusers'));
+    }
 }

@@ -48,4 +48,25 @@ class UserController extends Controller
             return redirect ('api/login');
         }
     }
+    public function delete($id)
+    {
+        //function to delete user
+        $user = User::find($id);
+        $result = $user->delete();
+        if ($result)
+        {
+            return back()->with('msg', $user->name . ' (' . $user->role .') Has Been Removed From The Records.');
+        }
+        else
+        {
+            return back()->with('msg', 'Failed To Remove User From The Records');
+        }
+
+    }
+    public function edit($id)
+    {
+        //function to edit user
+        $user = User::find($id);
+
+    }
 }

@@ -1,0 +1,57 @@
+body{
+    background-color: cornflowerblue;
+}
+.table-title{
+    font-size: 22px;
+}
+th,td{
+    outline: 2px solid black;
+    padding: 10px;
+}
+.users{
+    text-align: center;
+    background-color: aquamarine;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.alert{
+    background-color: cornflowerblue;
+}
+.alert-title{
+    padding: 10px 20px;
+    width: 50%;
+    margin: 0 auto;
+    background-color: rgb(205, 125, 205);
+    user-select: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+.alert-msg{
+    padding: 20px ;
+    width: 50%;
+    margin: 0 auto;
+    background-color: plum;
+    user-select: none;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+#edit,
+#delete{
+    padding: 0px;
+}
+.edit,
+.delete{
+    background-color: rgb(85, 171, 142);
+    font-weight: bold;
+    transition: 0.5s;
+    display: block;
+    padding: 10px 20px;
+}
+.edit:hover{
+    color: white;
+    background-color: rgb(53, 146, 53);
+}
+.delete:hover{
+    color: white;
+    background-color: rgb(215, 54, 54)
+}

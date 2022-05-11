@@ -8,7 +8,7 @@
             {{ csrf_field() }}
             <div class="search">
                 <button class="searchBtn"><img src="{{URL::asset('public/images/search.png')}}" width="40px" alt="search"></button>
-                <input type="text" class="searchInput" placeholder="Search By HOR No. / Year ...">
+                <input type="text" class="searchInput" placeholder="Search Reports By HOR No. / Year ...">
             </div>
         </form>
         <img onclick="toggleNav();" src="{{URL::asset('public/images/user.png')}}" id="change" class="nav-profile" alt="accountLogo">

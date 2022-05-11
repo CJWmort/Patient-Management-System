@@ -16,4 +16,20 @@ class PageController extends Controller
         }
         return view('profile', compact('data'));
     }
+    public function editprofile()
+    {
+        $data = array();
+        if (Session::has('loginId')){
+            $data = User::where('id', '=', Session::get('loginId'))->first();
+        }
+        return view('edit_profile', compact('data'));
+    }
+    public function password()
+    {
+        $data = array();
+        if (Session::has('loginId')){
+            $data = User::where('id', '=', Session::get('loginId'))->first();
+        }
+        return view('password', compact('data'));
+    }
 }

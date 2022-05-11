@@ -85,9 +85,10 @@ a{
     font-weight: bold;
     text-align: left;
 }
-.edit-profile,
-.change-password,
-.logout{
+#view-profile,
+#edit-profile,
+#change-password,
+#logout{
     font-weight: bold;
     text-align: center;
     padding: 10px;
@@ -95,13 +96,14 @@ a{
     transition: 0.3s;
     border-top: 3px solid #333;
 }
-.edit-profile:hover,
-.change-password:hover,
-.logout:hover{
+#view-profile:hover,
+#edit-profile:hover,
+#change-password:hover,
+#logout:hover{
     background-color: #8398AF;
     color: white;
 }
-.logout{
+#logout{
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
     color: red;

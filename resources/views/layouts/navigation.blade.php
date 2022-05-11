@@ -22,9 +22,10 @@
             <p><b>Role: </b>{{$data->role}}</p>
         </div>
     </div>
-    <a href="profile" class="edit-profile">Edit Profile</a>
-    <a href="#" class="change-password">Change Password</a>
-    <a href="logout" class="logout">Logout</a>
+    <a href="profile" id="view-profile">View Profile</a>
+    <a href="edit-profile" id="edit-profile">Edit Profile</a>
+    <a href="password" id="change-password">Change Password</a>
+    <a href="logout" id="logout">Logout</a>
 </div>
 <script>
     function toggleNav(){

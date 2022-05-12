@@ -16,13 +16,15 @@ class PageController extends Controller
         }
         return view('profile', compact('data'));
     }
-    public function editprofile()
+    public function editprofile($id)
     {
         $data = array();
+        $edituser = array();
         if (Session::has('loginId')){
             $data = User::where('id', '=', Session::get('loginId'))->first();
+            $edituser = User::find($id);
         }
-        return view('edit_profile', compact('data'));
+        return view('edit_profile', compact('data', 'edituser'));
     }
     public function password()
     {

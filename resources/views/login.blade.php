@@ -17,7 +17,7 @@
                 <p><input class="loginID" name="login_id" type="text" placeholder="Login ID" required></p>
                 <p><input class="password" name="password" type="password" placeholder="Password" required></p>
                 <p class="remember">
-                    <input class="logincheck" type="checkbox"><label>Remember Password</label>
+                    <input class="logincheck" name="remember" type="checkbox"><label>Remember Password</label>
                     @if($errors->any())
                         <b>{{$errors->first()}}</b>
                     @endif

@@ -21,6 +21,7 @@
             <p><b>Role: </b>{{$data->role}}</p>
         </div>
     </div>
+    <a href="main" id="home">Home</a>
     <a href="profile" id="view-profile">View Profile</a>
     <a href="edit-profile" id="edit-profile">Edit Profile</a>
     <a href="password" id="change-password">Change Password</a>
@@ -41,7 +42,7 @@
     //Close user nav if click outside of user nav
     var ignoreMe = document.getElementById("change");
     window.addEventListener('mouseup', function(event){
-        if (event.target != ignoreMe && event.target.parentNode != ignoreMe){
+        if (event.target != ignoreMe){
             var logo = document.getElementById('change');
             logo.src = "{{URL::asset('public/images/user.png')}}"
             document.querySelector(".user-nav").classList.remove('showusernav');

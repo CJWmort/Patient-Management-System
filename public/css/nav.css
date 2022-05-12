@@ -85,6 +85,7 @@ a{
     font-weight: bold;
     text-align: left;
 }
+#home,
 #view-profile,
 #edit-profile,
 #change-password,
@@ -96,6 +97,7 @@ a{
     transition: 0.3s;
     border-top: 3px solid #333;
 }
+#home:hover,
 #view-profile:hover,
 #edit-profile:hover,
 #change-password:hover,

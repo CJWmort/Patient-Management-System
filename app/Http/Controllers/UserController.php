@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Session;
 use Hash;
+use Auth;
 
 class UserController extends Controller
 {
@@ -20,6 +21,7 @@ class UserController extends Controller
         if($user){
             //check for correct password
             if(Hash::check($request->password, $user->password)){
+                //Create session for user
                 $request->session()->put('loginId', $user->id);
                 return redirect('api/main');
             }
@@ -61,12 +63,6 @@ class UserController extends Controller
         {
             return back()->with('msg', 'Failed To Remove User From The Records');
         }
-
-    }
-    public function edit($id)
-    {
-        //function to edit user
-        $user = User::find($id);
 
     }
 }

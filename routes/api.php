@@ -25,10 +25,9 @@ Route::post('/login-user', [UserController::class, 'loginUser'])->name('login-us
 Route::get('/main', [UserController::class, 'main'])->middleware('isLoggedIn');
 Route::get('/logout', [UserController::class, 'logout']);
 Route::get('/profile', [PageController::class, 'profile'])->middleware('isLoggedIn');
-Route::get('/edit-profile', [PageController::class, 'editprofile'])->middleware('isLoggedIn');
+Route::get('/edit-profile/{id}', [PageController::class, 'editprofile'])->middleware('isLoggedIn');
 Route::get('/password', [PageController::class, 'password'])->middleware('isLoggedIn');
 Route::get('/user', [PageController::class, 'manageuser'])->middleware('isLoggedIn');
 Route::get('/delete/{id}', [UserController::class, 'delete']);
-Route::get('/edit/{id}', [UserController::class, 'edit']);
 
 

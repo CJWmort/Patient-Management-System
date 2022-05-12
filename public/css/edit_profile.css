@@ -2,14 +2,14 @@
     text-align: center;
     background-color: lightcoral;
 }
-.edit-profile,
+.delete,
 .change-password{
     padding: 20px;
     background-color: bisque;
     display: inline-block;
     transition: 0.3s;
 }
-.edit-profile:hover,
+.delete:hover,
 .change-password:hover{
     background-color: lightblue;
     color: white;

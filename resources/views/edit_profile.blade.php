@@ -11,12 +11,14 @@
 @include('layouts/navigation')
 <body>
     <div class="profile">
+        EDIT PROFILE PAGE
         <p>Name: {{$edituser->name}}</p>
         <p>Email: {{$edituser->email}}</p>
         <p>Login ID: {{$edituser->login_id}}</p>
         <p>Phone Number: {{$edituser->phone_number}}</p>
         <p>Role: {{$edituser->role}}</p>
-        <a class="edit-profile" href="edit-profile">Edit Profile</a>
+        <a href="{{route('delete', ['id'=>$edituser->id])}}" class="delete" 
+        onclick="return confirm('Are you sure that you want to delete {{$edituser->name}} ({{$edituser->role}}) ?')">Delete</a>
         <a class="change-password" href="password">Change Password</a>
     </div>
 </body>

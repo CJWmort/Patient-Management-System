@@ -57,11 +57,11 @@ class UserController extends Controller
         $result = $user->delete();
         if ($result)
         {
-            return back()->with('msg', $user->name . ' (' . $user->role .') Has Been Removed From The Records.');
+            return redirect ('api/user')->with('msg', $user->name . ' (' . $user->role .') Has Been Removed From The Records.');
         }
         else
         {
-            return back()->with('msg', 'Failed To Remove User From The Records');
+            return redirect ('api/user')->with('msg', 'Failed To Remove User From The Records');
         }
 
     }

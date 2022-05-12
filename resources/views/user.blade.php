@@ -12,7 +12,7 @@
 <body>
     @if(session()->has('msg'))
     <div class="alert">
-        <div class="alert-title">User Removed Successfully</div>
+        <div class="alert-title">Alert Message</div>
         <div class="alert-msg">{{ session()->get('msg') }}</div>
     </div>
     @endif

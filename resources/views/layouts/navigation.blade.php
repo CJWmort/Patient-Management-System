@@ -3,7 +3,7 @@
 </head>
 <div class="navigation">
     <div class="top-nav">
-        <a href="main"><img src="{{URL::asset('public/images/thkh-logo.jpg')}}" class="nav-logo" alt="logo"></a>
+        <a href="{{route('home')}}"><img src="{{URL::asset('public/images/thkh-logo.jpg')}}" class="nav-logo" alt="logo"></a>
         <form action="#" method="#">
             {{ csrf_field() }}
             <div class="search">

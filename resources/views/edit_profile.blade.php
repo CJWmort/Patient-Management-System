@@ -19,6 +19,7 @@
         <p>Role: {{$edituser->role}}</p>
         <a href="{{route('delete', ['id'=>$edituser->id])}}" class="delete" 
         onclick="return confirm('Are you sure that you want to delete {{$edituser->name}} ({{$edituser->role}}) ?')">Delete</a>
+        <a class="update" href="update">Update</a>
         <a class="change-password" href="password">Change Password</a>
     </div>
 </body>

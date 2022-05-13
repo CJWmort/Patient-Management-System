@@ -29,5 +29,6 @@ Route::get('/edit-profile/{id}', [PageController::class, 'editprofile'])->middle
 Route::get('/password', [PageController::class, 'password'])->middleware('isLoggedIn')->name('password');
 Route::get('/user', [PageController::class, 'manageuser'])->middleware('isLoggedIn');
 Route::get('/delete/{id}', [UserController::class, 'delete'])->name('delete');
+Route::post('/add', [UserController::class, 'add'])->name('add');
 
 

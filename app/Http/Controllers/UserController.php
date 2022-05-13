@@ -61,8 +61,34 @@ class UserController extends Controller
         }
         else
         {
-            return redirect ('api/user')->with('msg', 'Failed To Remove User From The Records');
+            return redirect ('api/user')->withErrors(['msg' => ['Failed To Remove User From The Records.']]);
         }
 
+    }
+    public function add(Request $req)
+    {
+        //function to add user
+        $newuser = new User;
+        $newuser->name=$req->name;
+        $newuser->email=$req->email;
+        $newuser->login_id=$req->login_id;
+        $newuser->phone_number=$req->phone_number;
+        $newuser->password=$req->password;
+        $cfm_password = $req->cfm_password; //store confirm password value into variable $cfm_password
+        $newuser->role=$req->role;
+        if ($cfm_password == $req->password) //if password and confirm password is same
+        {
+            $result = $newuser->save();
+            if($result){
+                return redirect ('api/user')->with('msg', $newuser->name . ' (' . $newuser->role .') Has Been Added To The Records.');
+            }
+            else{
+                return redirect ('api/user')->withErrors(['msg' => ['Failed To Add User To The Records.']]);
+            }
+        }
+        else
+        {
+            return redirect ('api/user')->withErrors(['msg' => ['Incorrect Password. Please ensure password and confirm password are the same.']]);
+        }
     }
 }

@@ -114,3 +114,13 @@ td{
     font-weight: bold;
     font-size: 20px;
 }
+.error{
+    color: rgb(228, 4, 4);
+}
+small,
+#message{
+    position: absolute;
+    user-select: none;
+    margin-left: 10px;
+    font-weight: bold;
+}

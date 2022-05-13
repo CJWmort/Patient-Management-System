@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('login_id');
             $table->string('password');
             $table->string('phone_number', 8);
-            $table->string('profile_pic');
             $table->enum('role', ['Reporting Staff', 'Supervisor', 'Doctor', 'Pharmacy', 'Head of Department', 'Admin', 'Director']);
         });
     }

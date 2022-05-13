@@ -35,6 +35,7 @@
 }
 .searchBtn{
     background-color: transparent;
+    background: none;
     border: none;
     cursor: pointer;
     margin-right: 20px;

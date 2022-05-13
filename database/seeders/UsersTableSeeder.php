@@ -24,7 +24,6 @@ class UsersTableSeeder extends Seeder
             'login_id'=>'smith123',
             'password'=>Hash::make('123'),
             'phone_number'=>'87667653',
-            'profile_pic'=>'',
             'role'=>6,
         ]);
         DB::table('users')->insert([
@@ -33,7 +32,6 @@ class UsersTableSeeder extends Seeder
             'login_id'=>'irene123',
             'password'=>Hash::make('1234'),
             'phone_number'=>'87347658',
-            'profile_pic'=>'',
             'role'=>7,
         ]);
     }

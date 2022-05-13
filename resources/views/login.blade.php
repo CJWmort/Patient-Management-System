@@ -14,8 +14,8 @@
             <div>
                 <p><img class="loginlogo" src="{{URL::asset('public/images/thkh-logo.jpg')}}" alt="logo"></p>
                 <p class="logintitle">LOG IN</p>
-                <p><input class="loginID" name="login_id" type="text" placeholder="Login ID" required></p>
-                <p><input class="password" name="password" type="password" placeholder="Password" required></p>
+                <p><input class="loginID" title="Enter your login id" name="login_id" type="text" placeholder="Login ID" required></p>
+                <p><input class="password" title="Enter your password" name="password" type="password" placeholder="Password" required></p>
                 <p class="remember">
                     <input class="logincheck" name="remember" type="checkbox"><label>Remember Password</label>
                     @if($errors->any())

@@ -73,11 +73,12 @@ class UserController extends Controller
         $newuser->email=$req->email;
         $newuser->login_id=$req->login_id;
         $newuser->phone_number=$req->phone_number;
-        $newuser->password=$req->password;
+        $password = $req->password;
         $cfm_password = $req->cfm_password; //store confirm password value into variable $cfm_password
         $newuser->role=$req->role;
-        if ($cfm_password == $req->password) //if password and confirm password is same
+        if ($cfm_password == $password) //if password and confirm password is same
         {
+            $newuser->password = Hash::make($req->password);
             $result = $newuser->save();
             if($result){
                 return redirect ('api/user')->with('msg', $newuser->name . ' (' . $newuser->role .') Has Been Added To The Records.');
@@ -89,6 +90,34 @@ class UserController extends Controller
         else
         {
             return redirect ('api/user')->withErrors(['msg' => ['Incorrect Password. Please ensure password and confirm password are the same.']]);
+        }
+    }
+    public function update(Request $req){
+        $updateuser = User::find($req->userid);
+        $updateuser->name=$req->name;
+        $updateuser->email=$req->email;
+        $updateuser->login_id=$req->login_id;
+        $updateuser->phone_number=$req->phone_number;
+        $updateuser->role=$req->role;
+        if ($req->cfm_password){
+            if ($req->cfm_password == $req->password){
+                $updateuser->password = Hash::make($req->password);
+                $result = $updateuser->save();
+                if($result){
+                    return back()->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
+                }
+                else{
+                    return back()->withErrors(['msg' => ['Failed To Update User In The Records.']]);
+                }
+            }
+            else
+            {
+                return back()->withErrors(['msg' => ['Incorrect Password. Please ensure password and confirm password are the same.']]);
+            }
+        }
+        else{
+            $updateuser->save();
+            return back()->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
         }
     }
 }

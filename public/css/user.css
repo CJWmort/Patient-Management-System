@@ -117,7 +117,6 @@ td{
 .error{
     color: rgb(228, 4, 4);
 }
-small,
 #message{
     position: absolute;
     user-select: none;

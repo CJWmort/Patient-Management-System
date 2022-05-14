@@ -10,17 +10,75 @@
 <!--Include Nav Bar When Page Loads-->
 @include('layouts/navigation')
 <body>
+@if($errors->any())
+    <div class="alert">
+        <div class="alert-title error">Alert Message</div>
+        <div class="alert-msg error">{{$errors->first()}}</div>
+    </div>
+    @endif
+    @if(session()->has('msg'))
+    <div class="alert">
+        <div class="alert-title">Alert Message</div>
+        <div class="alert-msg">{{ session()->get('msg') }}</div>
+    </div>
+    @endif
     <div class="profile">
-        EDIT PROFILE PAGE
-        <p>Name: {{$edituser->name}}</p>
-        <p>Email: {{$edituser->email}}</p>
-        <p>Login ID: {{$edituser->login_id}}</p>
-        <p>Phone Number: {{$edituser->phone_number}}</p>
-        <p>Role: {{$edituser->role}}</p>
-        <a href="{{route('delete', ['id'=>$edituser->id])}}" class="delete" 
-        onclick="return confirm('Are you sure that you want to delete {{$edituser->name}} ({{$edituser->role}}) ?')">Delete</a>
-        <a class="update" href="update">Update</a>
-        <a class="change-password" href="password">Change Password</a>
+        <form class="editform" action="{{route('update')}}" method="POST">
+            <input type="hidden" name="userid" value="{{$edituser->id}}">
+            <label>Name:</label>
+            <input type="text" name="name" value="{{$edituser->name}}" title="Enter user's name" placeholder="Name" required><br>
+            <label>Email:</label>
+            <input type="email" name="email" value="{{$edituser->email}}" title="Enter user's email" placeholder="Email" required><br>
+            <label>Login ID:</label>
+            <input type="text" name="login_id" value="{{$edituser->login_id}}" title="Enter user's login id" placeholder="Login ID" required><br>
+            <label>Phone Number:</label>
+            <input type="tel" name="phone_number" value="{{$edituser->phone_number}}" title="Enter user's phone number (8 Digits, starting with 6, 8 or 9)" placeholder="Phone No."  pattern="[6|8|9]{1}[0-9]{7}" required><br>
+            <label>Role:</label>
+            <select name="role" required>
+                <option value="{{$edituser->role}}" selected>{{$edituser->role}}</option>
+                <option value="Reporting Staff">Reporting Staff</option>
+                <option value="Supervisor">Supervisor</option>
+                <option value="Doctor">Doctor</option>
+                <option value="Pharmacy">Pharmacy</option>
+                <option value="Head of Department">Head of Department</option>
+                <option value="Admin">Admin</option>
+                <option value="Director">Director</option>
+            </select><br>
+            <div class="hide-field">
+                <label>Password:</label>
+                <input type="password" id="password" onkeyup='check();' name="password" title="Enter user's password" placeholder="Password"><br>
+                <label>Confirm Password:</label>
+                <input type="password" id="cpassword" onkeyup='check();' name="cfm_password" title="Confirm user's password" placeholder="Confirm Password"><span id="message"></span><br>
+            </div>
+            <a href="{{route('delete', ['id'=>$edituser->id])}}" class="delete" 
+            onclick="return confirm('Are you sure that you want to delete {{$edituser->name}} ({{$edituser->role}}) ?')">Delete</a>
+            <input type="submit" class="update" value="Update">
+        </form>
+        <button class="change-password" onclick="openField();">Change Password</button>
     </div>
 </body>
+<script>
+    function openField(){
+        //toggle to hide or show change password field
+        document.querySelector(".hide-field").classList.toggle('show-field');
+        var buttontext = document.querySelector(".change-password");
+        if(buttontext.innerHTML == "Change Password"){
+            buttontext.innerHTML = "Close"
+        }
+        else{
+            buttontext.innerHTML = "Change Password"
+        }
+    }
+    var check = function(){
+        if (document.getElementById('password').value ==
+        document.getElementById('cpassword').value){
+            document.getElementById('message').style.color = 'green';
+            document.getElementById('message').innerHTML = 'matching';
+        }
+        else{
+            document.getElementById('message').style.color = 'red';
+            document.getElementById('message').innerHTML = 'not matching';
+        }
+    }
+</script>
 </html>

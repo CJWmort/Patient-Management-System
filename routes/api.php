@@ -30,5 +30,8 @@ Route::get('/password', [PageController::class, 'password'])->middleware('isLogg
 Route::get('/user', [PageController::class, 'manageuser'])->middleware('isLoggedIn');
 Route::get('/delete/{id}', [UserController::class, 'delete'])->name('delete');
 Route::post('/add', [UserController::class, 'add'])->name('add');
+Route::post('/update', [UserController::class, 'update'])->name('update');
+
+
 
 

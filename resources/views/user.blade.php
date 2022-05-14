@@ -24,7 +24,7 @@
     @endif
     <div class="createuser">
         <button class="toggleBtn" onclick="openForm();">Create New User</button>
-        <form class="hide-form" action="add" method="POST">
+        <form class="hide-form" action="{{route('add')}}" method="POST">
             <label>Name:</label>
             <input type="text" name="name" title="Enter user's name" placeholder="Name" required><br>
             <label>Email:</label>
@@ -32,7 +32,7 @@
             <label>Login ID:</label>
             <input type="text" name="login_id" title="Enter user's login id" placeholder="Login ID" required><br>
             <label>Phone Number:</label>
-            <input type="tel" name="phone_number" title="Enter user's phone number (8 Digits, starting with 6, 8 or 9)" placeholder="Phone No."  pattern="[6|8|9]{1}[0-9]{7}" required><small>Format: +65 - (6|8|9)XXX-YYYY</small><br>
+            <input type="tel" name="phone_number" title="Enter user's phone number (8 Digits, starting with 6, 8 or 9)" placeholder="Phone No."  pattern="[6|8|9]{1}[0-9]{7}" required><br>
             <label>Password:</label>
             <input type="password" id="password" onkeyup='check();' name="password" title="Enter user's password" placeholder="Password" required><br>
             <label>Confirm Password:</label>
@@ -69,8 +69,8 @@
             <td>{{$user->email}}</td>
             <td>{{$user->login_id}}</td>
             <td>{{$user->phone_number}}</td>
-            <td id="edit"><a href="edit-profile/{{$user->id}}" class="edit">Edit</a></td>
-            <td id="delete"><a href="delete/{{$user->id}}" class="delete" 
+            <td id="edit"><a href="{{route('edit-profile', ['id'=>$user->id])}}" class="edit">Edit</a></td>
+            <td id="delete"><a href="{{route('delete', ['id'=>$user->id])}}" class="delete" 
             onclick="return confirm('Are you sure that you want to delete {{$user->name}} ({{$user->role}}) ?')">Delete</a></td>
         </tr>
         @endforeach

@@ -35,14 +35,13 @@
 }
 .searchBtn{
     background-color: transparent;
-    background: none;
     border: none;
     cursor: pointer;
     margin-right: 20px;
-    transition-duration: 0.3s;
 }
 .searchBtn:hover{
     transform: scale(1.2);
+    transition-duration: 0.2s;
 }
 .nav-profile{
     width: 50px;

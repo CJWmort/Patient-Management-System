@@ -13,7 +13,7 @@
     <div class="grid-container">
         <a class="griditem view-charts" href="#">View Charts</a>
         <a class="griditem manage-users" href="user">Manage Users</a>
-        <a class="griditem customise" href="#">Customise EHOR</a>
+        <a class="griditem customise" href="{{route('ehor')}}">Customise EHOR</a>
         <a class="griditem view-reports" href="#">View Reports</a>
     </div>
 </body>

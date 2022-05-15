@@ -31,6 +31,7 @@ Route::get('/delete/{id}', [UserController::class, 'delete'])->name('delete');
 Route::post('/add', [UserController::class, 'add'])->name('add');
 Route::post('/update', [UserController::class, 'update'])->name('update');
 Route::get('/search', [UserController::class, 'search'])->name('search');
+Route::get('/ehor', [PageController::class, 'ehor'])->middleware('isLoggedIn')->name('ehor');
 
 
 

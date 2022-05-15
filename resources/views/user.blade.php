@@ -23,7 +23,13 @@
     </div>
     @endif
     <div class="createuser">
-        <button class="toggleBtn" onclick="openForm();">Create New User</button>
+        <div class="flex-row">
+            <button class="toggleBtn" onclick="openForm();">Create New User</button>
+            <form action="{{route('search')}}" method="GET">
+                <input type="text" name="finduser" class="search-field" placeholder="Search Users By Name / Login ID ...">
+                <input type="submit" class="findBtn" value="Find User">
+            </form>
+        </div>
         <form class="hide-form" action="{{route('add')}}" method="POST">
             <label>Name:</label>
             <input type="text" name="name" title="Enter user's name" placeholder="Name" required><br>
@@ -74,6 +80,11 @@
             onclick="return confirm('Are you sure that you want to delete {{$user->name}} ({{$user->role}}) ?')">Delete</a></td>
         </tr>
         @endforeach
+        @if ($allusers->count() == 0)
+        <tr class="tablerow">
+            <th colspan="7" class="noUser">There Are No Users Found Matching Your Search : "{{$input}}"</th>
+        </tr>
+        @endif
     </table>
 </body>
 <script>

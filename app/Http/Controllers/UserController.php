@@ -120,4 +120,16 @@ class UserController extends Controller
             return back()->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
         }
     }
+    public function search(Request $request)
+    {
+        //search database users table for name and login_id that matches the search input
+        $input = $request->finduser;
+        $data = array();
+        if (Session::has('loginId')){
+            $data = User::where('id', '=', Session::get('loginId'))->first();
+        }
+        $allusers = array();
+        $allusers = User::where('name','like','%'.$input.'%')->orWhere('login_id','like','%'.$input.'%')->get();
+        return view('user', compact('data','allusers','input'));
+    }
 }

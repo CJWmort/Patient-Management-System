@@ -11,13 +11,12 @@
 @include('layouts/navigation')
 <body>
     <div class="profile">
-        <p>Name: {{$data->name}}</p>
-        <p>Email: {{$data->email}}</p>
-        <p>Login ID: {{$data->login_id}}</p>
-        <p>Phone Number: {{$data->phone_number}}</p>
-        <p>Role: {{$data->role}}</p>
-        <a class="edit-profile" href="edit-profile">Edit Profile</a>
-        <a class="change-password" href="password">Change Password</a>
+        <label>Name:</label><span>{{$data->name}}</span><br>
+        <label>Email:</label><span>{{$data->email}}</span><br>
+        <label>Login ID:</label><span>{{$data->login_id}}</span><br>
+        <label>Phone Number:</label><span>{{$data->phone_number}}</span><br>
+        <label>Role:</label><span>{{$data->role}}</span><br>
+        <a class="edit-profile" href="{{route('edit-profile', ['id'=>$data->id])}}">Edit Profile</a>
     </div>
 </body>
 </html>

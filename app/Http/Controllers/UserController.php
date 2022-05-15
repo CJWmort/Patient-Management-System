@@ -99,7 +99,7 @@ class UserController extends Controller
         $updateuser->login_id=$req->login_id;
         $updateuser->phone_number=$req->phone_number;
         $updateuser->role=$req->role;
-        if ($req->cfm_password){
+        if ($req->cfm_password){ //check if admin want to change password
             if ($req->cfm_password == $req->password){
                 $updateuser->password = Hash::make($req->password);
                 $result = $updateuser->save();

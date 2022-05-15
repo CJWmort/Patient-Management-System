@@ -24,7 +24,6 @@
     <a href="{{route('home')}}" id="home">Home</a>
     <a href="{{route('profile')}}" id="view-profile">View Profile</a>
     <a href="{{route('edit-profile', ['id'=>$data->id])}}" id="edit-profile">Edit Profile</a>
-    <a href="{{route('password')}}" id="change-password">Change Password</a>
     <a href="{{route('logout')}}" id="logout">Logout</a>
 </div>
 <script>

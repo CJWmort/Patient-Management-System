@@ -1,16 +1,35 @@
-.profile{
+body{
+    background-color: cornflowerblue;
     text-align: center;
-    background-color: lightcoral;
 }
-.edit-profile,
-.change-password{
-    padding: 20px;
-    background-color: bisque;
+.profile{
+    background-color: rgb(196, 215, 231);
+    margin-top: 50px;
     display: inline-block;
+    width: 500px;
+    padding: 20px;
+}
+.profile label{
+    text-align: right;
+    display: inline-block;
+    width: 200px;
+    margin-right: 30px;
+}
+.profile span{
+    width: 200px;
+    display: inline-block;
+    text-align: left;
+}
+.edit-profile{
+    padding: 10px 20px;
+    background-color: rgb(251, 189, 76);
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 20px;
+    border-radius: 20px;
     transition: 0.3s;
 }
-.edit-profile:hover,
-.change-password:hover{
-    background-color: lightblue;
+.edit-profile:hover{
+    background-color: darkorange;
     color: white;
 }

@@ -89,7 +89,6 @@ a{
 #home,
 #view-profile,
 #edit-profile,
-#change-password,
 #logout{
     font-weight: bold;
     text-align: center;
@@ -101,7 +100,6 @@ a{
 #home:hover,
 #view-profile:hover,
 #edit-profile:hover,
-#change-password:hover,
 #logout:hover{
     background-color: #8398AF;
     color: white;

@@ -112,7 +112,7 @@ class UserController extends Controller
             }
             else
             {
-                return back()->withErrors(['msg' => ['Incorrect Password. Please ensure password and confirm password are the same.']]);
+                return back()->withErrors(['msg' => ['Please ensure password and confirm password are the same.']]);
             }
         }
         else{

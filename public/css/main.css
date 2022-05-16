@@ -1,22 +1,39 @@
+body{
+    background-color: #16c2d5;
+}
 .grid-container{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     text-align: center;
-    grid-gap: 10px;
-    margin: 10px;
+    grid-column-gap: 50px;
+    grid-row-gap: 30px;
+    margin: 70px 200px;
 }
 .griditem{
-    background-color: bisque;
-    outline: 2px solid black;
-    padding: 30px;
+    background-color: #ffe3d6;
+    padding: 50px 0px;
     transition: 0.3s;
+    font-weight: bold;
+    font-size: 30px;
+    border-radius: 30px;
 }
 .griditem:hover{
-    background-color: forestgreen;
+    background-color: #d7baad;
     color: white;
+    box-shadow: 4px 4px 12px #333;
+    transform: scale(1.02);
 }
-.customise,
-.manage-users{
-    background-color: rgb(184, 129, 235);
+.chart,
+.manage,
+.setting,
+.view{
+    width: 100px;
+    transition: 0.3s;
+}
+.griditem:hover > .chart,
+.griditem:hover > .manage,
+.griditem:hover > .setting,
+.griditem:hover > .view{
+    transform: scale(1.2);
 }

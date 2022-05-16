@@ -5,7 +5,7 @@
 }
 .top-nav{
     display: flex;
-    background-color: #8398AF;
+    background-color: #89dee2;
     justify-content: space-between;
     height: 80px;
     padding: 10px;
@@ -27,11 +27,7 @@
     background-color: transparent;
     transform: translateY(-15px);
     width: 350px;
-    color: white;
     padding: 5px;
-}
-.searchInput::placeholder{
-    color: white;
 }
 .searchBtn{
     background-color: transparent;
@@ -58,7 +54,7 @@ a{
     color: black;
 }
 .user-nav{
-    background-color: #b7d3f2;
+    background-color: #89dee2;
     outline: 3px solid #333;
     display: inline-block;
     border-radius: 15px;
@@ -100,7 +96,7 @@ a{
 #view-profile:hover,
 #edit-profile:hover,
 #logout:hover{
-    background-color: #8398AF;
+    background-color: #5aa5a9;
     color: white;
 }
 #logout{

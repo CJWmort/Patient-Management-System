@@ -12,8 +12,8 @@
 <body>
     @if($errors->any())
     <div class="alert">
-        <div class="alert-title error">Alert Message</div>
-        <div class="alert-msg error">{{$errors->first()}}</div>
+        <div class="alert-title error">Error Message</div>
+        <div class="alert-msg">{{$errors->first()}}</div>
     </div>
     @endif
     @if(session()->has('msg'))
@@ -23,42 +23,57 @@
     </div>
     @endif
     <div class="createuser">
-        <div class="flex-row">
-            <button class="toggleBtn" onclick="openForm();">Create New User</button>
-            <form action="{{route('search')}}" method="GET">
-                <input type="text" name="finduser" class="search-field" placeholder="Search Users By Name / Login ID ...">
-                <input type="submit" class="findBtn" value="Find User">
-            </form>
-        </div>
+        <button class="toggleBtn" onclick="openForm();">Create New User</button>    
         <form class="hide-form" action="{{route('add')}}" method="POST">
-            <label>Name:</label>
-            <input type="text" name="name" title="Enter user's name" placeholder="Name" required><br>
-            <label>Email:</label>
-            <input type="email" name="email" title="Enter user's email" placeholder="Email" required><br>
-            <label>Login ID:</label>
-            <input type="text" name="login_id" title="Enter user's login id" placeholder="Login ID" required><br>
-            <label>Phone Number:</label>
-            <input type="tel" name="phone_number" title="Enter user's phone number (8 Digits, starting with 6, 8 or 9)" placeholder="Phone No."  pattern="[6|8|9]{1}[0-9]{7}" required><br>
-            <label>Password:</label>
-            <input type="password" id="password" onkeyup='check();' name="password" title="Enter user's password" placeholder="Password" required><br>
-            <label>Confirm Password:</label>
-            <input type="password" id="cpassword" onkeyup='check();' name="cfm_password" title="Confirm user's password" placeholder="Confirm Password" required><span id="message"></span><br>
-            <label>Role:</label>
-            <select name="role" required>
-                <option value="" disabled selected>Select a role</option>
-                <option value="Reporting Staff">Reporting Staff</option>
-                <option value="Supervisor">Supervisor</option>
-                <option value="Doctor">Doctor</option>
-                <option value="Pharmacy">Pharmacy</option>
-                <option value="Head of Department">Head of Department</option>
-                <option value="Admin">Admin</option>
-                <option value="Director">Director</option>
-            </select><br>
-            <input type="submit" class="createBtn" value="Create User">
+            <div class="form-grid">
+                <div>
+                    <label>Name:</label><br>
+                    <input type="text" name="name" title="Enter user's name" placeholder="Name" required>
+                </div>
+                <div>
+                    <label>Email:</label><br>
+                    <input type="email" name="email" title="Enter user's email" placeholder="Email" required>
+                </div>
+                <div>
+                    <label>Login ID:</label><br>
+                    <input type="text" name="login_id" title="Enter user's login id" placeholder="Login ID" required>
+                </div>
+                <div>
+                    <label>Phone Number:</label><br>
+                    <input type="tel" name="phone_number" title="Enter user's phone number (8 Digits, starting with 6, 8 or 9)" placeholder="Phone No."  pattern="[6|8|9]{1}[0-9]{7}" required>
+                </div>
+                <div>
+                    <label>Password:</label><br>
+                    <input type="password" id="password" onkeyup='check();' name="password" title="Enter user's password" placeholder="Password" required>
+                </div>
+                <div>
+                    <label>Confirm Password:</label><br>
+                    <input type="password" id="cpassword" onkeyup='check();' name="cfm_password" title="Confirm user's password" placeholder="Confirm Password" required><p id="message"></p>
+                </div>
+                <div>
+                    <label>Role:</label><br>
+                    <select name="role" required>
+                        <option value="" disabled selected>Select a role</option>
+                        <option value="Reporting Staff">Reporting Staff</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="Doctor">Doctor</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                        <option value="Head of Department">Head of Department</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Director">Director</option>
+                    </select>
+                </div>
+                <div><input type="submit" class="createBtn" value="Create User"></div>
+            </div>
         </form>
     </div>
     <table class="users" cellspacing="0">
-        <th colspan="7" class="table-title">THKH EHOR USERS</th>
+        <th colspan="7" class="table-title">
+            <form class="find-form" action="{{route('search')}}" method="GET">
+                <input type="text" name="finduser" class="search-field" placeholder="Search Users By Name / Login ID ...">
+                <input type="submit" class="findBtn" value="Find User">
+            </form>
+        </th>
         <tr class="tablehead">
             <th>NAME</th>
             <th>ROLE</th>
@@ -67,7 +82,7 @@
             <th>PHONE NO.</th>
             <th>EDIT</th>
             <th>DELETE</th>
-        </tr>     
+        </tr> 
         @foreach ($allusers as $user)
         <tr class="tablerow">
             <td>{{$user->name}}</td>
@@ -103,11 +118,11 @@
         if (document.getElementById('password').value ==
         document.getElementById('cpassword').value){
             document.getElementById('message').style.color = 'green';
-            document.getElementById('message').innerHTML = 'matching';
+            document.getElementById('message').innerHTML = 'Password matching';
         }
         else{
             document.getElementById('message').style.color = 'red';
-            document.getElementById('message').innerHTML = 'not matching';
+            document.getElementById('message').innerHTML = 'Password not matching';
         }
     }
 </script>

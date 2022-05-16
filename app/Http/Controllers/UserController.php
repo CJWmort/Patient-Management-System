@@ -99,27 +99,20 @@ class UserController extends Controller
         $updateuser->login_id=$req->login_id;
         $updateuser->phone_number=$req->phone_number;
         $updateuser->role=$req->role;
-        if ($req->cfm_password){ //check if admin want to change password
-            if ($req->cfm_password == $req->password){
-                $updateuser->password = Hash::make($req->password);
-                $result = $updateuser->save();
-                if($result){
-                    return back()->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
-                }
-                else{
-                    return back()->withErrors(['msg' => ['Failed To Update User In The Records.']]);
-                }
+        if ($req->password != '' && $req->cfm_password == $req->password){
+            $updateuser->password = Hash::make($req->password);
+            $result = $updateuser->save();
+            if($result){
+                return back()->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
             }
-            else
-            {
-                return back()->withErrors(['msg' => ['Please ensure password and confirm password are the same.']]);
+            else{
+                return back()->withErrors(['msg' => ['Failed To Update User In The Records.']]);
             }
         }
-        else{
-            $updateuser->save();
-            return back()->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
-        }
+        $updateuser->save();
+        return back()->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
     }
+    
     public function search(Request $request)
     {
         //search database users table for name and login_id that matches the search input

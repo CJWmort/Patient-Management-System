@@ -11,6 +11,8 @@
 @include('layouts/navigation')
 <body>
     <div class="profile">
+        <img class="userlogo" src="{{URL::asset('public/images/user.png')}}" alt="user"><br>
+        <h2>My Profile</h2>
         <label>Name:</label><span>{{$data->name}}</span><br>
         <label>Email:</label><span>{{$data->email}}</span><br>
         <label>Login ID:</label><span>{{$data->login_id}}</span><br>

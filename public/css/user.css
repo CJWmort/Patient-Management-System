@@ -1,5 +1,5 @@
 body{
-    background-color: #16c2d5;
+    background-color: #57b2af;
 }
 .table-title{
     background-color: #2e4450;
@@ -19,7 +19,7 @@ td{
     margin: 0 auto;
 }
 .alert{
-    background-color: #16c2d5;
+    background-color: #57b2af;
 }
 .alert-title{
     padding: 10px 20px;
@@ -90,7 +90,7 @@ td{
     background-color: #d7baad;
 }
 .createuser{
-    background-color: #16c2d5;
+    background-color: #57b2af;
     text-align: center;
 }
 .hide-form{

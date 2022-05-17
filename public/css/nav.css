@@ -1,3 +1,6 @@
+/*
+#8BD4D1, #57B2AF, #359692, #1E8884, #0D6E6B
+*/
 *{
     margin: 0;
     padding: 0;
@@ -5,7 +8,7 @@
 }
 .top-nav{
     display: flex;
-    background-color: #89dee2;
+    background-color: #88d4d1;
     justify-content: space-between;
     height: 80px;
     padding: 10px;
@@ -54,7 +57,7 @@ a{
     color: black;
 }
 .user-nav{
-    background-color: #89dee2;
+    background-color: #88d4d1;
     outline: 3px solid #333;
     display: inline-block;
     border-radius: 15px;
@@ -96,8 +99,8 @@ a{
 #view-profile:hover,
 #edit-profile:hover,
 #logout:hover{
-    background-color: #5aa5a9;
-    color: white;
+    background-color: #1e8884;
+    color: whitesmoke;
 }
 #logout{
     border-bottom-right-radius: 15px;

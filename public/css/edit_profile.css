@@ -1,11 +1,11 @@
 body{
-    background-color: #16c2d5;
+    background-color: #57b2af;
 }
 .profile{
     text-align: center;
     margin-top: 30px;
     background-color: #ffe3d6;
-    margin: 60px 300px 0px 300px;
+    margin: 60px 250px 0px 250px;
     padding: 20px;
     border-radius: 20px;
 }
@@ -78,7 +78,7 @@ body{
     font-weight: bold;
 }
 .alert{
-    background-color: cornflowerblue;
+    background-color: #57b2af;
 }
 .alert-title{
     padding: 10px 20px;

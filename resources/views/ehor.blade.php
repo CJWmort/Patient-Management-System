@@ -10,7 +10,10 @@
 <!--Include Nav Bar When Page Loads-->
 @include('layouts/navigation')
 <body>
-    customise ehor
+    <div class="ehortitle">EDIT EHOR</div>
+    <button type="button" class="location">Location Of Occurrence</button>
+    <button type="button" class="site">Site Of Occurrence</button>
+    <button type="button" class="type">Type Of Occurrence</button>
 </body>
 <script>
 

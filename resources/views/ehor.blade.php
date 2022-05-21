@@ -10,10 +10,29 @@
 <!--Include Nav Bar When Page Loads-->
 @include('layouts/navigation')
 <body>
-    <div class="ehortitle">EDIT EHOR</div>
-    <button type="button" class="location">Location Of Occurrence</button>
-    <button type="button" class="site">Site Of Occurrence</button>
-    <button type="button" class="type">Type Of Occurrence</button>
+    <div class="ehortitle">EDIT EHOR FIELDS</div>
+    <div class="location-title">
+        <div>
+            <form action="{{route('addlocation')}}" method="POST">
+                <span>
+                    Location of Occurrence
+                    <button class="addBtn" type="submit"><img src="{{URL::asset('public/images/add.png')}}" alt="add"></button>
+                    <input class="newlocation" type="text" name="location" placeholder="enter new location">  
+                </span> 
+                <span class="alert-msg">{{ session()->get('msg') }}</span>
+            </form>
+        </div> 
+    </div>
+    <form class="location" action="#" method="#">
+        <div class="location-grid">
+            @foreach($allLocations as $locations)
+            <div>
+                <a class="deleteBtn" href="{{route('deletelocation', ['id'=>$locations->id])}}"><img src="{{URL::asset('public/images/minus.png')}}" alt="delete"></a><input type="text" value="{{$locations->location}}">                 
+            </div>
+            @endforeach
+            <input class="update" type="submit" value="Update Location of Occurrence Fields">
+        </div>
+    </form>
 </body>
 <script>
 

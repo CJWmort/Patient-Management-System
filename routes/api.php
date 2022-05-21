@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\EhorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::post('/add', [UserController::class, 'add'])->name('add');
 Route::post('/update', [UserController::class, 'update'])->name('update');
 Route::get('/search', [UserController::class, 'search'])->name('search');
 Route::get('/ehor', [PageController::class, 'ehor'])->middleware('isLoggedIn')->name('ehor');
+Route::get('/deletelocation/{id}', [EhorController::class, 'deletelocation'])->name('deletelocation');
+Route::get('/addlocation', [EhorController::class, 'addlocation'])->name('addlocation');
 
 
 

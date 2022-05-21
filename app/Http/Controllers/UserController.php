@@ -63,7 +63,6 @@ class UserController extends Controller
         {
             return redirect ('api/user')->withErrors(['msg' => ['Failed To Remove User From The Records.']]);
         }
-
     }
     public function add(Request $req)
     {

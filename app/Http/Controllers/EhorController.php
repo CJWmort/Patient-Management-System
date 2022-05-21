@@ -23,4 +23,31 @@ class EhorController extends Controller
             return redirect ('api/ehor')->with('msg', 'Failed to remove location field from Location of Occurrence section.');
         }
     }
+    public function addlocation(Request $req)
+    {
+        //function to add new location field
+        $newLocation = new occur_location;
+        $newLocation->location=$req->location;
+        $result = $newLocation->save();
+        if($result){
+            return redirect ('api/ehor')->with('msg',  '"'. $newLocation->location . '"' . ' field has been added to Location of Occurrence section.');
+        }
+        else{
+            return redirect ('api/ehor')->with('msg', 'Failed to add location field into Location of Occurrence section.');
+        }
+    }
+    public function updatelocation(Request $req){
+        //function to update all location fields
+        for($i = 0; $i < count($req->input('locationid')); $i++) {
+            $locations = occur_location::find($req->input('locationid')[$i]);
+            $locations->location = $req->input('location')[$i];
+            $result = $locations->save();
+        }
+        if($result){
+            return redirect ('api/ehor')->with('msg', 'All Location of Occurrence fields have been updated.');
+        }
+        else{
+            return redirect ('api/ehor')->with('msg', 'Failed to update Location of Occurrence fields.');
+        }
+    }
 }

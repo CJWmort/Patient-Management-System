@@ -11,27 +11,24 @@
 @include('layouts/navigation')
 <body>
     <div class="ehortitle">EDIT EHOR FIELDS</div>
-    <div class="location-title">
-        <div>
-            <form action="{{route('addlocation')}}" method="POST">
-                <span>
-                    Location of Occurrence
-                    <button class="addBtn" type="submit"><img src="{{URL::asset('public/images/add.png')}}" alt="add"></button>
-                    <input class="newlocation" type="text" name="location" placeholder="enter new location">  
-                </span> 
-                <span class="alert-msg">{{ session()->get('msg') }}</span>
-            </form>
-        </div> 
-    </div>
-    <form class="location" action="#" method="#">
+    <form class="location-title" action="{{route('addlocation')}}" method="POST">
+        <span class="addfield">
+            Location of Occurrence
+            <button class="addBtn" type="submit"><img src="{{URL::asset('public/images/add.png')}}" alt="add"></button>
+            <input class="newlocation" type="text" name="location" placeholder="enter new location" required>  
+        </span> 
+        <span class="alert-msg">{{ session()->get('msg') }}</span>
+    </form>
+    <form class="location" action="{{route('updatelocation')}}" method="POST">
         <div class="location-grid">
             @foreach($allLocations as $locations)
             <div>
-                <a class="deleteBtn" href="{{route('deletelocation', ['id'=>$locations->id])}}"><img src="{{URL::asset('public/images/minus.png')}}" alt="delete"></a><input type="text" value="{{$locations->location}}">                 
+                <a class="deleteBtn" href="{{route('deletelocation', ['id'=>$locations->id])}}"><img src="{{URL::asset('public/images/minus.png')}}" alt="delete"></a><input type="text" name="location[]" value="{{$locations->location}}" required>
+                <input type="hidden" name="locationid[]" value="{{$locations->id}}">                 
             </div>
             @endforeach
-            <input class="update" type="submit" value="Update Location of Occurrence Fields">
         </div>
+        <input class="update" type="submit" value="Update Location of Occurrence Fields">
     </form>
 </body>
 <script>

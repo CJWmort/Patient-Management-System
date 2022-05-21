@@ -34,7 +34,7 @@ Route::post('/update', [UserController::class, 'update'])->name('update');
 Route::get('/search', [UserController::class, 'search'])->name('search');
 Route::get('/ehor', [PageController::class, 'ehor'])->middleware('isLoggedIn')->name('ehor');
 Route::get('/deletelocation/{id}', [EhorController::class, 'deletelocation'])->name('deletelocation');
-Route::get('/addlocation', [EhorController::class, 'addlocation'])->name('addlocation');
-
+Route::post('/addlocation', [EhorController::class, 'addlocation'])->name('addlocation');
+Route::post('/updatelocation', [EhorController::class, 'updatelocation'])->name('updatelocation');
 
 

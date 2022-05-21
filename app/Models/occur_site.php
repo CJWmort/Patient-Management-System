@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class occur_site extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 }

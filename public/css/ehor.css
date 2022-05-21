@@ -16,7 +16,7 @@ body{
     display: inline-block;
     font-weight: bold;
     font-size: 30px;
-    margin: 20px 0px 30px 0px;
+    margin: 20px 0px 20px 0px;
 }
 .location{
     width: 80%;
@@ -102,6 +102,48 @@ body{
 .addBtn img:hover{
     background-color: rgb(23, 197, 23);
 }
-.site{
+.site,
+.type{
     margin-top: 20px;
+}
+.filter{
+    border-top: none;
+}
+.selectType{
+    padding: 0px 20px;
+}
+.selectType input{
+    cursor: pointer;
+}
+.selectType label{
+    user-select: none;
+    margin-right: 20px;
+}
+.filterBtn{
+    padding: 5px 10px;
+    border: none;
+    background-color: lightskyblue;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+.filterBtn:hover{
+    background-color: rgb(98, 152, 185);
+    color: white;
+}
+.typeinfo{
+    color: orange;
+    font-weight: bold;
+}
+.addfield select{
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    font-size: 14px;
+    transform: translateY(-5px);
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #ffe3d6;
+    cursor: pointer;
 }

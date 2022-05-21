@@ -102,7 +102,7 @@ class UserController extends Controller
             $updateuser->password = Hash::make($req->password);
             $result = $updateuser->save();
             if($result){
-                return back()->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
+                return redirect('api/user')->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
             }
             else{
                 return back()->withErrors(['msg' => ['Failed To Update User In The Records.']]);

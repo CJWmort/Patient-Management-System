@@ -36,5 +36,8 @@ Route::get('/ehor', [PageController::class, 'ehor'])->middleware('isLoggedIn')->
 Route::get('/deletelocation/{id}', [EhorController::class, 'deletelocation'])->name('deletelocation');
 Route::post('/addlocation', [EhorController::class, 'addlocation'])->name('addlocation');
 Route::post('/updatelocation', [EhorController::class, 'updatelocation'])->name('updatelocation');
+Route::get('/deletesite/{id}', [EhorController::class, 'deletesite'])->name('deletesite');
+Route::post('/addsite', [EhorController::class, 'addsite'])->name('addsite');
+Route::post('/updatesite', [EhorController::class, 'updatesite'])->name('updatesite');
 
 

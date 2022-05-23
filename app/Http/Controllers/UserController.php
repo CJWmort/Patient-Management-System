@@ -77,13 +77,20 @@ class UserController extends Controller
         $newuser->role=$req->role;
         if ($cfm_password == $password) //if password and confirm password is same
         {
-            $newuser->password = Hash::make($req->password);
-            $result = $newuser->save();
-            if($result){
-                return redirect ('user')->with('msg', $newuser->name . ' (' . $newuser->role .') Has Been Added To The Records.');
-            }
+            if (User::where([['login_id', '=', $req->login_id],
+            ['role', '=', $req->role]])->exists()) {
+                // don't allow admin to create user with same login_id and role
+                return redirect ('user')->withErrors(['msg' => ['User with the same role already exists in the records. Pick another role or login id.']]);
+             }
             else{
-                return redirect ('user')->withErrors(['msg' => ['Failed To Add User To The Records.']]);
+                $newuser->password = Hash::make($req->password);
+                $result = $newuser->save();
+                if($result){
+                    return redirect ('user')->with('msg', $newuser->name . ' (' . $newuser->role .') Has Been Added To The Records.');
+                }
+                else{
+                    return redirect ('user')->withErrors(['msg' => ['Failed To Add User To The Records.']]);
+                }
             }
         }
         else
@@ -98,18 +105,25 @@ class UserController extends Controller
         $updateuser->login_id=$req->login_id;
         $updateuser->phone_number=$req->phone_number;
         $updateuser->role=$req->role;
-        if ($req->password != '' && $req->cfm_password == $req->password){
-            $updateuser->password = Hash::make($req->password);
-            $result = $updateuser->save();
-            if($result){
-                return redirect('/user')->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
-            }
-            else{
-                return back()->withErrors(['msg' => ['Failed To Update User In The Records.']]);
-            }
+        if (User::where([['login_id', '=', $req->login_id],
+            ['role', '=', $req->role]])->exists()) {
+            //don't allow admin to duplicate user with same login id and role
+            return back()->withErrors(['msg' => ['User with the same role already exists in the records. Pick another role or login id.']]);
         }
-        $updateuser->save();
-        return back()->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
+        else{
+            if ($req->password != '' && $req->cfm_password == $req->password){
+                $updateuser->password = Hash::make($req->password);
+                $result = $updateuser->save();
+                if($result){
+                    return redirect('user')->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
+                }
+                else{
+                    return back()->withErrors(['msg' => ['Failed To Update User In The Records.']]);
+                }
+            }
+            $updateuser->save();
+            return redirect('user')->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
+        }
     }
     
     public function search(Request $request)

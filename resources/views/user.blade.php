@@ -71,7 +71,7 @@
         <th colspan="7" class="table-title">
             <form class="find-form" action="{{route('search')}}" method="GET">
                 <input type="text" name="finduser" class="search-field" placeholder="Search Users By Name / Login ID ...">
-                <input type="submit" class="findBtn" value="Find User">
+                <input type="submit" class="findBtn" value="Search User">
             </form>
         </th>
         <tr class="tablehead">

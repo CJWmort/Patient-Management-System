@@ -5,6 +5,7 @@
     <div class="top-nav">
         <a href="{{route('home')}}"><img src="{{URL::asset('public/images/thkh-logo.jpg')}}" class="nav-logo" alt="logo"></a>
         <form action="#" method="#">
+        @csrf
             <div class="search">
                 <button class="searchBtn"><img src="{{URL::asset('public/images/search.png')}}" width="40px" alt="search"></button>
                 <input type="text" class="searchInput" placeholder="Search Reports By HOR No. / Year ...">

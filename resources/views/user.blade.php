@@ -25,6 +25,7 @@
     <div class="createuser">
         <button class="toggleBtn" onclick="openForm();">Create New User</button>    
         <form class="hide-form" action="{{route('add')}}" method="POST">
+            @csrf
             <div class="form-grid">
                 <div>
                     <label>Name:</label><br>
@@ -70,6 +71,7 @@
     <table class="users" cellspacing="0">
         <th colspan="7" class="table-title">
             <form class="find-form" action="{{route('search')}}" method="GET">
+            @csrf
                 <input type="text" name="finduser" class="search-field" placeholder="Search Users By Name / Login ID ...">
                 <input type="submit" class="findBtn" value="Search User">
             </form>

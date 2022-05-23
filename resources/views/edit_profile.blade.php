@@ -26,6 +26,7 @@
         <img class="userlogo" src="{{URL::asset('public/images/user.png')}}" alt="user"><br>
         <h2>Edit Profile</h2>
         <form class="editform" action="{{route('update')}}" method="POST" onsubmit="return validateMyForm();">
+        @csrf
             <div class="form-grid">
                 <input type="hidden" name="userid" value="{{$edituser->id}}">
                 <div>

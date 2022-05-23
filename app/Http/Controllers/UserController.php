@@ -23,7 +23,7 @@ class UserController extends Controller
             if(Hash::check($request->password, $user->password)){
                 //Create session for user
                 $request->session()->put('loginId', $user->id);
-                return redirect('api/main');
+                return redirect('main');
             }
             else{
                 return back()->withErrors(['msg' => ['Invaid Login Details']]);
@@ -47,7 +47,7 @@ class UserController extends Controller
         //pull the loginId and send them back to login page
         if(Session::has('loginId')){
             Session::pull('loginId');
-            return redirect ('api/login');
+            return redirect ('login');
         }
     }
     public function delete($id)
@@ -57,11 +57,11 @@ class UserController extends Controller
         $result = $user->delete();
         if ($result)
         {
-            return redirect ('api/user')->with('msg', $user->name . ' (' . $user->role .') Has Been Removed From The Records.');
+            return redirect ('user')->with('msg', $user->name . ' (' . $user->role .') Has Been Removed From The Records.');
         }
         else
         {
-            return redirect ('api/user')->withErrors(['msg' => ['Failed To Remove User From The Records.']]);
+            return redirect ('user')->withErrors(['msg' => ['Failed To Remove User From The Records.']]);
         }
     }
     public function add(Request $req)
@@ -80,15 +80,15 @@ class UserController extends Controller
             $newuser->password = Hash::make($req->password);
             $result = $newuser->save();
             if($result){
-                return redirect ('api/user')->with('msg', $newuser->name . ' (' . $newuser->role .') Has Been Added To The Records.');
+                return redirect ('user')->with('msg', $newuser->name . ' (' . $newuser->role .') Has Been Added To The Records.');
             }
             else{
-                return redirect ('api/user')->withErrors(['msg' => ['Failed To Add User To The Records.']]);
+                return redirect ('user')->withErrors(['msg' => ['Failed To Add User To The Records.']]);
             }
         }
         else
         {
-            return redirect ('api/user')->withErrors(['msg' => ['Incorrect Password. Please ensure password and confirm password are the same.']]);
+            return redirect ('user')->withErrors(['msg' => ['Incorrect Password. Please ensure password and confirm password are the same.']]);
         }
     }
     public function update(Request $req){
@@ -102,7 +102,7 @@ class UserController extends Controller
             $updateuser->password = Hash::make($req->password);
             $result = $updateuser->save();
             if($result){
-                return redirect('api/user')->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
+                return redirect('/user')->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
             }
             else{
                 return back()->withErrors(['msg' => ['Failed To Update User In The Records.']]);

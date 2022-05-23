@@ -19,11 +19,11 @@ class EhorController extends Controller
         $result = $field->delete();
         if ($result)
         {
-            return redirect ('api/ehor')->with('msg',  '"'.$field->location . '"' . ' field has been removed from Location of Occurrence section.');
+            return redirect ('ehor')->with('msg',  '"'.$field->location . '"' . ' field has been removed from Location of Occurrence section.');
         }
         else
         {
-            return redirect ('api/ehor')->with('msg', 'Failed to remove location field from Location of Occurrence section.');
+            return redirect ('ehor')->with('msg', 'Failed to remove location field from Location of Occurrence section.');
         }
     }
     public function addlocation(Request $req)
@@ -33,10 +33,10 @@ class EhorController extends Controller
         $newLocation->location=$req->location;
         $result = $newLocation->save();
         if($result){
-            return redirect ('api/ehor')->with('msg',  '"'. $newLocation->location . '"' . ' field has been added to Location of Occurrence section.');
+            return redirect ('ehor')->with('msg',  '"'. $newLocation->location . '"' . ' field has been added to Location of Occurrence section.');
         }
         else{
-            return redirect ('api/ehor')->with('msg', 'Failed to add location field into Location of Occurrence section.');
+            return redirect ('ehor')->with('msg', 'Failed to add location field into Location of Occurrence section.');
         }
     }
     public function updatelocation(Request $req){
@@ -47,10 +47,10 @@ class EhorController extends Controller
             $result = $locations->save();
         }
         if($result){
-            return redirect ('api/ehor')->with('msg', 'All Location of Occurrence fields have been updated.');
+            return redirect ('ehor')->with('msg', 'All Location of Occurrence fields have been updated.');
         }
         else{
-            return redirect ('api/ehor')->with('msg', 'Failed to update Location of Occurrence fields.');
+            return redirect ('ehor')->with('msg', 'Failed to update Location of Occurrence fields.');
         }
     }
 
@@ -62,11 +62,11 @@ class EhorController extends Controller
         $result = $field->delete();
         if ($result)
         {
-            return redirect ('api/ehor')->with('msg2',  '"'.$field->site . '"' . ' site has been removed from Site of Occurrence section.');
+            return redirect ('ehor')->with('msg2',  '"'.$field->site . '"' . ' site has been removed from Site of Occurrence section.');
         }
         else
         {
-            return redirect ('api/ehor')->with('msg2', 'Failed to remove site field from Site of Occurrence section.');
+            return redirect ('ehor')->with('msg2', 'Failed to remove site field from Site of Occurrence section.');
         }
     }
     public function addsite(Request $req)
@@ -76,10 +76,10 @@ class EhorController extends Controller
         $newSite->site=$req->site;
         $result = $newSite->save();
         if($result){
-            return redirect ('api/ehor')->with('msg2',  '"'. $newSite->site . '"' . ' field has been added to Site of Occurrence section.');
+            return redirect ('ehor')->with('msg2',  '"'. $newSite->site . '"' . ' field has been added to Site of Occurrence section.');
         }
         else{
-            return redirect ('api/ehor')->with('msg2', 'Failed to add site field into Site of Occurrence section.');
+            return redirect ('ehor')->with('msg2', 'Failed to add site field into Site of Occurrence section.');
         }
     }
     public function updatesite(Request $req){
@@ -90,10 +90,10 @@ class EhorController extends Controller
             $result = $sites->save();
         }
         if($result){
-            return redirect ('api/ehor')->with('msg2', 'All Site of Occurrence fields have been updated.');
+            return redirect ('ehor')->with('msg2', 'All Site of Occurrence fields have been updated.');
         }
         else{
-            return redirect ('api/ehor')->with('msg2', 'Failed to update Site of Occurrence fields.');
+            return redirect ('ehor')->with('msg2', 'Failed to update Site of Occurrence fields.');
         }
     }
 
@@ -105,11 +105,11 @@ class EhorController extends Controller
         $result = $field->delete();
         if ($result)
         {
-            return redirect ('api/ehor')->with('msg3',  '"'.$field->name . '"' . ' (' . $field->type . ')' . ' has been removed from Type of Occurrence section.');
+            return redirect ('ehor')->with('msg3',  '"'.$field->name . '"' . ' (' . $field->type . ')' . ' has been removed from Type of Occurrence section.');
         }
         else
         {
-            return redirect ('api/ehor')->with('msg3', 'Failed to remove type field from Type of Occurrence section.');
+            return redirect ('ehor')->with('msg3', 'Failed to remove type field from Type of Occurrence section.');
         }
     }
     public function addtype(Request $req)
@@ -120,10 +120,10 @@ class EhorController extends Controller
         $newType->name=$req->name;
         $result = $newType->save();
         if($result){
-            return redirect ('api/ehor')->with('msg3',  '"'. $newType->name . '"' . ' (' . $newType->type . ')' . ' has been added to Type of Occurrence section.');
+            return redirect ('ehor')->with('msg3',  '"'. $newType->name . '"' . ' (' . $newType->type . ')' . ' has been added to Type of Occurrence section.');
         }
         else{
-            return redirect ('api/ehor')->with('msg3', 'Failed to add type field into Type of Occurrence section.');
+            return redirect ('ehor')->with('msg3', 'Failed to add type field into Type of Occurrence section.');
         }
     }
     public function updatetype(Request $req){
@@ -134,10 +134,10 @@ class EhorController extends Controller
             $result = $types->save();
         }
         if($result){
-            return redirect ('api/ehor')->with('msg3', 'All Type of Occurrence fields have been updated.');
+            return redirect ('ehor')->with('msg3', 'All Type of Occurrence fields have been updated.');
         }
         else{
-            return redirect ('api/ehor')->with('msg3', 'Failed to update Type of Occurrence fields.');
+            return redirect ('ehor')->with('msg3', 'Failed to update Type of Occurrence fields.');
         }
     }
     public function filtertype(Request $req)

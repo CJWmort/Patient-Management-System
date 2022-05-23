@@ -18,7 +18,7 @@ class AlreadyLoggedIn
     {
         //if session is already logged in
         //don't allow user to manually navigate to /login unless they logout first
-        if(Session()->has('loginId') && (url('api/login')==$request->url())){
+        if(Session()->has('loginId') && (url('login')==$request->url())){
             return back();
         }
         return $next($request);

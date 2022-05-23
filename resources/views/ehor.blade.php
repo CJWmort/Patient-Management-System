@@ -13,6 +13,7 @@
     <div class="ehortitle">EDIT EHOR FIELDS</div>
     <!-- Form for location of occurrence -->
     <form class="location-title" action="{{route('addlocation')}}" method="POST">
+    @csrf
         <span class="addfield">
             Location of Occurrence
             <button class="addBtn" type="submit"><img src="{{URL::asset('public/images/add.png')}}" alt="add"></button>
@@ -21,6 +22,7 @@
         <span class="alert-msg">{{ session()->get('msg') }}</span>
     </form>
     <form class="location" action="{{route('updatelocation')}}" method="POST">
+    @csrf
         <div class="location-grid">
             @foreach($allLocations as $locations)
             <div>
@@ -33,6 +35,7 @@
     </form>
     <!-- Form for site of occurrence -->
     <form class="location-title site" action="{{route('addsite')}}" method="POST">
+    @csrf
         <span class="addfield">
             Site of Occurrence
             <button class="addBtn" type="submit"><img src="{{URL::asset('public/images/add.png')}}" alt="add"></button>
@@ -41,6 +44,7 @@
         <span class="alert-msg">{{ session()->get('msg2') }}</span>
     </form>
     <form class="location" action="{{route('updatesite')}}" method="POST">
+    @csrf
         <div class="location-grid">
             @foreach($allSites as $sites)
             <div>
@@ -54,6 +58,7 @@
 
     <!-- Form for type of occurrence -->
     <form class="location-title type" action="{{route('addtype')}}" method="POST">
+    @csrf
         <span class="addfield">
             Type of Occurrence
             <button class="addBtn" type="submit"><img src="{{URL::asset('public/images/add.png')}}" alt="add"></button>
@@ -68,6 +73,7 @@
         </span> 
     </form>
     <form class="location-title filter" action="{{route('filtertype')}}" method="POST">
+    @csrf
         <div class="selectType">
             <input type="radio" name="type" value="fall">
             <label>Fall Related</label>
@@ -81,6 +87,7 @@
         </div>
     </form>
     <form class="location" action="{{route('updatetype')}}" method="POST">
+    @csrf
         <div class="location-grid">
             @foreach($allTypes as $types)
             <div>

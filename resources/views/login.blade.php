@@ -10,7 +10,7 @@
 <body>
     <div class="login_div">
         <form action="login-user" method="POST">
-            {{ csrf_field() }}
+        @csrf
             <div>
                 <p><img class="loginlogo" src="{{URL::asset('public/images/thkh-logo.jpg')}}" alt="logo"></p>
                 <p class="logintitle">LOG IN</p>

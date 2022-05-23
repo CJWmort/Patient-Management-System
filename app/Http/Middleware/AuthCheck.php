@@ -18,7 +18,7 @@ class AuthCheck
     {
         //if session not logged in, direct to login page
         if(!Session()->has('loginId')){
-            return redirect('api/login')->withErrors(['msg' => ['Please Login First']]);
+            return redirect('login')->withErrors(['msg' => ['Please Login First']]);
         }
         return $next($request);
     }

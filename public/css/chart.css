@@ -1,3 +1,26 @@
 body{
     background-color: #57b2af;
 }
+.side-nav{
+    background-color: #88d4d1;
+    width: 15%;
+    float: left;
+    height: 100vh;
+    padding: 20px 10px;
+    overflow-wrap: break-word;
+}
+.side-nav a{
+    color: #333;
+    background-color: #57B2AF;
+    display: block;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.3s;
+}
+.side-nav a:hover{
+    background-color: #359692;
+    color: whitesmoke;
+}

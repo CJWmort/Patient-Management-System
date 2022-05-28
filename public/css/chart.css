@@ -24,3 +24,16 @@ body{
     background-color: #359692;
     color: whitesmoke;
 }
+.chart{
+    margin-top: 50px;
+}
+#myChart{
+    width: 70%;
+    margin: 0 auto;
+    background-color: aliceblue;
+}
+.selected:link,
+.selected:visited{
+    color: whitesmoke;
+    background-color: #0D6E6B;
+}

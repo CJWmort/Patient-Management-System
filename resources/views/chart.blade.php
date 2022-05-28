@@ -16,12 +16,12 @@
         <!-- Highlight Chart Navigation Link To Show Which Chart Is Currently Being Selected -->
         <a @if($selectedChart == 1)class="selected"@endif href="{{route('chart8')}}">8. Serious Reportable Event</a><br>
         <a @if($selectedChart == 2)class="selected"@endif href="{{route('chart10a')}}">10a. Medication Error (Monthly)</a><br>
-        <a @if($selectedChart == 3)class="selected"@endif href="#">10b. Medication Error (Current Month)</a><br>
-        <a @if($selectedChart == 4)class="selected"@endif href="#">10c. Type of Medication Error (Current Year)</a><br>
-        <a @if($selectedChart == 5)class="selected"@endif href="#">11a. Fall Related by Injury/Non-Injury (Monthly)</a><br>
-        <a @if($selectedChart == 6)class="selected"@endif href="#">11b. Falls Reported by Severity (In-Hospital)</a><br>
-        <a @if($selectedChart == 7)class="selected"@endif href="#">11c. Falls Reported by Ward Wing (In-Hospital)</a><br>
-        <a @if($selectedChart == 8)class="selected"@endif href="#">11d. Falls Reported table by Ward Wing (In-Hospital)</a><br>
+        <a @if($selectedChart == 3)class="selected"@endif href="{{route('chart10b')}}">10b. Medication Error (Current Month)</a><br>
+        <a @if($selectedChart == 4)class="selected"@endif href="{{route('chart10c')}}">10c. Type of Medication Error (Current Year)</a><br>
+        <a @if($selectedChart == 5)class="selected"@endif href="{{route('chart11a')}}">11a. Fall Related by Injury/Non-Injury (Monthly)</a><br>
+        <a @if($selectedChart == 6)class="selected"@endif href="{{route('chart11b')}}">11b. Falls Reported by Severity (In-Hospital)</a><br>
+        <a @if($selectedChart == 7)class="selected"@endif href="{{route('chart11c')}}">11c. Falls Reported by Ward Wing (In-Hospital)</a><br>
+        <a @if($selectedChart == 8)class="selected"@endif href="{{route('chart11d')}}">11d. Falls Reported table by Ward Wing (In-Hospital)</a><br>
     </div>
     <div class="chart">
         <canvas id="myChart"></canvas>

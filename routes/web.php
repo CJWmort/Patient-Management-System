@@ -53,3 +53,9 @@ Route::post('/updatetype', [EhorController::class, 'updatetype'])->name('updatet
 //Route For Chart Controller
 Route::get('/chart8', [Chart8Controller::class, 'chart8'])->name('chart8');
 Route::get('/chart10a', [Chart10aController::class, 'chart10a'])->name('chart10a');
+Route::get('/chart10b', [Chart10aController::class, 'chart10b'])->name('chart10b');
+Route::get('/chart10c', [Chart10aController::class, 'chart10c'])->name('chart10c');
+Route::get('/chart11a', [Chart10aController::class, 'chart11a'])->name('chart11a');
+Route::get('/chart11b', [Chart10aController::class, 'chart11b'])->name('chart11b');
+Route::get('/chart11c', [Chart10aController::class, 'chart11c'])->name('chart11c');
+Route::get('/chart11d', [Chart10aController::class, 'chart11d'])->name('chart11d');

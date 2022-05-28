@@ -9,18 +9,8 @@ use App\Models\User;
 use Session;
 
 
-class ChartController extends Controller
+class Chart10aController extends Controller
 {
-    //Function to get all data required for chart8 and send it back to chart view
-    public function chart8()
-    {
-        $selectedChart = 1;
-        $data = array(); 
-        if (Session::has('loginId')){
-            $data = User::where('id', '=', Session::get('loginId'))->first();
-        }
-        return view('chart',compact('data', 'selectedChart'));
-    }
     //Function to get all data required for chart10a and send it back to chart view
     public function chart10a()
     {

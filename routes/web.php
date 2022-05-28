@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\EhorController;
-use App\Http\Controllers\ChartController;
+use App\Http\Controllers\Chart8Controller;
+use App\Http\Controllers\Chart10aController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,5 +51,5 @@ Route::post('/addtype', [EhorController::class, 'addtype'])->name('addtype');
 Route::post('/updatetype', [EhorController::class, 'updatetype'])->name('updatetype');
 
 //Route For Chart Controller
-Route::get('/chart8', [ChartController::class, 'chart8'])->name('chart8');
-Route::get('/chart10a', [ChartController::class, 'chart10a'])->name('chart10a');
+Route::get('/chart8', [Chart8Controller::class, 'chart8'])->name('chart8');
+Route::get('/chart10a', [Chart10aController::class, 'chart10a'])->name('chart10a');

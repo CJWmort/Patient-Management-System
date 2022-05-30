@@ -27,6 +27,7 @@
         <canvas id="myChart"></canvas>
     </div>
 </body>
+<script src="{{URL::asset('public/js/jquery.min.js?v=').time()}}"></script>
 <!-- Display different charts based on user selection -->
 @if ($selectedChart == 1)
 <script>
@@ -36,9 +37,9 @@
 @endif
 @if ($selectedChart == 2)
 <script>
-    const chartdataAnB = {!! json_encode($listAnB) !!}
-    const chartdataC = {!! json_encode($listC) !!}
-    const chartdataD = {!! json_encode($listD) !!}
+    var chartdataAnB = {!! json_encode($listAnB) !!}
+    var chartdataC = {!! json_encode($listC) !!}
+    var chartdataD = {!! json_encode($listD) !!}
 </script>
 <script src="{{URL::asset('public/js/chart10a.js?v=').time()}}"></script>
 @endif

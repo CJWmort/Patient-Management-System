@@ -17,7 +17,7 @@ var myChart = new Chart(ctx, {
                 ], 
                 borderColor: ["#4f81bd"],
                 borderWidth: 1, 
-                order: 3        
+                order: 5        
             },{
                 label: 'Cat D',
                 data: [
@@ -26,7 +26,7 @@ var myChart = new Chart(ctx, {
                 backgroundColor: [
                     "#9bbb59"
                 ],   
-                order: 2      
+                order: 4     
             },{
                 label: 'Cat C',
                 data: [
@@ -35,7 +35,7 @@ var myChart = new Chart(ctx, {
                 backgroundColor: [
                     "#c0504d"
                 ],  
-                order: 2    
+                order: 3    
             },{
                 label: 'Cat A/B',
                 data: [
@@ -84,7 +84,7 @@ var myChart = new Chart(ctx, {
                 display: true,
                 position: "bottom",
                 align: "start",
-                reverse: true
+
             },
             title: {
                 display: true,

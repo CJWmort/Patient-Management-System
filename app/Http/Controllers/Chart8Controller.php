@@ -21,8 +21,8 @@ class Chart8Controller extends Controller
         }
 
         //Store serious reported event(fall) for each month
-        //SELECT a_inccidentDate,IFNULL(COUNT(m_dms_verdict),0),f_occurType FROM `hors_charts` WHERE (f_occurType = 'fall') group by a_inccidentDate;
-        $datesSeriousFall = DB::select('SELECT a_inccidentDate,IFNULL(COUNT(m_dms_verdict),0),f_occurType FROM `hors_charts` WHERE (f_occurType = "fall") group by a_inccidentDate');
+        //SELECT SELECT a_inccidentDate,IFNULL(COUNT(m_dms_verdict),0),f_occurType FROM `hors_charts` WHERE (f_occurType = "fall") group by a_inccidentDate
+        $datesSeriousFall = DB::select('');
 
         foreach($datesSeriousFall as $row){
             $date_x_axis[] = $row->a_inccidentDate;
@@ -41,7 +41,8 @@ class Chart8Controller extends Controller
         }
 
         //Store serious reported event(medicine) for each month
-        $datesSeriousMedicine = DB::select('SELECT a_inccidentDate,IFNULL(COUNT(m_dms_verdict),0),f_occurType FROM `hors_charts` WHERE (f_occurType = "medication") group by a_inccidentDate');
+        //SELECT a_inccidentDate,IFNULL(COUNT(m_dms_verdict),0),f_occurType FROM `hors_charts` WHERE (f_occurType = "medication") group by a_inccidentDate
+        $datesSeriousMedicine = DB::select('');
 
         foreach($datesSeriousMedicine as $row){
             $date_x_axis[] = $row->a_inccidentDate;

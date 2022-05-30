@@ -30,8 +30,7 @@
 <!-- Display different charts based on user selection -->
 @if ($selectedChart == 1)
 <script>
-    const chartdataAnB = {!! json_encode($listAnB) !!}
-    const chartdataC = {!! json_encode($listC) !!}
+    
 </script>
 <script src="{{URL::asset('public/js/chart8.js?v=').time()}}"></script>
 @endif

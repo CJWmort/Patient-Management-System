@@ -48,6 +48,7 @@
 <script>
     $('#filter').append(`<label>Sort By Month - Year:</label>
     <input type="month" name="selectedDate" value="2021-03" id="date">`);
+    var chartdata = {!! json_encode($chartdata) !!}
     var selectedDate = $('#date').val();
     function formatdate(date){ //format date to correct format 
         var selectedDate = new Date(date);

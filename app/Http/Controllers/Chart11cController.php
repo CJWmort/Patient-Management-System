@@ -11,7 +11,7 @@ use Session;
 
 class Chart11cController extends Controller
 {
-    //Function to get all data required for chart8 and send it back to chart view
+    //Function to get all data required for chart11c and send it back to chart view
     public function chart11c()
     {
         $selectedChart = 1;

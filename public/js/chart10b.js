@@ -1,10 +1,9 @@
-//" ... " is a spread syntax, similar to blade syntax
-//spread syntax is used to include all objects in an array
+var formattedDate = formatdate(selectedDate);
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Sep-21"],
+        labels: [formattedDate],
         datasets: [
             {
                 label: 'Cat A',

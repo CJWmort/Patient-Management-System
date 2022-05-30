@@ -26,6 +26,7 @@
     <div class="chart">
         <canvas id="myChart"></canvas>
     </div>
+    <div id="filter"></div>
 </body>
 <script src="{{URL::asset('public/js/jquery.min.js?v=').time()}}"></script>
 <!-- Display different charts based on user selection -->
@@ -45,7 +46,23 @@
 @endif
 @if ($selectedChart == 3)
 <script>
-    
+    $('#filter').append(`<label>Sort By Month - Year:</label>
+    <input type="month" name="selectedDate" value="2021-03" id="date">`);
+    var selectedDate = $('#date').val();
+    function formatdate(date){ //format date to correct format 
+        var selectedDate = new Date(date);
+        var options = {year: '2-digit', month: 'short'};
+        var formattedDate = selectedDate.toLocaleDateString("en-US", options);
+        return formattedDate;
+    };
+    $('#date').change(function() { //update chart label on change input type month
+        myChart.data.labels[0] = formatdate($('#date').val());
+        myChart.update();   
+    });
+
+    // var selectedDate = new Date($('#date').val());
+    // var options = {year: '2-digit', month: 'short'};
+    // var formattedDate = selectedDate.toLocaleDateString("en-US", options);
 </script>
 <script src="{{URL::asset('public/js/chart10b.js?v=').time()}}"></script>
 @endif

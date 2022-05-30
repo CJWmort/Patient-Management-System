@@ -25,7 +25,7 @@ body{
     color: whitesmoke;
 }
 .chart{
-    margin-top: 50px;
+    margin-top: 20px;
 }
 #myChart{
     width: 70%;
@@ -36,4 +36,22 @@ body{
 .selected:visited{
     color: whitesmoke;
     background-color: #0D6E6B;
+}
+#filter{
+    margin: 20px 0px;
+    text-align: center;
+}
+#filter label{
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 10px;
+}
+#date{
+    height: 30px;
+    width: 150px;
+    outline: none;
+    border: 2px solid #333;
+    cursor: pointer;
+    padding: 5px;
 }

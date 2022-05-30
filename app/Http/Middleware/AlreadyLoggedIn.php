@@ -21,9 +21,6 @@ class AlreadyLoggedIn
         if(Session()->has('loginId') && (url('login')==$request->url())){
             return back();
         }
-        else{
-            return view('login');
-        }
         return $next($request);
     }
 }

@@ -19,14 +19,14 @@ var myChart = new Chart(ctx, {
                 borderWidth: 1, 
                 order: 5        
             },{
-                label: 'Cat D',
+                label: 'Cat A/B',
                 data: [
-                    ...chartdataD,
+                    ...chartdataAnB,
                 ],
                 backgroundColor: [
-                    "#9bbb59"
-                ],   
-                order: 4     
+                    "#4f81bd"
+                ],  
+                order: 2  
             },{
                 label: 'Cat C',
                 data: [
@@ -37,14 +37,14 @@ var myChart = new Chart(ctx, {
                 ],  
                 order: 3    
             },{
-                label: 'Cat A/B',
+                label: 'Cat D',
                 data: [
-                    ...chartdataAnB,
+                    ...chartdataD,
                 ],
                 backgroundColor: [
-                    "#4f81bd"
-                ],  
-                order: 2  
+                    "#9bbb59"
+                ],   
+                order: 4     
             },{
                 label: 'Med error (Cat C to I) per monthly HOR',
                 data: [
@@ -125,7 +125,6 @@ var myChart = new Chart(ctx, {
                 },      
                 stacked: true,
                 beginAtZero: true,
-                max: 3,
                 title: {
                     display: true,
                     text: 'No of Medication Error',
@@ -138,11 +137,10 @@ var myChart = new Chart(ctx, {
             }, 
             rate: {
                 ticks: {
-                    stepSize: 0.5,     
+                    stepSize: 0.25,     
                     color: 'black'           
                 },
                 beginAtZero: true,
-                max: 4,
                 title: {
                     display: true,
                     text: 'Medication error rate',

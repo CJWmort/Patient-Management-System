@@ -24,7 +24,7 @@
         <a @if($selectedChart == 8)class="selected"@endif href="#">11d. Falls Reported table by Ward Wing (In-Hospital)</a><br>
     </div>
     <div class="chart">
-        <canvas id="myChart"></canvas>
+        <canvas id="myChart" width="1000" height="500"></canvas>
     </div>
     <div id="filter"></div>
 </body>
@@ -49,21 +49,6 @@
     $('#filter').append(`<label>Sort By Month - Year:</label>
     <input type="month" name="selectedDate" value="2021-03" id="date">`);
     var chartdata = {!! json_encode($chartdata) !!}
-    var selectedDate = $('#date').val();
-    function formatdate(date){ //format date to correct format 
-        var selectedDate = new Date(date);
-        var options = {year: '2-digit', month: 'short'};
-        var formattedDate = selectedDate.toLocaleDateString("en-US", options);
-        return formattedDate;
-    };
-    $('#date').change(function() { //update chart label on change input type month
-        myChart.data.labels[0] = formatdate($('#date').val());
-        myChart.update();   
-    });
-
-    // var selectedDate = new Date($('#date').val());
-    // var options = {year: '2-digit', month: 'short'};
-    // var formattedDate = selectedDate.toLocaleDateString("en-US", options);
 </script>
 <script src="{{URL::asset('public/js/chart10b.js?v=').time()}}"></script>
 @endif

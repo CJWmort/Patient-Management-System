@@ -1,3 +1,14 @@
+var selectedDate = $('#date').val();
+function formatdate(date){ //format date to correct format 
+    var selectedDate = new Date(date);
+    var options = {year: '2-digit', month: 'short'};
+    var formattedDate = selectedDate.toLocaleDateString("en-US", options);
+    return formattedDate;
+};
+$('#date').change(function() { //update chart label on change input type month
+    myChart.data.labels[0] = formatdate($('#date').val());
+    myChart.update();   
+});
 var formattedDate = formatdate(selectedDate);
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {

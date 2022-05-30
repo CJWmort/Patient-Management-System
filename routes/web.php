@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\EhorController;
 use App\Http\Controllers\Chart8Controller;
 use App\Http\Controllers\Chart10aController;
+use App\Http\Controllers\Chart10bController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,3 +54,4 @@ Route::post('/updatetype', [EhorController::class, 'updatetype'])->name('updatet
 //Route For Chart Controller
 Route::get('/chart8', [Chart8Controller::class, 'chart8'])->name('chart8');
 Route::get('/chart10a', [Chart10aController::class, 'chart10a'])->name('chart10a');
+Route::get('/chart10b', [Chart10bController::class, 'chart10b'])->name('chart10b');

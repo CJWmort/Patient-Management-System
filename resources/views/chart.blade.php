@@ -16,7 +16,7 @@
         <!-- Highlight Chart Navigation Link To Show Which Chart Is Currently Being Selected -->
         <a @if($selectedChart == 1)class="selected"@endif href="{{route('chart8')}}">8. Serious Reportable Event</a><br>
         <a @if($selectedChart == 2)class="selected"@endif href="{{route('chart10a')}}">10a. Medication Error (Monthly)</a><br>
-        <a @if($selectedChart == 3)class="selected"@endif href="#">10b. Medication Error (Current Month)</a><br>
+        <a @if($selectedChart == 3)class="selected"@endif href="{{route('chart10b')}}">10b. Medication Error (Current Month)</a><br>
         <a @if($selectedChart == 4)class="selected"@endif href="#">10c. Type of Medication Error (Current Year)</a><br>
         <a @if($selectedChart == 5)class="selected"@endif href="#">11a. Fall Related by Injury/Non-Injury (Monthly)</a><br>
         <a @if($selectedChart == 6)class="selected"@endif href="#">11b. Falls Reported by Severity (In-Hospital)</a><br>
@@ -28,6 +28,12 @@
     </div>
 </body>
 <!-- Display different charts based on user selection -->
+@if ($selectedChart == 1)
+<script>
+
+</script>
+<script src="{{URL::asset('public/js/chart8.js?v=').time()}}"></script>
+@endif
 @if ($selectedChart == 2)
 <script>
     const chartdataAnB = {!! json_encode($listAnB) !!}
@@ -35,5 +41,11 @@
     const chartdataD = {!! json_encode($listD) !!}
 </script>
 <script src="{{URL::asset('public/js/chart10a.js?v=').time()}}"></script>
+@endif
+@if ($selectedChart == 3)
+<script>
+    
+</script>
+<script src="{{URL::asset('public/js/chart10b.js?v=').time()}}"></script>
 @endif
 </html>

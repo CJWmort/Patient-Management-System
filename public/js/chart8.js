@@ -1,21 +1,45 @@
+//" ... " is a spread syntax, similar to blade syntax
+//spread syntax is used to include all objects in an array
 var ctx = document.getElementById("myChart");
-var myChart = new CharacterData(ctx, {
+var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Oct-20","Nov-20","Dec-20","Jan-21","Feb-21","Mar-21","Apr-21",
-                "May-21","Jun-21","Jul-21","Aug-20","Sep-20"],
-        dataset: [
+        labels: ["Sep-21"],
+        datasets: [
             {
-                label: 'HOR - FALLS',
-                data: [],
-                backgroundColor: [],
+                label: 'Cat A',
+                data: [
+                    
+                ],
+                backgroundColor: [
+                    "#94d8fc"
+                ],          
+            },{
+                label: 'Cat B',
+                data: [
+                    
+                ],
+                backgroundColor: [
+                    "#49a1ba"
+                ],          
+            },{
+                label: 'Cat C',
+                data: [
+                    
+                ],
+                backgroundColor: [
+                    "#fedf17"
+                ],          
+            },{
+                label: 'Cat D',
+                data: [
+                    
+                ],
+                backgroundColor: [
+                    "#c30505"
+                ],          
             },
-            {
-                label: 'HOR - ME',
-                data: [],
-                backgroundColor: [],
-            },
-        ]
+        ],
     },
     plugins: [ChartDataLabels],
     options: {
@@ -30,11 +54,11 @@ var myChart = new CharacterData(ctx, {
         plugins: {
             legend: {
                 labels: {
-                    color: "black"
+                    color: "black",
+                    boxWidth: 12
                 },
                 display: true,
                 position: "bottom",
-                align: "center"
             },
             title: {
                 display: true,
@@ -60,32 +84,28 @@ var myChart = new CharacterData(ctx, {
                 stacked: true,
                 grid: {
                     display: true,
-                    drawOnChartArea:false,
+                    drawOnChartArea: false,
                     drawBorder: false,
-                    drawTicks: true,
                 },
                 ticks: {
-                    color: 'black',
+                    color: 'black'
                 }
             },
             y: {
                 ticks: {
-                    stepSize: 0.5,   
+                    stepSize: 2,   
                     color: 'black'              
                 },      
-                stacked: true,
                 beginAtZero: true,
-                max: 3,
+                max: 10,
                 title: {
                     display: true,
-                    text: 'No. of SRE Reported',
+                    text: 'No. of SRE reported',
                     color: 'black'
                 },
                 position: 'left',
-                grid: {
-                    drawBorder: false,
-                }
+
             }, 
         }
     }
-})
+});

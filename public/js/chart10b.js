@@ -4,65 +4,40 @@ var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Oct-20", "Nov-20", "Dec-20", "Jan-21", "Feb-21", "Mar-21", "Apr-21",
-                    "May-21", "Jun-21", "Jul-21", "Aug-21", "Sep-21"],
+        labels: ["Sep-21"],
         datasets: [
             {
-                label: 'Target Rate',
+                label: 'Cat A',
                 data: [
-
+                    
                 ],
                 backgroundColor: [
-                    "#fdeada"
-                ], 
-                borderColor: ["#4f81bd"],
-                borderWidth: 1, 
-                order: 3        
+                    "#94d8fc"
+                ],          
             },{
-                label: 'Cat D',
+                label: 'Cat B',
                 data: [
-                    ...chartdataD,
+                    
                 ],
                 backgroundColor: [
-                    "#9bbb59"
-                ],   
-                order: 2      
+                    "#49a1ba"
+                ],          
             },{
                 label: 'Cat C',
                 data: [
-                    ...chartdataC,
+                    
                 ],
                 backgroundColor: [
-                    "#c0504d"
-                ],  
-                order: 2    
+                    "#fedf17"
+                ],          
             },{
-                label: 'Cat A/B',
+                label: 'Cat D',
                 data: [
-                    ...chartdataAnB,
+                    
                 ],
                 backgroundColor: [
-                    "#4f81bd"
-                ],  
-                order: 2  
-            },{
-                label: 'Med error (Cat C to I) per monthly HOR',
-                data: [
-                    {x: 'Oct-20', y: 1},
-                    {x: 'Nov-20', y: 1},
-                    {x: 'Dec-20', y: 0},
-                ],
-                type: 'line',
-                backgroundColor: [
-                    "#627331"
-                ], 
-                borderColor: ["#627331"],
-                borderWidth: 3,
-                datalabels: {
-                    display: false
-                },
-                yAxisID: 'rate',
-                order: 1         
+                    "#c30505"
+                ],          
             },
         ],
     },
@@ -80,11 +55,10 @@ var myChart = new Chart(ctx, {
             legend: {
                 labels: {
                     color: "black",
+                    boxWidth: 12
                 },
                 display: true,
                 position: "bottom",
-                align: "start",
-                reverse: true
             },
             title: {
                 display: true,
@@ -112,7 +86,6 @@ var myChart = new Chart(ctx, {
                     display: true,
                     drawOnChartArea: false,
                     drawBorder: false,
-                    drawTicks: true
                 },
                 ticks: {
                     color: 'black'
@@ -120,15 +93,14 @@ var myChart = new Chart(ctx, {
             },
             y: {
                 ticks: {
-                    stepSize: 0.5,   
+                    stepSize: 2,   
                     color: 'black'              
                 },      
-                stacked: true,
                 beginAtZero: true,
-                max: 3,
+                max: 10,
                 title: {
                     display: true,
-                    text: 'No of Medication Error',
+                    text: 'No. of cases',
                     color: 'black'
                 },
                 position: 'left',
@@ -136,25 +108,6 @@ var myChart = new Chart(ctx, {
                     drawBorder: false,
                 }
             }, 
-            rate: {
-                ticks: {
-                    stepSize: 0.5,     
-                    color: 'black'           
-                },
-                beginAtZero: true,
-                max: 4,
-                title: {
-                    display: true,
-                    text: 'Medication error rate',
-                    color: 'black',
-                },
-                position: 'right',
-                grid: {
-                    drawOnChartArea: false,
-                    drawBorder: false,
-                    drawTicks: false
-                }
-            }
         }
     }
 });

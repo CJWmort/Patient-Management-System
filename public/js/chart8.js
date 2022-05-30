@@ -4,10 +4,11 @@ var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Sep-21"],
+        labels: ["Oct-20", "Nov-20", "Dec-20", "Jan-21", "Feb-21", "Mar-21", "Apr-21",
+        "May-21", "Jun-21", "Jul-21", "Aug-21", "Sep-21"],
         datasets: [
             {
-                label: 'Cat A',
+                label: 'HOR-Falls',
                 data: [
                     
                 ],
@@ -15,28 +16,12 @@ var myChart = new Chart(ctx, {
                     "#94d8fc"
                 ],          
             },{
-                label: 'Cat B',
+                label: 'HOR-ME',
                 data: [
                     
                 ],
                 backgroundColor: [
                     "#49a1ba"
-                ],          
-            },{
-                label: 'Cat C',
-                data: [
-                    
-                ],
-                backgroundColor: [
-                    "#fedf17"
-                ],          
-            },{
-                label: 'Cat D',
-                data: [
-                    
-                ],
-                backgroundColor: [
-                    "#c30505"
                 ],          
             },
         ],
@@ -93,11 +78,11 @@ var myChart = new Chart(ctx, {
             },
             y: {
                 ticks: {
-                    stepSize: 2,   
+                    stepSize: 1,   
                     color: 'black'              
                 },      
                 beginAtZero: true,
-                max: 10,
+                max: 1,
                 title: {
                     display: true,
                     text: 'No. of SRE reported',

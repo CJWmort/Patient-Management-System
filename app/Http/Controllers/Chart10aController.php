@@ -21,6 +21,8 @@ class Chart10aController extends Controller
         }
         //get all data required for chart10a
         $chartdata = DB::table('hors_charts')->select('a_inccidentDate', 'f_occurType', 'j_ph_index', DB::raw('COUNT(j_ph_index) as error_count'))->where([['j_ph_index', '!=', '""'],['f_occurType', '=', "medication"]])->groupBy('a_inccidentDate','j_ph_index')->get();
+        //get highest count for No. of Medication Error
+        // $max = DB::table('hors_charts')->select(DB::raw('COUNT(j_ph_index) as error_count'))->where([['j_ph_index', '!=', '""'],['f_occurType', '=', "medication"]])->groupBy('a_inccidentDate')->orderBy('error_count', 'desc')->first();
 
         return view('chart',compact('data', 'chartdata', 'selectedChart'));
     }

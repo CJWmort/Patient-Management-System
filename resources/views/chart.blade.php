@@ -24,7 +24,7 @@
         <a @if($selectedChart == 8)class="selected"@endif href="#">11d. Falls Reported table by Ward Wing (In-Hospital)</a><br>
     </div>
     <div class="chart">
-        <canvas id="myChart" width="1000" height="500"></canvas>
+        <canvas id="myChart" width="1200" height="500"></canvas>
     </div>
     <div id="filter"></div>
     <div id="text"></div>

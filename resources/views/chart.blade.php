@@ -40,8 +40,6 @@
 @if ($selectedChart == 2)
 <script>
     var chartdataAnB = {!! json_encode($listAnB) !!}
-    var chartdataC = {!! json_encode($listC) !!}
-    var chartdataD = {!! json_encode($listD) !!}
 </script>
 <script src="{{URL::asset('public/js/chart10a.js?v=').time()}}"></script>
 @endif

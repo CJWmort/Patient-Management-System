@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Session;
 
-
 class Chart10aController extends Controller
 {
     //Function to get all data required for chart10a and send it back to chart view
@@ -38,34 +37,7 @@ class Chart10aController extends Controller
         for($i = 0; $i<sizeof($chartData); $i++) {
             array_push($listAnB, (Object)["x" => $formattedDate[$i], "y" => $med_error_y_axis[$i]]);
         }
-        //Stores med error num for each month from oct 2020 to sep 2021 for category C
-        $datesC = DB::select('select a_inccidentDate, count(j_ph_index) as "med_error_num" from hors_charts WHERE (a_inccidentDate BETWEEN "2020-10-1" AND "2021-09-1") AND (j_ph_index = "C") group by a_inccidentDate');
-        foreach($datesC as $row){
-            $dateC_x_axis[] = $row->a_inccidentDate;
-            $med_errorC_y_axis[] = $row->med_error_num;
-        }
-        $formattedDate = array_map(function ($date) {
-            return date('M-y', strtotime($date));
-        }, $dateC_x_axis);
-        $chartDataC = array_combine($formattedDate, $med_errorC_y_axis);
-        $listC = array();
-        for($i = 0; $i<sizeof($chartDataC); $i++) {
-            array_push($listC, (Object)["x" => $formattedDate[$i], "y" => $med_errorC_y_axis[$i]]);
-        }
-        //Stores med error num for each month from oct 2020 to sep 2021 for category D
-        $datesD = DB::select('select a_inccidentDate, count(j_ph_index) as "med_error_num" from hors_charts WHERE (a_inccidentDate BETWEEN "2020-10-1" AND "2021-09-1") AND (j_ph_index = "D") group by a_inccidentDate');
-        foreach($datesD as $row){
-            $dateD_x_axis[] = $row->a_inccidentDate;
-            $med_errorD_y_axis[] = $row->med_error_num;
-        }
-        $formattedDate = array_map(function ($date) {
-            return date('M-y', strtotime($date));
-        }, $dateD_x_axis);
-        $chartDataD = array_combine($formattedDate, $med_errorD_y_axis);
-        $listD = array();
-        for($i = 0; $i<sizeof($chartDataD); $i++) {
-            array_push($listD, (Object)["x" => $formattedDate[$i], "y" => $med_errorD_y_axis[$i]]);
-        }
-        return view('chart',compact('data', 'listAnB', 'listC', 'listD', 'selectedChart'));
+        
+        return view('chart',compact('data', 'listAnB', 'selectedChart'));
     }
 }

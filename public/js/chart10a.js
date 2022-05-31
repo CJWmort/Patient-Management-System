@@ -8,49 +8,9 @@ var myChart = new Chart(ctx, {
                     "May-21", "Jun-21", "Jul-21", "Aug-21", "Sep-21"],
         datasets: [
             {
-                label: 'Target Rate',
-                data: [
-
-                ],
-                backgroundColor: [
-                    "#fdeada"
-                ], 
-                borderColor: ["#4f81bd"],
-                borderWidth: 1, 
-                order: 5        
-            },{
-                label: 'Cat A/B',
-                data: [
-                    ...chartdataAnB,
-                ],
-                backgroundColor: [
-                    "#4f81bd"
-                ],  
-                order: 2  
-            },{
-                label: 'Cat C',
-                data: [
-                    ...chartdataC,
-                ],
-                backgroundColor: [
-                    "#c0504d"
-                ],  
-                order: 3    
-            },{
-                label: 'Cat D',
-                data: [
-                    ...chartdataD,
-                ],
-                backgroundColor: [
-                    "#9bbb59"
-                ],   
-                order: 4     
-            },{
                 label: 'Med error (Cat C to I) per monthly HOR',
                 data: [
-                    {x: 'Oct-20', y: 1},
-                    {x: 'Nov-20', y: 1},
-                    {x: 'Dec-20', y: 0},
+
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -61,8 +21,43 @@ var myChart = new Chart(ctx, {
                 datalabels: {
                     display: false
                 },
-                yAxisID: 'rate',
-                order: 1         
+                yAxisID: 'rate',   
+            },{
+                label: 'Cat A/B',
+                data: [
+                    
+                ],
+                backgroundColor: [
+                    "#4f81bd"
+                ],  
+                
+            },{
+                label: 'Cat C',
+                data: [
+                    
+                ],
+                backgroundColor: [
+                    "#c0504d"
+                ],  
+                  
+            },{
+                label: 'Cat D',
+                data: [
+                    
+                ],
+                backgroundColor: [
+                    "#9bbb59"
+                ],   
+            },{
+                label: 'Target Rate',
+                data: [
+
+                ],
+                backgroundColor: [
+                    "#fdeada"
+                ], 
+                borderColor: ["#4f81bd"],
+                borderWidth: 1,        
             },
         ],
     },

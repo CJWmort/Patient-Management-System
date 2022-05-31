@@ -1,11 +1,38 @@
 //" ... " is a spread syntax, similar to blade syntax
 //spread syntax is used to include all objects in an array
+var selectedDate = $('#date').val();
+var formattedDate = formatdate(selectedDate);
+var monthList = [];
+function formatdate(date){ //format date to correct format 
+    var selectedDate = new Date(date);
+    var options = {year: '2-digit', month: 'short'};
+    var formattedDate = selectedDate.toLocaleDateString("en-US", options);
+    formattedDate = formattedDate.replace(' ', '-');
+    return formattedDate;
+};
+function getPast12Months(){
+    monthList = [];
+    selectedDate = $('#date').val();
+    var d = new Date(selectedDate);
+    var monthName = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+    d.setDate(1);
+    for (i=0; i<=11; i++) {
+        var year = d.getFullYear();
+        monthList.unshift(monthName[d.getMonth()] + '-' + year.toString().substring(2,4));
+        d.setMonth(d.getMonth() - 1);
+    }
+}
+$('#date').change(function() { //update chart on change input type month
+    getPast12Months();
+    myChart.data.labels = monthList;
+    myChart.update();  
+});
+getPast12Months()
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Oct-20", "Nov-20", "Dec-20", "Jan-21", "Feb-21", "Mar-21", "Apr-21",
-                    "May-21", "Jun-21", "Jul-21", "Aug-21", "Sep-21"],
+        labels: monthList,
         datasets: [
             {
                 label: 'Med error (Cat C to I) per monthly HOR',
@@ -151,3 +178,9 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+$('#text').append(`
+<span id="catA">Cat A:  </span>The event that have the capacity to cause error <strong>(Near Misses)</strong><br>
+<span id="catB">Cat B:  </span>The error did not reach patient <strong>(Near Misses)</strong><br>
+<span id="catC">Cat C:  </span>The error reached patient but did not cause patient harm<br>
+<span id="catD">Cat D:  </span>The error reached patient and required monitoring to confirm the result
+`);

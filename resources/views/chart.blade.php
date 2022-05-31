@@ -15,7 +15,7 @@
     <div class="side-nav">
         <!-- Highlight Chart Navigation Link To Show Which Chart Is Currently Being Selected -->
         <a @if($selectedChart == 1)class="selected"@endif href="{{route('chart8')}}">8. Serious Reportable Event</a><br>
-        <a @if($selectedChart == 2)class="selected"@endif href="{{route('chart10a')}}">10a. Medication Error (Monthly)</a><br>
+        <a @if($selectedChart == 2)class="selected"@endif href="{{route('chart10a')}}">10a. Medication Error (Past 12 Months)</a><br>
         <a @if($selectedChart == 3)class="selected"@endif href="{{route('chart10b')}}">10b. Medication Error (Current Month)</a><br>
         <a @if($selectedChart == 4)class="selected"@endif href="#">10c. Type of Medication Error (Current Year)</a><br>
         <a @if($selectedChart == 5)class="selected"@endif href="#">11a. Fall Related by Injury/Non-Injury (Monthly)</a><br>
@@ -39,7 +39,15 @@
 @endif
 @if ($selectedChart == 2)
 <script>
-    var chartdataAnB = {!! json_encode($listAnB) !!}
+    $('#filter').append(`<label>Starting Month - Year:</label>
+    <input type="month" name="selectedDate" value="2021-09" id="date" onkeydown="return false" required>
+    `);
+    // var currentMonth = document.querySelector('input[type="month"]');
+    // var date= new Date()
+    // var month=("0" + (date.getMonth() + 1)).slice(-2)
+    // var year=date.getFullYear()
+    // currentMonth.value = `${year}-${month}`;
+    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart10acontroller
 </script>
 <script src="{{URL::asset('public/js/chart10a.js?v=').time()}}"></script>
 @endif

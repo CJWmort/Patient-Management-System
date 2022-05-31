@@ -67,13 +67,9 @@ body{
 #text b{
     font-size: 18px;
 }
-#catA{
-    color: #04b1f0;
-    font-weight: bold;
-    font-size: 18px;
-}
+#catA,
 #catB{
-    color: #49a1ba;
+    color: #04b1f0;
     font-weight: bold;
     font-size: 18px;
 }

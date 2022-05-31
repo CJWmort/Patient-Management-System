@@ -60,7 +60,7 @@ function getAllCategoryData(){
     }
     $('#total').html('<b>Total: ' + total + '</b>')
 }
-$('#date').change(function() { //update chart label on change input type month
+$('#date').change(function() { //update chart on change input type month
     getAllCategoryData();
     myChart.data.labels[0] = formatdate($('#date').val());
     myChart.data.datasets[0].data = [catAcount];

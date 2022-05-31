@@ -27,6 +27,7 @@
         <canvas id="myChart" width="1000" height="500"></canvas>
     </div>
     <div id="filter"></div>
+    <div id="text"></div>
 </body>
 <script src="{{URL::asset('public/js/jquery.min.js?v=').time()}}"></script>
 <!-- Display different charts based on user selection -->
@@ -47,8 +48,15 @@
 @if ($selectedChart == 3)
 <script>
     $('#filter').append(`<label>Sort By Month - Year:</label>
-    <input type="month" name="selectedDate" value="2021-03" id="date">`);
-    var chartdata = {!! json_encode($chartdata) !!}
+    <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
+    <span id="total"></span>`);
+    //Get the current month and year then set it as the starting value for input type month
+    var currentMonth = document.querySelector('input[type="month"]');
+    var date= new Date()
+    var month=("0" + (date.getMonth() + 1)).slice(-2)
+    var year=date.getFullYear()
+    currentMonth.value = `${year}-${month}`;
+    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart10bcontroller
 </script>
 <script src="{{URL::asset('public/js/chart10b.js?v=').time()}}"></script>
 @endif

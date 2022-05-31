@@ -1,8 +1,10 @@
 var selectedDate = $('#date').val();
 var formattedDate = formatdate(selectedDate);
-var catAdata;
 var catAcount;
-getCatAData();
+var catBcount;
+var catCcount;
+var catDcount;
+getAllCategoryData();
 function formatdate(date){ //format date to correct format 
     var selectedDate = new Date(date);
     var options = {year: '2-digit', month: 'short'};
@@ -10,24 +12,61 @@ function formatdate(date){ //format date to correct format
     formattedDate = formattedDate.replace(' ', '-');
     return formattedDate;
 };
-function getCatAData(){
+function getAllCategoryData(){
+    total = 0;
     selectedDate = $('#date').val();
-    catAdata = chartdata.filter(
+    var catAdata = chartdata.filter(
         d => d.j_ph_index == 'A' &&
         d.a_inccidentDate.includes(selectedDate, 0)
     );
-    if (catAdata.length == 0){
-        catAcount = 0;
+    var catBdata = chartdata.filter(
+        d => d.j_ph_index == 'B' &&
+        d.a_inccidentDate.includes(selectedDate, 0)
+    );
+    var catCdata = chartdata.filter(
+        d => d.j_ph_index == 'C' &&
+        d.a_inccidentDate.includes(selectedDate, 0)
+    );
+    var catDdata = chartdata.filter(
+        d => d.j_ph_index == 'D' &&
+        d.a_inccidentDate.includes(selectedDate, 0)
+    );
+    if (catAdata.length != 0){
+        catAcount = catAdata[0].error_count;
+        total += catAcount;
+    }else{
+        catAcount = 0
     }
-    else{
-        catAcount = catAdata[0].error_count     
+
+    if (catBdata.length != 0){
+        catBcount = catBdata[0].error_count;
+        total += catBcount;
+    }else{
+        catBcount = 0
     }
+
+    if (catCdata.length != 0){
+        catCcount = catCdata[0].error_count;
+        total += catCcount;
+    }else{
+        catCcount = 0
+    }
+
+    if (catDdata.length != 0){
+        catDcount = catDdata[0].error_count;
+        total += catDcount;
+    }else{
+        catDcount = 0
+    }
+    $('#total').html('<b>Total: ' + total + '</b>')
 }
 $('#date').change(function() { //update chart label on change input type month
-    getCatAData();
+    getAllCategoryData();
     myChart.data.labels[0] = formatdate($('#date').val());
     myChart.data.datasets[0].data = [catAcount];
-    //myChart.data.datasets[1].data = [catBcount];
+    myChart.data.datasets[1].data = [catBcount];
+    myChart.data.datasets[2].data = [catCcount];
+    myChart.data.datasets[3].data = [catDcount];
     myChart.update();  
 });
 var ctx = document.getElementById("myChart");
@@ -42,12 +81,12 @@ var myChart = new Chart(ctx, {
                     catAcount
                 ],
                 backgroundColor: [
-                    "#94d8fc"
+                    "#04b1f0"
                 ],          
             },{
                 label: 'Cat B',
                 data: [
-                    
+                    catBcount
                 ],
                 backgroundColor: [
                     "#49a1ba"
@@ -55,7 +94,7 @@ var myChart = new Chart(ctx, {
             },{
                 label: 'Cat C',
                 data: [
-                    
+                    catCcount
                 ],
                 backgroundColor: [
                     "#fedf17"
@@ -63,7 +102,7 @@ var myChart = new Chart(ctx, {
             },{
                 label: 'Cat D',
                 data: [
-                    
+                    catDcount
                 ],
                 backgroundColor: [
                     "#c30505"
@@ -85,22 +124,21 @@ var myChart = new Chart(ctx, {
             legend: {
                 labels: {
                     color: "black",
-                    boxWidth: 12
+                    boxWidth: 12,
+                    font: {
+                        weight: '600',
+                    }
                 },
                 display: true,
                 position: "bottom",
             },
             title: {
                 display: true,
-                text: 'Med Errors (Oct 2020 - Sep 2021)',
                 font: {
-                    size: 22
+                    size: 22,
                 }
             },
             datalabels: {
-                formatter: ( val ) => {
-                    return val.y
-                },
                 labels: {
                     value: {
                         color: 'black'
@@ -117,20 +155,27 @@ var myChart = new Chart(ctx, {
                     drawBorder: false,
                 },
                 ticks: {
-                    color: 'black'
-                }
+                    color: 'black',
+                    font: {
+                        weight: '600',
+                        size: 12
+                    }
+                },   
             },
             y: {
                 ticks: {
-                    stepSize: 2,   
-                    color: 'black'              
+                    stepSize: 1,   
+                    color: 'black',            
                 },      
                 beginAtZero: true,
-                max: 10,
                 title: {
                     display: true,
                     text: 'No. of cases',
-                    color: 'black'
+                    color: 'black',
+                    font: {
+                        weight: '600',
+                        size: 13
+                    }  
                 },
                 position: 'left',
                 grid: {
@@ -140,3 +185,14 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+$('#text').append(`
+<span id="catA">Cat A:  </span>The event that have the capacity to cause error <strong>(Near Misses)</strong><br>
+<span id="catB">Cat B:  </span>The error did not reach patient <strong>(Near Misses)</strong><br>
+<span id="catC">Cat C:  </span>The error reached patient but did not cause patient harm<br>
+<span id="catD">Cat D:  </span>The error reached patient and required monitoring to confirm the result<br>
+<b>Cat E:  </b>The error resulted in temporary harm to patient. Intervention required<br>
+<b>Cat F:  </b>The error resulted in temporary harm to patient. Initial or prolonged hospitalization required<br>
+<b>Cat G:  </b>The error resulted in permanent patient harm<br>
+<b>Cat H:  </b>The error resulted in patient requiring intervention necessary to sustain life<br>
+<b>Cat I:  </b>The error resulted in patient's death<br>
+`);

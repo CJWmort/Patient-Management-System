@@ -1,15 +1,35 @@
 var selectedDate = $('#date').val();
+var formattedDate = formatdate(selectedDate);
+var catAdata;
+var catAcount;
+getCatAData();
 function formatdate(date){ //format date to correct format 
     var selectedDate = new Date(date);
     var options = {year: '2-digit', month: 'short'};
     var formattedDate = selectedDate.toLocaleDateString("en-US", options);
+    formattedDate = formattedDate.replace(' ', '-');
     return formattedDate;
 };
+function getCatAData(){
+    selectedDate = $('#date').val();
+    catAdata = chartdata.filter(
+        d => d.j_ph_index == 'A' &&
+        d.a_inccidentDate.includes(selectedDate, 0)
+    );
+    if (catAdata.length == 0){
+        catAcount = 0;
+    }
+    else{
+        catAcount = catAdata[0].error_count     
+    }
+}
 $('#date').change(function() { //update chart label on change input type month
+    getCatAData();
     myChart.data.labels[0] = formatdate($('#date').val());
-    myChart.update();   
+    myChart.data.datasets[0].data = [catAcount];
+    //myChart.data.datasets[1].data = [catBcount];
+    myChart.update();  
 });
-var formattedDate = formatdate(selectedDate);
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -19,7 +39,7 @@ var myChart = new Chart(ctx, {
             {
                 label: 'Cat A',
                 data: [
-                    
+                    catAcount
                 ],
                 backgroundColor: [
                     "#94d8fc"
@@ -91,7 +111,6 @@ var myChart = new Chart(ctx, {
         responsive: true,
         scales: {
             x: {
-                stacked: true,
                 grid: {
                     display: true,
                     drawOnChartArea: false,

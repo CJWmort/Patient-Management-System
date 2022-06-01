@@ -1,8 +1,14 @@
 //" ... " is a spread syntax, similar to blade syntax
 //spread syntax is used to include all objects in an array
 var selectedDate = $('#date').val();
+var targetRate = $('#rate').val();
 var firstmonth;
 var lastmonth;
+var targetRateList = [];
+targetRate = $('#rate').val();
+for (var i = 0; i < 12; i++){
+    targetRateList.push(targetRate)
+}
 getPast12Months();
 //Format all months to match x axis format
 var catAnBdata = chartdata.filter(
@@ -87,7 +93,6 @@ function createDataSet(categorydata, filtereddate, filtereddata){
         }
     });
 }
-
 function getPast12MonthsData(){ //get data for the past 12 months based on selected starting month
     catAnBfilteredDate = [];
     catAnBfilteredData = [];
@@ -155,6 +160,15 @@ $('#date').change(function() { //update chart on change input type month
     myChart.options.plugins.title.text = 'Med Errors (' + firstmonth + ' - ' + lastmonth + ')'
     myChart.update();  
 });
+$('#rate').change(function() { //update target rate on change input target rate
+    targetRateList = [];
+    targetRate = $('#rate').val();
+    for (var i = 0; i < 12; i++){
+        targetRateList.push(targetRate)
+    }
+    myChart.data.datasets[9].data = [...targetRateList];
+    myChart.update();  
+});
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -164,7 +178,7 @@ var myChart = new Chart(ctx, {
             {
                 label: 'Med error (Cat C to I) per monthly HOR',
                 data: [
-                    
+                    1,1,0
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -245,13 +259,20 @@ var myChart = new Chart(ctx, {
             },{
                 label: 'Target Rate',
                 data: [
-
+                    ...targetRateList
                 ],
+                fill: true,
+                type: 'line',
                 backgroundColor: [
                     "#fdeada"
                 ], 
                 borderColor: ["#4f81bd"],
-                borderWidth: 1,        
+                borderWidth: 2,   
+                borderDash: [10, 5],
+                datalabels: {
+                    display: false,
+                },
+                pointRadius: 0,
             },
         ],
     },

@@ -41,7 +41,7 @@
 <script>
     $('#filter').append(`<label>Starting Month - Year:</label>
     <input type="month" name="selectedDate" value="2021-09" id="date" onkeydown="return false" required>
-    `);
+    <label class="rate">Target Rate (Prev Yr): </label><input type="number" value="1" min="0" onchange='return true' oninput="this.value = Math.abs(this.value)" id="rate" step="0.1">`);
     // var currentMonth = document.querySelector('input[type="month"]');
     // var date= new Date()
     // var month=("0" + (date.getMonth() + 1)).slice(-2)

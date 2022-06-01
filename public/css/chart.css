@@ -46,7 +46,8 @@ body{
     font-size: 20px;
     margin-right: 10px;
 }
-#date{
+#date,
+#rate{
     height: 30px;
     width: 150px;
     outline: none;
@@ -89,4 +90,7 @@ body{
     border-radius: 15px;
     margin-left: 50px;
     outline: 3px solid #333;
+}
+.rate{
+    margin-left: 50px;
 }

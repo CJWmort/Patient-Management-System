@@ -94,3 +94,12 @@ body{
 .rate{
     margin-left: 50px;
 }
+.medError{
+    color: #627331;
+    font-weight: bold;
+    font-size: 18px;
+}
+#targetRate{
+    font-weight: bold;
+    font-size: 18px;
+}

@@ -436,5 +436,7 @@ $('#text').append(`
 <span id="catA">Cat A:  </span>The event that have the capacity to cause error <strong>(Near Misses)</strong><br>
 <span id="catB">Cat B:  </span>The error did not reach patient <strong>(Near Misses)</strong><br>
 <span id="catC">Cat C:  </span>The error reached patient but did not cause patient harm<br>
-<span id="catD">Cat D:  </span>The error reached patient and required monitoring to confirm the result
+<span id="catD">Cat D:  </span>The error reached patient and required monitoring to confirm the result<br><br>
+<span class="medError">Med error (C to I) rates: </span><sup>Number of Med error (C to I) </sup>&frasl;<sub> Total Med error HOR reported</sub><br><br>
+<span id="targetRate">Target rate: Previous year's average of "<span class="medError">Med error (C to I) rates</span>"</span>
 `);

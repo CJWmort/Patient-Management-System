@@ -4,6 +4,8 @@ var selectedDate = $('#date').val();
 var targetRate = $('#rate').val();
 var firstmonth;
 var lastmonth;
+var medErrorRate;
+var highestRate;
 var targetRateList = [];
 targetRate = $('#rate').val();
 for (var i = 0; i < 12; i++){
@@ -11,38 +13,36 @@ for (var i = 0; i < 12; i++){
 }
 getPast12Months();
 //Format all months to match x axis format
+formatCategoryDate(chartdata)
 var catAnBdata = chartdata.filter(
-    d => d.j_ph_index == 'A'
+    d => d.j_ph_index == 'A' ||
+    d.j_ph_index == 'B'
 );
-formatCategoryDate(catAnBdata);
 var catCdata = chartdata.filter(
     d => d.j_ph_index == 'C'
 );
-formatCategoryDate(catCdata);
 var catDdata = chartdata.filter(
     d => d.j_ph_index == 'D'
 );
-formatCategoryDate(catDdata);
 var catEdata = chartdata.filter(
     d => d.j_ph_index == 'E'
 );
-formatCategoryDate(catEdata);
 var catFdata = chartdata.filter(
     d => d.j_ph_index == 'F'
 );
-formatCategoryDate(catFdata);
 var catGdata = chartdata.filter(
     d => d.j_ph_index == 'G'
 );
-formatCategoryDate(catGdata);
 var catHdata = chartdata.filter(
     d => d.j_ph_index == 'H'
 );
-formatCategoryDate(catHdata);
 var catIdata = chartdata.filter(
     d => d.j_ph_index == 'I'
 );
-formatCategoryDate(catIdata);
+var medErrorData = chartdata.filter(
+    d => d.j_ph_index != 'A' && 
+    d.j_ph_index != 'B'
+);
 getPast12MonthsData();
 formatChartTitle();
 function formatCategoryDate(category){
@@ -110,6 +110,10 @@ function getPast12MonthsData(){ //get data for the past 12 months based on selec
     catHfilteredData = [];
     catIfilteredDate = [];
     catIfilteredData = [];
+    numMedErrorDate = [];
+    numMedErrorData = [];
+    totalMedErrorDate = [];
+    totalMedErrorData = [];
     createDataSet(catAnBdata, catAnBfilteredDate, catAnBfilteredData);
     createDataSet(catCdata, catCfilteredDate, catCfilteredData);
     createDataSet(catDdata, catDfilteredDate, catDfilteredData);
@@ -118,6 +122,8 @@ function getPast12MonthsData(){ //get data for the past 12 months based on selec
     createDataSet(catGdata, catGfilteredDate, catGfilteredData);
     createDataSet(catHdata, catHfilteredDate, catHfilteredData);
     createDataSet(catIdata, catIfilteredDate, catIfilteredData);
+    createDataSet(medErrorData, numMedErrorDate, numMedErrorData);
+    createDataSet(chartdata, totalMedErrorDate, totalMedErrorData)
     //map array data with x(month) and y(error count) values
     catAnBdataset = catAnBfilteredDate.map( function(x, i){
         return {"x": x, "y": catAnBfilteredData[i]}        
@@ -143,12 +149,73 @@ function getPast12MonthsData(){ //get data for the past 12 months based on selec
     catIdataset = catIfilteredDate.map( function(x, i){
         return {"x": x, "y": catIfilteredData[i]}        
     }.bind(this));
+    //Sum all value if key has duplicate for number of med error (Cat C to I)
+    numMedErrorDataSet = numMedErrorDate.map( function(x, i){
+        return {"x": x, "y": numMedErrorData[i]}        
+    }.bind(this));
+    var holder = {};
+    numMedErrorDataSet.forEach(function(d) {
+        if (holder.hasOwnProperty(d.x)) {
+            holder[d.x] = holder[d.x] + d.y;
+        } else {
+            holder[d.x] = d.y;
+        }
+    });
+    numMedErrorDataSet = [];
+    for (var prop in holder) {
+        numMedErrorDataSet.push({ x: prop, y: holder[prop] });
+    }
+    //Sum all value if key has duplicate for all med error (Cat A to I)
+    totalMedErrorDataSet = totalMedErrorDate.map( function(x, i){
+        return {"x": x, "y": totalMedErrorData[i]}        
+    }.bind(this));
+    var holder = {};
+    totalMedErrorDataSet.forEach(function(d) {
+        if (holder.hasOwnProperty(d.x)) {
+            holder[d.x] = holder[d.x] + d.y;
+        } else {
+            holder[d.x] = d.y;
+        }
+    });
+    totalMedErrorDataSet = [];
+    for (var prop in holder) {
+        totalMedErrorDataSet.push({ x: prop, y: holder[prop] });
+    }
+    var numMedErrorList = []; //Store med error count for Cat C to I
+    var totalMedErrorList = [];// Store med error count for all Category
+    var monthWithData = [];//Store months that have data
+    numMedErrorDataSet.forEach(data => {
+        numMedErrorList.push(data.y);
+        monthWithData.push(data.x);
+    });
+    totalMedErrorDataSet.forEach(data => {
+        totalMedErrorList.push(data.y);
+    });
+    //Divide values in numMedErrorList with totalMedErrorList values this will return the med error rate values
+    var medError = numMedErrorList.map(function(n, i) { return n / totalMedErrorList[i]; });
+    //Create map array of x(months that have med error) and y(med error rate) values
+    medError = monthWithData.map( function(x, i){
+        return {"x": x, "y": medError[i]}        
+    }.bind(this));
+    //emptyDataSet will create an array of x(current 12 months selected) and y(start with value of 0) values
+    emptyDataSet = monthList.map( function(x, i){
+        return {"x": x, "y": 0}        
+    }.bind(this));
+    //Merge medError and emptyDataSet arrays together and replace objects based on the key
+    medErrorRate = Object.values(
+        [].concat(emptyDataSet, medError)
+            .reduce((r, c) => (r[c.x] = Object.assign((r[c.x] || {}), c), r), {})
+    );
+    //Get the highest value for Med Error Rate
+    highestRate = Math.max(...medErrorRate.map(o => o.y))
 }
+
 $('#date').change(function() { //update chart on change input type month
     getPast12Months();
     getPast12MonthsData();
     formatChartTitle();
     myChart.data.labels = monthList;
+    myChart.data.datasets[0].data = [...medErrorRate];
     myChart.data.datasets[1].data = [...catAnBdataset];
     myChart.data.datasets[2].data = [...catCdataset];
     myChart.data.datasets[3].data = [...catDdataset];
@@ -178,7 +245,7 @@ var myChart = new Chart(ctx, {
             {
                 label: 'Med error (Cat C to I) per monthly HOR',
                 data: [
-                    1,1,0
+                    ...medErrorRate
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -328,7 +395,7 @@ var myChart = new Chart(ctx, {
             },
             y: {
                 ticks: {
-                    stepSize: 1,   
+                    stepSize: 0.5,   
                     color: 'black'              
                 },      
                 stacked: true,
@@ -355,7 +422,7 @@ var myChart = new Chart(ctx, {
                     color: 'black',
                 },
                 position: 'right',
-                max: 4,
+                max: highestRate + 3,
                 grid: {
                     drawOnChartArea: false,
                     drawBorder: false,

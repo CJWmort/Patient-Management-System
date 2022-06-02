@@ -48,6 +48,7 @@
     // var year=date.getFullYear()
     // currentMonth.value = `${year}-${month}`;
     var chartdata = {!! json_encode($chartdata) !!} //Get data from chart10acontroller
+    var highestErrorCount = {!! json_encode($max) !!}
 </script>
 <script src="{{URL::asset('public/js/chart10a.js?v=').time()}}"></script>
 @endif

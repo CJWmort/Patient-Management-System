@@ -8,6 +8,7 @@ use App\Http\Controllers\EhorController;
 use App\Http\Controllers\Chart8Controller;
 use App\Http\Controllers\Chart10aController;
 use App\Http\Controllers\Chart10bController;
+use App\Http\Controllers\Chart10cController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,3 +55,4 @@ Route::post('/updatetype', [EhorController::class, 'updatetype'])->name('updatet
 Route::get('/chart8', [Chart8Controller::class, 'chart8'])->middleware('isLoggedIn')->name('chart8');
 Route::get('/chart10a', [Chart10aController::class, 'chart10a'])->middleware('isLoggedIn')->name('chart10a');
 Route::get('/chart10b', [Chart10bController::class, 'chart10b'])->middleware('isLoggedIn')->name('chart10b');
+Route::get('/chart10c', [Chart10cController::class, 'chart10c'])->middleware('isLoggedIn')->name('chart10c');

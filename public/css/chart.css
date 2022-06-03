@@ -47,7 +47,8 @@ body{
     margin-right: 10px;
 }
 #date,
-#rate{
+#rate,
+#year{
     height: 30px;
     width: 150px;
     outline: none;
@@ -102,4 +103,21 @@ body{
 #targetRate{
     font-weight: bold;
     font-size: 18px;
+}
+table, th, td{
+    border: 2px solid #333;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 10px;
+    margin: 15px auto;
+}
+.table10c th,
+.table10c tr .totalMedError{
+    background-color: #a6a6a6;
+}
+.table10c td{
+    background-color: aliceblue;
+}
+#yearSelected{
+    font-size: 26px;
 }

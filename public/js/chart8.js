@@ -1,5 +1,8 @@
 var selectedDate = $('#date').val();
+var firstmonth;
+var lastmonth;
 getPast12Months();
+formatChartTitle();
 function getPast12Months(){ //get past 12 months based on selected starting month
     monthList = [];
     selectedDate = $('#date').val();
@@ -12,11 +15,32 @@ function getPast12Months(){ //get past 12 months based on selected starting mont
         d.setMonth(d.getMonth() - 1);
     }
 }
+function formatChartTitle(){ //format the date for chart title example(Oct 20 - Sep 21)
+    titleMonthList = [];
+    selectedDate = $('#date').val();
+    var d = new Date(selectedDate);
+    var monthName = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+    d.setDate(1);
+    for (i=0; i<=11; i++) {
+        var year = d.getFullYear().toString().substring(2,4);
+        titleMonthList.unshift(monthName[d.getMonth()] + ' ' + year);
+        d.setMonth(d.getMonth() - 1);
+    }
+    firstmonth = titleMonthList[0];
+    lastmonth = titleMonthList[11];
+}
+$('#date').change(function() { //update chart on change input type month
+    getPast12Months();
+    formatChartTitle();
+    myChart.data.labels = monthList;
+    myChart.options.plugins.title.text = 'SRE cases (' + firstmonth + ' - ' + lastmonth + ')'
+    myChart.update();  
+});
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [],
+        labels: monthList,
         datasets: [
             {
                 label: 'HOR-Falls',
@@ -58,7 +82,7 @@ var myChart = new Chart(ctx, {
             },
             title: {
                 display: true,
-                text: 'SRE cases (Oct 20 - Sep 21)',
+                text: 'SRE cases (' + firstmonth + ' - ' + lastmonth + ')',
                 font: {
                     size: 22
                 }

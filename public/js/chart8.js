@@ -129,3 +129,7 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+$('#text').append(`
+<span><b>Process owner</b>: HPO</span><br><br>
+<span><b>Data Description</b>: KPI tracks the number of “serious reportable events” that occurred in AMKH each month.</span>
+`);

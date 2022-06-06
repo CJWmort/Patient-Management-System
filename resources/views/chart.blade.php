@@ -34,7 +34,9 @@
 <!-- Display different charts based on user selection -->
 @if ($selectedChart == 1)
 <script>
-    
+    $('#filter').append(`<label>Starting Month - Year:</label>
+    <input type="month" name="selectedDate" value="2021-09" id="date" onkeydown="return false" required>
+    `);
 </script>
 <script src="{{URL::asset('public/js/chart8.js?v=').time()}}"></script>
 @endif

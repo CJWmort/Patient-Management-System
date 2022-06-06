@@ -1,11 +1,22 @@
-//" ... " is a spread syntax, similar to blade syntax
-//spread syntax is used to include all objects in an array
+var selectedDate = $('#date').val();
+getPast12Months();
+function getPast12Months(){ //get past 12 months based on selected starting month
+    monthList = [];
+    selectedDate = $('#date').val();
+    var d = new Date(selectedDate);
+    var monthName = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+    d.setDate(1);
+    for (i=0; i<=11; i++) {
+        var year = d.getFullYear();
+        monthList.unshift(monthName[d.getMonth()] + '-' + year.toString().substring(2,4));
+        d.setMonth(d.getMonth() - 1);
+    }
+}
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Oct-20", "Nov-20", "Dec-20", "Jan-21", "Feb-21", "Mar-21", "Apr-21",
-        "May-21", "Jun-21", "Jul-21", "Aug-21", "Sep-21"],
+        labels: [],
         datasets: [
             {
                 label: 'HOR-Falls',
@@ -13,7 +24,7 @@ var myChart = new Chart(ctx, {
                     
                 ],
                 backgroundColor: [
-                    "#94d8fc"
+                    "#49a1ba"
                 ],          
             },{
                 label: 'HOR-ME',
@@ -21,7 +32,7 @@ var myChart = new Chart(ctx, {
                     
                 ],
                 backgroundColor: [
-                    "#49a1ba"
+                    "#ee7d31"
                 ],          
             },
         ],

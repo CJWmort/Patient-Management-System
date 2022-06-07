@@ -1,8 +1,25 @@
 var selectedDate = $('#date').val();
 var firstmonth;
 var lastmonth;
+chartdata.forEach(element => { //format all a_inccidentDate fields to the correct format e.g(2021-09-01 to Sep-21)
+    element.a_inccidentDate = formatdate(element.a_inccidentDate)
+});
+var medicationData = chartdata.filter( 
+    d => d.f_occurType == 'medication'
+);
+var fallData = chartdata.filter(
+    d => d.f_occurType == 'fall'
+);
 getPast12Months();
+getPast12MonthsData();
 formatChartTitle();
+function formatdate(date){ //format date to correct format 
+    var selectedDate = new Date(date);
+    var options = {year: '2-digit', month: 'short'};
+    var formattedDate = selectedDate.toLocaleDateString("en-US", options);
+    formattedDate = formattedDate.replace(' ', '-');
+    return formattedDate;
+};
 function getPast12Months(){ //get past 12 months based on selected starting month
     monthList = [];
     selectedDate = $('#date').val();
@@ -29,10 +46,40 @@ function formatChartTitle(){ //format the date for chart title example(Oct 20 - 
     firstmonth = titleMonthList[0];
     lastmonth = titleMonthList[11];
 }
+function createDataSet(data, filtereddate, filtereddata){
+    //Check if month is within filtered month-year range, push respective month and error count if true
+    data.forEach(element => {
+        if(monthList.includes(element.a_inccidentDate)){
+            filtereddate.push(element.a_inccidentDate);
+            filtereddata.push(element.serious_count);
+        };
+    });
+}
+function getPast12MonthsData(){ //get data for the past 12 months based on selected month-year
+    medfilteredDate = [];
+    medfilteredData = [];
+    fallfilteredDate = [];
+    fallfilteredData = [];
+    createDataSet(medicationData, medfilteredDate, medfilteredData)
+    createDataSet(fallData, fallfilteredDate, fallfilteredData)
+    //map array data with x(month) and y(error count) values
+    medEventDataset = medfilteredDate.map( function(x, i){
+        return {"x": x, "y": medfilteredData[i]}        
+    }.bind(this));
+    fallEventDataset = fallfilteredDate.map( function(x, i){
+        return {"x": x, "y": fallfilteredData[i]}        
+    }.bind(this));
+    var total = medfilteredData.concat(fallfilteredData); //Merge the count values for falls and medication events
+    totalData = total.reduce((partialSum, a) => partialSum + a, 0); //Sum all values in total array
+    $('#total').html('<b>Total: ' + totalData + '</b>')
+}
 $('#date').change(function() { //update chart on change input type month
     getPast12Months();
+    getPast12MonthsData();
     formatChartTitle();
     myChart.data.labels = monthList;
+    myChart.data.datasets[0].data = [...fallEventDataset];
+    myChart.data.datasets[1].data = [...medEventDataset];
     myChart.options.plugins.title.text = 'SRE cases (' + firstmonth + ' - ' + lastmonth + ')'
     myChart.update();  
 });
@@ -45,7 +92,7 @@ var myChart = new Chart(ctx, {
             {
                 label: 'HOR-Falls',
                 data: [
-                    
+                    ...fallEventDataset
                 ],
                 backgroundColor: [
                     "#49a1ba"
@@ -53,7 +100,7 @@ var myChart = new Chart(ctx, {
             },{
                 label: 'HOR-ME',
                 data: [
-                    
+                    ...medEventDataset
                 ],
                 backgroundColor: [
                     "#ee7d31"
@@ -101,7 +148,6 @@ var myChart = new Chart(ctx, {
         responsive: true,
         scales: {
             x: {
-                stacked: true,
                 grid: {
                     display: true,
                     drawOnChartArea: false,
@@ -117,7 +163,6 @@ var myChart = new Chart(ctx, {
                     color: 'black'              
                 },      
                 beginAtZero: true,
-                max: 1,
                 title: {
                     display: true,
                     text: 'No. of SRE reported',

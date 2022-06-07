@@ -93,7 +93,7 @@ function createDataSet(categorydata, filtereddate, filtereddata){
         }
     });
 }
-function getPast12MonthsData(){ //get data for the past 12 months based on selected starting month
+function getPast12MonthsData(){ //get data for the past 12 months based on selected month-year
     catAnBfilteredDate = [];
     catAnBfilteredData = [];
     catCfilteredDate = [];
@@ -123,7 +123,7 @@ function getPast12MonthsData(){ //get data for the past 12 months based on selec
     createDataSet(catHdata, catHfilteredDate, catHfilteredData);
     createDataSet(catIdata, catIfilteredDate, catIfilteredData);
     createDataSet(medErrorData, numMedErrorDate, numMedErrorData);
-    createDataSet(chartdata, totalMedErrorDate, totalMedErrorData)
+    createDataSet(chartdata, totalMedErrorDate, totalMedErrorData);
     //map array data with x(month) and y(error count) values
     catAnBdataset = catAnBfilteredDate.map( function(x, i){
         return {"x": x, "y": catAnBfilteredData[i]}        

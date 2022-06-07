@@ -31,12 +31,24 @@
     <div id="text"></div>
 </body>
 <script src="{{URL::asset('public/js/jquery.min.js?v=').time()}}"></script>
+<script>
+    function getCurrentMonthYear(){
+        //Get the current month and year then set it as the starting value for input type month
+        var currentMonth = document.querySelector('input[type="month"]');
+        var date= new Date()
+        var month=("0" + (date.getMonth() + 1)).slice(-2)
+        var year=date.getFullYear()
+        currentMonth.value = `${year}-${month}`;
+    }
+</script>
 <!-- Display different charts based on user selection -->
 @if ($selectedChart == 1)
 <script>
     $('#filter').append(`<label>Selected Month - Year:</label>
-    <input type="month" name="selectedDate" value="2021-09" id="date" onkeydown="return false" required>
-    `);
+    <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
+    <span id="total"></span>`);
+    getCurrentMonthYear(); //Set starting value for input type month to be current month-year
+    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart8controller
 </script>
 <script src="{{URL::asset('public/js/chart8.js?v=').time()}}"></script>
 @endif
@@ -45,12 +57,7 @@
     $('#filter').append(`<label>Selected Month - Year:</label>
     <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
     <label class="rate">Target Rate (Prev Yr): </label><input type="number" value="1" min="0" onchange='return true' oninput="this.value = Math.abs(this.value)" id="rate" step="0.1">`);
-    //Get the current month and year then set it as the starting value for input type month
-    var currentMonth = document.querySelector('input[type="month"]');
-    var date= new Date()
-    var month=("0" + (date.getMonth() + 1)).slice(-2)
-    var year=date.getFullYear()
-    currentMonth.value = `${year}-${month}`;
+    getCurrentMonthYear(); //Set starting value for input type month to be current month-year
     var chartdata = {!! json_encode($chartdata) !!} //Get data from chart10acontroller
 </script>
 <script src="{{URL::asset('public/js/chart10a.js?v=').time()}}"></script>
@@ -60,12 +67,7 @@
     $('#filter').append(`<label>Sort By Month - Year:</label>
     <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
     <span id="total"></span>`);
-    //Get the current month and year then set it as the starting value for input type month
-    var currentMonth = document.querySelector('input[type="month"]');
-    var date= new Date()
-    var month=("0" + (date.getMonth() + 1)).slice(-2)
-    var year=date.getFullYear()
-    currentMonth.value = `${year}-${month}`;
+    getCurrentMonthYear(); //Set starting value for input type month to be current month-year
     var chartdata = {!! json_encode($chartdata) !!} //Get data from chart10bcontroller
 </script>
 <script src="{{URL::asset('public/js/chart10b.js?v=').time()}}"></script>

@@ -114,10 +114,26 @@ table, th, td{
 .table10c th,
 .table10c tr .totalMedError{
     background-color: #a6a6a6;
+    font-weight: bold;
 }
 .table10c td{
     background-color: aliceblue;
 }
 #yearSelected{
     font-size: 26px;
+}
+tr .totaltype{
+    background-color: #c3d69b;
+}
+tr #totalMedError{
+    background-color: #77933c;
+    font-weight: bold;
+}
+tr .subtotal{
+    background-color: #0070c0;
+    font-weight: bold;
+}
+#noData tr td{
+    font-weight: bold;
+    font-size: 24px;
 }

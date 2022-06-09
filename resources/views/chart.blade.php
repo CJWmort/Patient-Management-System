@@ -48,7 +48,7 @@
     <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
     <span id="total"></span>`);
     getCurrentMonthYear(); //Set starting value for input type month to be current month-year
-    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart8controller
+    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart8Controller
 </script>
 <script src="{{URL::asset('public/js/chart8.js?v=').time()}}"></script>
 @endif
@@ -58,7 +58,7 @@
     <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
     <label class="rate">Target Rate (Prev Yr): </label><input type="number" value="1" min="0" onchange='return true' oninput="this.value = Math.abs(this.value)" id="rate" step="0.1">`);
     getCurrentMonthYear(); //Set starting value for input type month to be current month-year
-    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart10acontroller
+    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart10aController
 </script>
 <script src="{{URL::asset('public/js/chart10a.js?v=').time()}}"></script>
 @endif
@@ -68,13 +68,18 @@
     <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
     <span id="total"></span>`);
     getCurrentMonthYear(); //Set starting value for input type month to be current month-year
-    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart10bcontroller
+    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart10bController
 </script>
 <script src="{{URL::asset('public/js/chart10b.js?v=').time()}}"></script>
 @endif
 @if ($selectedChart == 4)
 <script>
-    
+    var currentYear= new Date().getFullYear(); //Get current year and set as default value in chart10c
+    $('#filter').append(`
+    <label>Enter Selected Year:</label>
+    <input type="number" id="year" min="0" onchange='return true' value="${currentYear}" oninput="this.value = Math.abs(this.value)" required>`);
+    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart10cController
+    var fielddata = {!! json_encode($fielddata) !!} //Get fields from chart10cController
 </script>
 <script src="{{URL::asset('public/js/chart10c.js?v=').time()}}"></script>
 @endif

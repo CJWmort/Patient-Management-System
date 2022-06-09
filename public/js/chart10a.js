@@ -1,15 +1,18 @@
 //" ... " is a spread syntax, similar to blade syntax
 //spread syntax is used to include all objects in an array
 var selectedDate = $('#date').val();
-var targetRate = $('#rate').val();
+if(localStorage.getItem('targetRate') != null){ //Assign local storage value for targetRate if exists
+    document.getElementById('rate').value = localStorage.getItem('targetRate');
+} else{ //Default target rate value will be 1 if no target rate values in localStorage
+    document.getElementById('rate').value = 1;
+}
 var firstmonth;
 var lastmonth;
 var medErrorRate;
 var highestRate;
 var targetRateList = [];
-targetRate = $('#rate').val();
 for (var i = 0; i < 12; i++){
-    targetRateList.push(targetRate)
+    targetRateList.push($('#rate').val())
 }
 getPast12Months();
 //Format all months to match x axis format
@@ -229,7 +232,9 @@ $('#date').change(function() { //update chart on change input type month
 });
 $('#rate').change(function() { //update target rate on change input target rate
     targetRateList = [];
-    targetRate = $('#rate').val();
+    targetRate = $('#rate').val(); //Get current target rate value
+    localStorage.setItem('targetRate', targetRate) //Set current target rate value in localStorage
+    targetRate = localStorage.getItem('targetRate')
     for (var i = 0; i < 12; i++){
         targetRateList.push(targetRate)
     }

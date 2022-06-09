@@ -18,7 +18,7 @@
         <a @if($selectedChart == 2)class="selected"@endif href="{{route('chart10a')}}">10a. Medication Error (Past 12 Months)</a><br>
         <a @if($selectedChart == 3)class="selected"@endif href="{{route('chart10b')}}">10b. Medication Error (Current Month)</a><br>
         <a @if($selectedChart == 4)class="selected"@endif href="{{route('chart10c')}}">10c. Type of Medication Error (Current Year)</a><br>
-        <a @if($selectedChart == 5)class="selected"@endif href="#">11a. Fall Related by Injury/Non-Injury (Monthly)</a><br>
+        <a @if($selectedChart == 5)class="selected"@endif href="{{route('chart11a')}}">11a. Fall Related by Injury/Non-Injury (Monthly)</a><br>
         <a @if($selectedChart == 6)class="selected"@endif href="#">11b. Falls Reported by Severity (In-Hospital)</a><br>
         <a @if($selectedChart == 7)class="selected"@endif href="#}">11c. Falls Reported by Ward Wing (In-Hospital)</a><br>
         <a @if($selectedChart == 8)class="selected"@endif href="#">11d. Falls Reported table by Ward Wing (In-Hospital)</a><br>
@@ -83,11 +83,12 @@
 </script>
 <script src="{{URL::asset('public/js/chart10c.js?v=').time()}}"></script>
 @endif
-<!-- @if ($selectedChart == 7)
+@if ($selectedChart == 5)
 <script>
-    
+    $('#filter').append(`<label>Selected Month - Year:</label>
+    <input type="month" name="selectedDate" id="date" value="2021-09" onkeydown="return false" required>`);
 </script>
-<script src="{{URL::asset('public/js/chart11c.js?v=').time()}}"></script>
-@endif -->
+<script src="{{URL::asset('public/js/chart11a.js?v=').time()}}"></script>
+@endif
 
 </html>

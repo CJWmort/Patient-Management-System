@@ -56,7 +56,7 @@
 <script>
     $('#filter').append(`<label>Selected Month - Year:</label>
     <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
-    <label class="rate">Target Rate (Prev Yr): </label><input type="number" min="0" onchange='return true' oninput="this.value = Math.abs(this.value)" id="rate" step="0.1">`);
+    <label class="rate">Target Rate (Prev Yr): </label><input type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" id="rate" step="0.1">`);
     getCurrentMonthYear(); //Set starting value for input type month to be current month-year
     var chartdata = {!! json_encode($chartdata) !!} //Get data from chart10aController
 </script>

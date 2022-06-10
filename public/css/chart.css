@@ -5,7 +5,7 @@ body{
     background-color: #88d4d1;
     width: 15%;
     float: left;
-    height: 110vh;
+    height: 130vh;
     padding: 20px 10px;
     overflow-wrap: break-word;
 }
@@ -56,6 +56,9 @@ body{
     cursor: pointer;
     padding: 5px;
     font-weight: bold;
+}
+#rate{
+    cursor: text;
 }
 #text{
     text-align: center;
@@ -137,8 +140,9 @@ tr .subtotal{
     font-weight: bold;
     font-size: 24px;
 }
-.table11a{
+.table11a, .table11a th, .table11a td{
     background-color: aliceblue;
+    padding: 5px;
 }
 #emptyCell{
     background-color: #57b2af;
@@ -147,4 +151,12 @@ tr .subtotal{
 }
 .field{
     text-align: left;
+}
+.tableInput{
+    width: 60px;
+    outline: none;
+    border: 2px solid #333;
+    cursor: text;
+    padding: 5px;
+    font-weight: bold;
 }

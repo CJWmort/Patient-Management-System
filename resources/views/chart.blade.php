@@ -12,23 +12,26 @@
 <!--Include Nav Bar When Page Loads-->
 @include('layouts/navigation')
 <body>
-    <div class="side-nav">
+    <div class="side-nav" id="side-nav">
         <!-- Highlight Chart Navigation Link To Show Which Chart Is Currently Being Selected -->
         <a @if($selectedChart == 1)class="selected"@endif href="{{route('chart8')}}">8. Serious Reportable Event</a><br>
         <a @if($selectedChart == 2)class="selected"@endif href="{{route('chart10a')}}">10a. Medication Error (Past 12 Months)</a><br>
         <a @if($selectedChart == 3)class="selected"@endif href="{{route('chart10b')}}">10b. Medication Error (Current Month)</a><br>
         <a @if($selectedChart == 4)class="selected"@endif href="{{route('chart10c')}}">10c. Type of Medication Error (Current Year)</a><br>
         <a @if($selectedChart == 5)class="selected"@endif href="{{route('chart11a')}}">11a. Fall Related by Injury/Non-Injury (Monthly)</a><br>
-        <a @if($selectedChart == 6)class="selected"@endif href="#">11b. Falls Reported by Severity (In-Hospital)</a><br>
+        <a @if($selectedChart == 6)class="selected"@endif href="{{route('chart11b')}}">11b. Falls Reported by Severity (In-Hospital)</a><br>
         <a @if($selectedChart == 7)class="selected"@endif href="#}">11c. Falls Reported by Ward Wing (In-Hospital)</a><br>
         <a @if($selectedChart == 8)class="selected"@endif href="#">11d. Falls Reported table by Ward Wing (In-Hospital)</a><br>
     </div>
+    <div class="right" onclick="openMenu();"><img id='arrow' src="{{URL::asset('public/images/right.png')}}" alt="arrow"></div>
     <div class="chart">
         <canvas id="myChart" width="1200" height="500"></canvas>
     </div>
-    <div id="filter"></div>
-    <div id="table"></div>
-    <div id="text"></div>
+    <div class='center'>
+        <div id="filter"></div>
+        <div id="table"></div>
+        <div id="text"></div>
+    </div>
 </body>
 <script src="{{URL::asset('public/js/jquery.min.js?v=').time()}}"></script>
 <script>
@@ -39,6 +42,16 @@
         var month=("0" + (date.getMonth() + 1)).slice(-2)
         var year=date.getFullYear()
         currentMonth.value = `${year}-${month}`;
+    }
+    function openMenu(){
+        //Open or Close Menu To Hide or Show Chart List
+        document.querySelector(".side-nav").classList.toggle('showSideNav');
+        document.querySelector(".right").classList.toggle('moveRight');
+        if ($('#arrow').attr('src') == '{{URL::asset('public/images/right.png')}}') {
+            $('#arrow').attr('src', "{{URL::asset('public/images/left.png')}}")
+        } else {
+            $('#arrow').attr('src', "{{URL::asset('public/images/right.png')}}")
+        }
     }
 </script>
 <!-- Display different charts based on user selection -->

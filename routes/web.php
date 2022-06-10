@@ -10,6 +10,7 @@ use App\Http\Controllers\Chart10aController;
 use App\Http\Controllers\Chart10bController;
 use App\Http\Controllers\Chart10cController;
 use App\Http\Controllers\Chart11aController;
+use App\Http\Controllers\Chart11bController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,3 +59,4 @@ Route::get('/chart10a', [Chart10aController::class, 'chart10a'])->middleware('is
 Route::get('/chart10b', [Chart10bController::class, 'chart10b'])->middleware('isLoggedIn')->name('chart10b');
 Route::get('/chart10c', [Chart10cController::class, 'chart10c'])->middleware('isLoggedIn')->name('chart10c');
 Route::get('/chart11a', [Chart11aController::class, 'chart11a'])->middleware('isLoggedIn')->name('chart11a');
+Route::get('/chart11b', [Chart11bController::class, 'chart11b'])->middleware('isLoggedIn')->name('chart11b');

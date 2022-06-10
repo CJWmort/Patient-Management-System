@@ -319,23 +319,79 @@ $('#tableBody').append(`
     </tr>
     <tr class="injury">
         <td class="field">Fall (Injury)</td>
+        <td id="injury${monthList[0]}">0</td>
+        <td id="injury${monthList[1]}">0</td>
+        <td id="injury${monthList[2]}">0</td>
+        <td id="injury${monthList[3]}">0</td>
+        <td id="injury${monthList[4]}">0</td>
+        <td id="injury${monthList[5]}">0</td>
+        <td id="injury${monthList[6]}">0</td>
+        <td id="injury${monthList[7]}">0</td>
+        <td id="injury${monthList[8]}">0</td>
+        <td id="injury${monthList[9]}">0</td>
+        <td id="injury${monthList[10]}">0</td>
+        <td id="injury${monthList[11]}">0</td>
     </tr>
     <tr class="average">
         <td class="field">Past year average</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
     <tr class="rate">
         <td class="field">Target rate</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
     <tr class="patientDay">
         <td class="field">Rate per 1000 patient days</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
 `);        
 };
 function loadData(){
     nonInjuryData.forEach(data => {
+        //Get the field id that matches one of the 12 current selected month-year
         var myElement = document.getElementById('nonInjury' + data.a_inccidentDate);
-        if(myElement){
-            myElement.innerHTML = data.fall_count;
+        if(myElement){ //Check if that field with the correct id exist
+            myElement.innerHTML = data.fall_count; //Change innerHTML of selected field to fall_count
+        }
+    });
+    injuryData.forEach(data => {
+        //Get the field id that matches one of the 12 current selected month-year
+        var myElement = document.getElementById('injury' + data.a_inccidentDate);
+        if(myElement){ //Check if that field with the correct id exist
+            myElement.innerHTML = data.fall_count; //Change innerHTML of selected field to fall_count
         }
     });
 }

@@ -16,6 +16,7 @@ getPast12MonthsData();
 formatChartTitle();
 loadTable();
 loadField();
+loadData();
 
 function formatdate(date){ //format date to correct format 
     var selectedDate = new Date(date);
@@ -80,6 +81,7 @@ $('#date').change(function() { //update chart on change input type month
     formatChartTitle();
     loadTable();
     loadField();
+    loadData();
     myChart.data.labels = monthList;
     myChart.data.datasets[3].data = [...nonInjuryDataset];
     myChart.data.datasets[4].data = [...injuryDataset];
@@ -301,31 +303,39 @@ $('#table').append(`
 function loadField(){ //Create td with unique id so that we can select individually
 $('#tableBody').append(`
     <tr class="nonInjury">
-        <td>Fall (Non-Injury)</td>
-        <td id="nonInjury${monthList[0]}"></td>
-        <td id="nonInjury${monthList[1]}"></td>
-        <td id="nonInjury${monthList[2]}"></td>
-        <td id="nonInjury${monthList[3]}"></td>
-        <td id="nonInjury${monthList[4]}"></td>
-        <td id="nonInjury${monthList[5]}"></td>
-        <td id="nonInjury${monthList[6]}"></td>
-        <td id="nonInjury${monthList[7]}"></td>
-        <td id="nonInjury${monthList[8]}"></td>
-        <td id="nonInjury${monthList[9]}"></td>
-        <td id="nonInjury${monthList[10]}"></td>
-        <td id="nonInjury${monthList[11]}"></td>
+        <td class="field">Fall (Non-Injury)</td>
+        <td id="nonInjury${monthList[0]}">0</td>
+        <td id="nonInjury${monthList[1]}">0</td>
+        <td id="nonInjury${monthList[2]}">0</td>
+        <td id="nonInjury${monthList[3]}">0</td>
+        <td id="nonInjury${monthList[4]}">0</td>
+        <td id="nonInjury${monthList[5]}">0</td>
+        <td id="nonInjury${monthList[6]}">0</td>
+        <td id="nonInjury${monthList[7]}">0</td>
+        <td id="nonInjury${monthList[8]}">0</td>
+        <td id="nonInjury${monthList[9]}">0</td>
+        <td id="nonInjury${monthList[10]}">0</td>
+        <td id="nonInjury${monthList[11]}">0</td>
     </tr>
     <tr class="injury">
-        <td>Fall (Injury)</td>
+        <td class="field">Fall (Injury)</td>
     </tr>
     <tr class="average">
-        <td>Past year average</td>
+        <td class="field">Past year average</td>
     </tr>
     <tr class="rate">
-        <td>Target rate</td>
+        <td class="field">Target rate</td>
     </tr>
     <tr class="patientDay">
-        <td>Rate per 1000 patient days</td>
+        <td class="field">Rate per 1000 patient days</td>
     </tr>
 `);        
+};
+function loadData(){
+    nonInjuryData.forEach(data => {
+        var myElement = document.getElementById('nonInjury' + data.a_inccidentDate);
+        if(myElement){
+            myElement.innerHTML = data.fall_count;
+        }
+    });
 }

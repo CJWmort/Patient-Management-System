@@ -18,7 +18,9 @@ class Chart11aController extends Controller
         if (Session::has('loginId')){
             $data = User::where('id', '=', Session::get('loginId'))->first();
         }
+        //get all data required for chart11a
+        $chartdata = DB::table('hors_charts')->select('a_inccidentDate', 'f_occurType', 'f_fall_injury', DB::raw('COUNT(f_occurType) as fall_count'))->where('f_occurType', '=', 'fall')->groupBy('a_inccidentDate','f_fall_injury')->get();
 
-        return view('chart',compact('data', 'selectedChart'));
+        return view('chart',compact('data', 'chartdata', 'selectedChart'));
     }
 }

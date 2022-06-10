@@ -13,6 +13,7 @@ var fallData = chartdata.filter(
 getPast12Months();
 getPast12MonthsData();
 formatChartTitle();
+
 function formatdate(date){ //format date to correct format 
     var selectedDate = new Date(date);
     var options = {year: '2-digit', month: 'short'};
@@ -96,7 +97,8 @@ var myChart = new Chart(ctx, {
                 ],
                 backgroundColor: [
                     "#49a1ba"
-                ],          
+                ],    
+                barPercentage: 1.0      
             },{
                 label: 'HOR-ME',
                 data: [
@@ -104,7 +106,8 @@ var myChart = new Chart(ctx, {
                 ],
                 backgroundColor: [
                     "#ee7d31"
-                ],          
+                ],         
+                barPercentage: 1.0 
             },
         ],
     },

@@ -1,8 +1,19 @@
 var selectedDate = $('#date').val();
 var firstmonth;
 var lastmonth;
+chartdata.forEach(element => { //format all a_inccidentDate fields to the correct format e.g(2021-09-01 to Sep-21)
+    element.a_inccidentDate = formatdate(element.a_inccidentDate)
+});
+var injuryData = chartdata.filter( //Get data where fall resulted in injury
+    d => d.f_fall_injury == 'yes'
+);
+var nonInjuryData = chartdata.filter( //Get data where fall did not result in injury
+    d => d.f_fall_injury == 'no'
+);
 getPast12Months();
+getPast12MonthsData();
 formatChartTitle();
+
 function formatdate(date){ //format date to correct format 
     var selectedDate = new Date(date);
     var options = {year: '2-digit', month: 'short'};
@@ -21,7 +32,7 @@ function getPast12Months(){ //get past 12 months based on selected starting mont
         monthList.unshift(monthName[d.getMonth()] + '-' + year.toString().substring(2,4));
         d.setMonth(d.getMonth() - 1);
     }
-}
+};
 function formatChartTitle(){ //format the date for chart title example(Oct 20 - Sep 21)
     titleMonthList = [];
     selectedDate = $('#date').val();
@@ -35,11 +46,38 @@ function formatChartTitle(){ //format the date for chart title example(Oct 20 - 
     }
     firstmonth = titleMonthList[0];
     lastmonth = titleMonthList[11];
-}
+};
+function createDataSet(data, filtereddate, filtereddata){
+    //Check if month is within filtered month-year range, push respective month and error count if true
+    data.forEach(element => {
+        if(monthList.includes(element.a_inccidentDate)){
+            filtereddate.push(element.a_inccidentDate);
+            filtereddata.push(element.fall_count);
+        };
+    });
+};
+function getPast12MonthsData(){ //get data for the past 12 months based on selected month-year
+    injuryFilteredDate = [];
+    injuryFilteredData = [];
+    nonInjuryFilteredDate = [];
+    nonInjuryFilteredData = [];
+    createDataSet(injuryData, injuryFilteredDate, injuryFilteredData)
+    createDataSet(nonInjuryData, nonInjuryFilteredDate, nonInjuryFilteredData)
+    //map array data with x(month) and y(fall count) values
+    injuryDataset = injuryFilteredDate.map( function(x, i){
+        return {"x": x, "y": injuryFilteredData[i]}        
+    }.bind(this));
+    nonInjuryDataset = nonInjuryFilteredDate.map( function(x, i){
+        return {"x": x, "y": nonInjuryFilteredData[i]}        
+    }.bind(this));
+};
 $('#date').change(function() { //update chart on change input type month
     getPast12Months();
+    getPast12MonthsData();
     formatChartTitle();
     myChart.data.labels = monthList;
+    myChart.data.datasets[0].data = [...injuryDataset];
+    myChart.data.datasets[1].data = [...nonInjuryDataset];
     myChart.options.plugins.title.text = 'Falls (' + firstmonth + ' - ' + lastmonth + ')'
     myChart.update();  
 });
@@ -50,29 +88,84 @@ var myChart = new Chart(ctx, {
         labels: monthList,
         datasets: [
             {
-                label: 'Med error (Cat C to I) per monthly HOR',
+                label: 'Rate per 1000 patient days',
                 data: [
                     
                 ],
                 type: 'line',
                 backgroundColor: [
-                    "#627331"
+                    "#efc00c"
                 ], 
-                borderColor: ["#627331"],
-                borderWidth: 3,
+                borderColor: ["#ffd032"],
+                pointBorderColor: '#efc00c',
+                borderWidth: 2,
                 datalabels: {
                     display: false
                 },
+                pointStyle: 'rectRot',
+                pointRadius: 4,
                 yAxisID: 'rate',   
             },{
-                label: 'Cat A/B',
+                label: 'Past year average',
                 data: [
                     
                 ],
+                type: 'line',
                 backgroundColor: [
-                    "#4f81bd"
+                    "#d07f3c"
+                ], 
+                borderColor: ["#ffd032"],
+                pointBorderColor: '#d07f3c',
+                borderWidth: 2,
+                pointStyle: 'rectRot',
+                pointRadius: 4,
+                datalabels: {
+                    display: false
+                },   
+            },{
+                label: 'Target rate',
+                data: [
+                    
+                ],
+                type: 'line',
+                backgroundColor: [
+                    "#89a2c8"
+                ], 
+                borderColor: ["#333"],
+                pointBorderColor: '#89a2c8',
+                pointStyle: 'cross',
+                borderWidth: 2,
+                pointRadius: 5,
+                borderDash: [10, 5],
+                datalabels: {
+                    display: false
+                },   
+            },{
+                label: 'Fall (Non-Injury)',
+                data: [
+                    ...nonInjuryDataset
+                ],
+                backgroundColor: [
+                    "#04b1f0"
                 ],  
-                
+                datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                },   
+                barPercentage: 1.0
+            },{
+                label: 'Fall (Injury)',
+                data: [
+                    ...injuryDataset
+                ],
+                backgroundColor: [
+                    "#c30505"
+                ],  
+                datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                }, 
+                barPercentage: 1.0
             },
         ],
     },
@@ -99,7 +192,10 @@ var myChart = new Chart(ctx, {
                 text: 'Falls (' + firstmonth + ' - ' + lastmonth + ')',
                 font: {
                     size: 22
-                }
+                },
+                padding: {
+                    bottom: 20
+                },
             },
             datalabels: {
                 formatter: ( val ) => {
@@ -107,7 +203,11 @@ var myChart = new Chart(ctx, {
                 },
                 labels: {
                     value: {
-                        color: 'black'
+                        color: 'black',
+                        font: {
+                            weight: '550',
+                            size: 14
+                        }
                     },
                 },
             },
@@ -122,7 +222,7 @@ var myChart = new Chart(ctx, {
                 },
                 ticks: {
                     color: 'black'
-                }
+                },
             },
             y: {
                 ticks: {

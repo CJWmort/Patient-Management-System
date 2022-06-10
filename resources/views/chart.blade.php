@@ -87,6 +87,7 @@
 <script>
     $('#filter').append(`<label>Selected Month - Year:</label>
     <input type="month" name="selectedDate" id="date" value="2021-09" onkeydown="return false" required>`);
+    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart11aController
 </script>
 <script src="{{URL::asset('public/js/chart11a.js?v=').time()}}"></script>
 @endif

@@ -76,8 +76,8 @@ $('#date').change(function() { //update chart on change input type month
     getPast12MonthsData();
     formatChartTitle();
     myChart.data.labels = monthList;
-    myChart.data.datasets[0].data = [...injuryDataset];
-    myChart.data.datasets[1].data = [...nonInjuryDataset];
+    myChart.data.datasets[3].data = [...nonInjuryDataset];
+    myChart.data.datasets[4].data = [...injuryDataset];
     myChart.options.plugins.title.text = 'Falls (' + firstmonth + ' - ' + lastmonth + ')'
     myChart.update();  
 });

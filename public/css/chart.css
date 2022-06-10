@@ -137,3 +137,14 @@ tr .subtotal{
     font-weight: bold;
     font-size: 24px;
 }
+.table11a{
+    background-color: aliceblue;
+}
+#emptyCell{
+    background-color: #57b2af;
+    border-top: 2px solid #57b2af;
+    border-left: 2px solid #57b2af;
+}
+.table11a #tableBody tr td{
+    text-align: left;
+}

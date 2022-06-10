@@ -1,3 +1,4 @@
+$('#text').hide(); //Do not need text in this chart
 var selectedDate = $('#date').val();
 var firstmonth;
 var lastmonth;
@@ -13,6 +14,8 @@ var nonInjuryData = chartdata.filter( //Get data where fall did not result in in
 getPast12Months();
 getPast12MonthsData();
 formatChartTitle();
+loadTable();
+loadField();
 
 function formatdate(date){ //format date to correct format 
     var selectedDate = new Date(date);
@@ -48,7 +51,7 @@ function formatChartTitle(){ //format the date for chart title example(Oct 20 - 
     lastmonth = titleMonthList[11];
 };
 function createDataSet(data, filtereddate, filtereddata){
-    //Check if month is within filtered month-year range, push respective month and error count if true
+    //Check if month is within filtered month-year range, push respective month and fall count if true
     data.forEach(element => {
         if(monthList.includes(element.a_inccidentDate)){
             filtereddate.push(element.a_inccidentDate);
@@ -75,6 +78,8 @@ $('#date').change(function() { //update chart on change input type month
     getPast12Months();
     getPast12MonthsData();
     formatChartTitle();
+    loadTable();
+    loadField();
     myChart.data.labels = monthList;
     myChart.data.datasets[3].data = [...nonInjuryDataset];
     myChart.data.datasets[4].data = [...injuryDataset];
@@ -266,3 +271,61 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+function loadTable(){ //function to load and display the table
+$('#table').empty(); 
+$('#table').append(`
+<table class="table11a">
+    <thead>
+        <tr>
+            <th id="emptyCell"></th>
+            <th>${monthList[0]}</th>
+            <th>${monthList[1]}</th>
+            <th>${monthList[2]}</th>
+            <th>${monthList[3]}</th>
+            <th>${monthList[4]}</th>
+            <th>${monthList[5]}</th>
+            <th>${monthList[6]}</th>
+            <th>${monthList[7]}</th>
+            <th>${monthList[8]}</th>
+            <th>${monthList[9]}</th>
+            <th>${monthList[10]}</th>
+            <th>${monthList[11]}</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+
+    </tbody>
+</table>
+`);
+}
+function loadField(){ //Create td with unique id so that we can select individually
+$('#tableBody').append(`
+    <tr class="nonInjury">
+        <td>Fall (Non-Injury)</td>
+        <td id="nonInjury${monthList[0]}"></td>
+        <td id="nonInjury${monthList[1]}"></td>
+        <td id="nonInjury${monthList[2]}"></td>
+        <td id="nonInjury${monthList[3]}"></td>
+        <td id="nonInjury${monthList[4]}"></td>
+        <td id="nonInjury${monthList[5]}"></td>
+        <td id="nonInjury${monthList[6]}"></td>
+        <td id="nonInjury${monthList[7]}"></td>
+        <td id="nonInjury${monthList[8]}"></td>
+        <td id="nonInjury${monthList[9]}"></td>
+        <td id="nonInjury${monthList[10]}"></td>
+        <td id="nonInjury${monthList[11]}"></td>
+    </tr>
+    <tr class="injury">
+        <td>Fall (Injury)</td>
+    </tr>
+    <tr class="average">
+        <td>Past year average</td>
+    </tr>
+    <tr class="rate">
+        <td>Target rate</td>
+    </tr>
+    <tr class="patientDay">
+        <td>Rate per 1000 patient days</td>
+    </tr>
+`);        
+}

@@ -218,6 +218,8 @@ tr .subtotal{
 }
 .align-left{
     text-align: left;
+}
+#major td, #moderate td, #minor td{
     padding: 5px;
 }
 .chart11b th{

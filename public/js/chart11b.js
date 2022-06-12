@@ -18,11 +18,17 @@ function fetchData(){
     lastyrModerateCount = 0;
     lastyrMajorCount = 0;
     lastyrTotalCount = 0;
+    lastyrMajorListData = [];
+    lastyrModerateListData = [];
+    lastyrMinorListData = [];
 
     selectedyrMinorCount = 0;
     selectedyrModerateCount = 0;
     selectedyrMajorCount = 0;
     selectedyrTotalCount = 0;
+    selectedyrMajorListData = [];
+    selectedyrModerateListData = [];
+    selectedyrMinorListData = [];
 
     lastYearData = chartdata.filter( //Get all data from last year of selected month-year
         d => d.a_inccidentDate.includes(lastYear, 0)
@@ -72,21 +78,76 @@ function fetchData(){
     majorList = majorList.filter((item,index) => majorList.indexOf(item) === index)
     moderateList = moderateList.filter((item,index) => moderateList.indexOf(item) === index)
     minorList = minorList.filter((item,index) => minorList.indexOf(item) === index)
-    id = 1;
-    majorList.forEach(data => {
-        $('#tableBody1').append(`<tr id="major${id}"><td class="align-left">${data}</td></tr>`);
-        id++;
+    majorList.forEach(data =>{
+        lastyrMajorListData.push(0); //Set default value to be 0 for each field
+        selectedyrMajorListData.push(0);
     });
-    id = 1;
-    moderateList.forEach(data => {
-        $('#tableBody2').append(`<tr id="moderate${id}"><td class="align-left">${data}</td></tr>`);
-        id++;
+    moderateList.forEach(data =>{
+        lastyrModerateListData.push(0); 
+        selectedyrModerateListData.push(0);
     });
-    id = 1;
-    minorList.forEach(data => {
-        $('#tableBody3').append(`<tr id="minor${id}"><td class="align-left">${data}</td></tr>`);
-        id++;
+    minorList.forEach(data =>{
+        lastyrMinorListData.push(0); 
+        selectedyrMinorListData.push(0);
     });
+
+    lastYearData.forEach(yearData => { 
+        //Increment count for each injury field in last year respectively
+        filtered = yearData.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
+        if(yearData.l_hpo_outcome == 'Major'){
+            index = majorList.indexOf(filtered);
+            lastyrMajorListData[index] += yearData.severity_count;
+        }
+        if(yearData.l_hpo_outcome == 'Moderate'){
+            index = moderateList.indexOf(filtered);
+            lastyrModerateListData[index] += yearData.severity_count;
+        }
+        if(yearData.l_hpo_outcome == 'Minor'){
+            index = minorList.indexOf(filtered);
+            lastyrMinorListData[index] += yearData.severity_count;
+        }
+    });
+    selectedYearData.forEach(yearData => { 
+        //Increment count for each injury field in selected year respectively
+        filtered = yearData.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
+        if(yearData.l_hpo_outcome == 'Major'){
+            index = majorList.indexOf(filtered);
+            selectedyrMajorListData[index] += yearData.severity_count;
+        }
+        if(yearData.l_hpo_outcome == 'Moderate'){
+            index = moderateList.indexOf(filtered);
+            selectedyrModerateListData[index] += yearData.severity_count;
+        }
+        if(yearData.l_hpo_outcome == 'Minor'){
+            index = minorList.indexOf(filtered);
+            selectedyrMinorListData[index] += yearData.severity_count;
+        }
+    });
+    majorList.forEach((data, index) => {
+        $('#tableBody1').append(`
+        <tr id="major">
+            <td class="align-left">${data}</td>
+            <td>${lastyrMajorListData[index]}</td>
+            <td>${selectedyrMajorListData[index]}</td>
+        </tr>`);
+    });
+    moderateList.forEach((data, index) => {
+        $('#tableBody2').append(`
+        <tr id="moderate">
+            <td class="align-left">${data}</td>
+            <td>${lastyrModerateListData[index]}</td>
+            <td>${selectedyrModerateListData[index]}</td>
+        </tr>`);
+    });
+    minorList.forEach((data, index) => {
+        $('#tableBody3').append(`
+        <tr id="minor">
+            <td class="align-left">${data}</td>
+            <td>${lastyrMinorListData[index]}</td>
+            <td>${selectedyrMinorListData[index]}</td>
+        </tr>`);
+    });
+    console.log(selectedYearData)
 
     lastYearMinor = ( lastyrMinorCount / lastyrTotalCount ) * 100
     lastYearModerate = ( lastyrModerateCount / lastyrTotalCount ) * 100

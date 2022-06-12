@@ -21,7 +21,7 @@
         <a @if($selectedChart == 5)class="selected"@endif href="{{route('chart11a')}}">11a. Fall Related by Injury/Non-Injury (Monthly)</a><br>
         <a @if($selectedChart == 6)class="selected"@endif href="{{route('chart11b')}}">11b. Falls Reported by Severity (In-Hospital)</a><br>
         <a @if($selectedChart == 7)class="selected"@endif href="{{route('chart11c')}}">11c. Falls Reported by Ward Wing (In-Hospital)</a><br>
-        <a @if($selectedChart == 8)class="selected"@endif href="#">11d. Falls Reported table by Ward Wing (In-Hospital)</a><br>
+        <a @if($selectedChart == 8)class="selected"@endif href="{{route('chart11d')}}">11d. Falls Reported table by Ward Wing (In-Hospital)</a><br>
     </div>
     <div class="right" onclick="openMenu();"><img id='arrow' src="{{URL::asset('public/images/right.png')}}" alt="arrow"></div>
     <div class="chart">
@@ -129,5 +129,12 @@
     var fielddata = {!! json_encode($fielddata) !!} //Get fields from chart11cController
 </script>
 <script src="{{URL::asset('public/js/chart11c.js?v=').time()}}"></script>
+@endif
+@if ($selectedChart == 8)
+<script> //Display Chart11d
+    $('#filter').append(`<label>Selected Month - Year:</label>
+    <input type="month" name="selectedDate" id="date" value="2021-09" onkeydown="return false" required>`);
+</script>
+<script src="{{URL::asset('public/js/chart11d.js?v=').time()}}"></script>
 @endif
 </html>

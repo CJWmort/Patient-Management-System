@@ -20,7 +20,7 @@
         <a @if($selectedChart == 4)class="selected"@endif href="{{route('chart10c')}}">10c. Type of Medication Error (Current Year)</a><br>
         <a @if($selectedChart == 5)class="selected"@endif href="{{route('chart11a')}}">11a. Fall Related by Injury/Non-Injury (Monthly)</a><br>
         <a @if($selectedChart == 6)class="selected"@endif href="{{route('chart11b')}}">11b. Falls Reported by Severity (In-Hospital)</a><br>
-        <a @if($selectedChart == 7)class="selected"@endif href="#}">11c. Falls Reported by Ward Wing (In-Hospital)</a><br>
+        <a @if($selectedChart == 7)class="selected"@endif href="{{route('chart11c')}}">11c. Falls Reported by Ward Wing (In-Hospital)</a><br>
         <a @if($selectedChart == 8)class="selected"@endif href="#">11d. Falls Reported table by Ward Wing (In-Hospital)</a><br>
     </div>
     <div class="right" onclick="openMenu();"><img id='arrow' src="{{URL::asset('public/images/right.png')}}" alt="arrow"></div>
@@ -61,8 +61,8 @@
     }
 </script>
 <!-- Display different charts based on user selection -->
-@if ($selectedChart == 1)
-<script>
+@if ($selectedChart == 1) 
+<script> //Display Chart8
     $('#filter').append(`<label>Selected Month - Year:</label>
     <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
     <span id="total"></span>`);
@@ -72,7 +72,7 @@
 <script src="{{URL::asset('public/js/chart8.js?v=').time()}}"></script>
 @endif
 @if ($selectedChart == 2)
-<script>
+<script> //Display Chart10a
     $('#filter').append(`<label>Selected Month - Year:</label>
     <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
     <label class="rate">Target Rate (Prev Yr): </label><input type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" id="rate" step="0.1">`);
@@ -82,7 +82,7 @@
 <script src="{{URL::asset('public/js/chart10a.js?v=').time()}}"></script>
 @endif
 @if ($selectedChart == 3)
-<script>
+<script> //Display Chart10b
     $('#filter').append(`<label>Sort By Month - Year:</label>
     <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
     <span id="total"></span>`);
@@ -92,7 +92,7 @@
 <script src="{{URL::asset('public/js/chart10b.js?v=').time()}}"></script>
 @endif
 @if ($selectedChart == 4)
-<script>
+<script> //Display Chart10c
     var currentYear= new Date().getFullYear(); //Get current year and set as default value in chart10c
     $('#filter').append(`
     <label>Enter Selected Year:</label>
@@ -103,7 +103,7 @@
 <script src="{{URL::asset('public/js/chart10c.js?v=').time()}}"></script>
 @endif
 @if ($selectedChart == 5)
-<script>
+<script> //Display Chart11a
     $('#filter').append(`<label>Selected Month - Year:</label>
     <input type="month" name="selectedDate" id="date" onkeydown="return false" required>`);
     getCurrentMonthYear(); //Set starting value for input type month to be current month-year
@@ -112,12 +112,22 @@
 <script src="{{URL::asset('public/js/chart11a.js?v=').time()}}"></script>
 @endif
 @if ($selectedChart == 6)
-<script>
+<script> //Display Chart11b
     $('#filter').append(`<label>Selected Month - Year:</label>
     <input type="month" name="selectedDate" id="date" value="2021-09" onkeydown="return false" required>`);
     var chartdata = {!! json_encode($chartdata) !!} //Get data from chart11bController
     var fielddata = {!! json_encode($fielddata) !!} //Get fields from chart11bController
 </script>
 <script src="{{URL::asset('public/js/chart11b.js?v=').time()}}"></script>
+@endif
+@if ($selectedChart == 7)
+<script> //Display Chart11c
+    $('#filter').append(`<label>Selected Month - Year:</label>
+    <input type="month" name="selectedDate" id="date" value="2021-09" onkeydown="return false" required>
+    <span id="total"></span>`);
+    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart11cController
+    var fielddata = {!! json_encode($fielddata) !!} //Get fields from chart11cController
+</script>
+<script src="{{URL::asset('public/js/chart11c.js?v=').time()}}"></script>
 @endif
 </html>

@@ -72,7 +72,7 @@ function getPast12MonthsData(){ //get data for the past 12 months based on selec
     }.bind(this));
     var total = medfilteredData.concat(fallfilteredData); //Merge the count values for falls and medication events
     totalData = total.reduce((partialSum, a) => partialSum + a, 0); //Sum all values in total array
-    $('#total').html('<b>Total: ' + totalData + '</b>')
+    $('#total').html('<b>Total: </b>' + totalData)
 }
 $('#date').change(function() { //update chart on change input type month
     getPast12Months();

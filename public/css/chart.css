@@ -22,15 +22,14 @@ body{
 .right:hover{
     cursor: pointer;
     background-color: #0D6E6B;
+    padding-left: 100px;
 }
 .side-nav{
     background-color: #88d4d1;
     width: 15%;
     float: left;
-    height: 120vh;
     padding: 100px 10px 0px 10px;
     left: 0px;
-    right: 0px;
     transform: translateX(-800px);
     transition: 0.5s;
     overflow-wrap: break-word;
@@ -234,4 +233,9 @@ tr .subtotal{
 }
 .chartsubtitle{
     font-size: 24px;
+}
+.box{
+    border: 3px solid orange;
+    display: inline-block;
+    padding: 8px;
 }

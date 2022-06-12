@@ -58,7 +58,7 @@ function getAllCategoryData(){
     }else{
         catDcount = 0
     }
-    $('#total').html('<b>Total: ' + total + '</b>')
+    $('#total').html('<b>Total: </b>' + total)
 }
 $('#date').change(function() { //update chart on change input type month
     getAllCategoryData();

@@ -147,7 +147,6 @@ function fetchData(){
             <td>${selectedyrMinorListData[index]}</td>
         </tr>`);
     });
-    console.log(selectedYearData)
 
     lastYearMinor = ( lastyrMinorCount / lastyrTotalCount ) * 100
     lastYearModerate = ( lastyrModerateCount / lastyrTotalCount ) * 100
@@ -349,20 +348,18 @@ var myChart3 = new Chart(ctx, {
     type: 'doughnut',
     data: {
         labels: [
-            'Red',
-            'Blue',
-            'Yellow'
+            'Major', 'Moderate', 'Minor'
         ],
         datasets: [{
-            label: 'My First Dataset',
-            data: [300, 50, 100],
+            data: [1,2,3],
             backgroundColor: [
-              'rgb(255, 99, 132)',
-              'rgb(54, 162, 235)',
-              'rgb(255, 205, 86)'
+                '#4f81bd',
+                '#c0504d',
+                '#9bbb59'
             ],
-            hoverOffset: 4
-          }],
+            hoverOffset: 4,
+          },
+        ],
     },
     plugins: [ChartDataLabels],
     options: {
@@ -372,6 +369,35 @@ var myChart3 = new Chart(ctx, {
                 right: 60,
                 top: 20,
                 bottom: 20
+            },
+        },
+        plugins: {
+            title: {
+                display: true,
+                position: "bottom",
+                text: lastYear,
+                font: {
+                    size: 22,
+                },
+                color: 'black'
+            },
+            legend: {
+                labels: {
+                    color: "black",
+                    boxWidth: 12
+                },
+                display: true,
+                position: "bottom",
+            },
+            datalabels: {
+                formatter: function( value, context){
+                    return [context.chart.data.labels[context.dataIndex], value + '%'] 
+                },
+                labels: {
+                    value: {
+                        color: 'black'
+                    },
+                },
             },
         },
     }
@@ -382,20 +408,18 @@ var myChart4 = new Chart(ctx, {
     type: 'doughnut',
     data: {
         labels: [
-            'Red',
-            'Blue',
-            'Yellow'
+            'Major', 'Moderate', 'Minor'
         ],
         datasets: [{
-            label: 'My First Dataset',
-            data: [300, 50, 100],
+            data: [1,2,3],
             backgroundColor: [
-              'rgb(255, 99, 132)',
-              'rgb(54, 162, 235)',
-              'rgb(255, 205, 86)'
+                '#4f81bd',
+                '#c0504d',
+                '#9bbb59'
             ],
-            hoverOffset: 4
-          }],
+            hoverOffset: 4,
+          },
+        ],
     },
     plugins: [ChartDataLabels],
     options: {
@@ -407,5 +431,41 @@ var myChart4 = new Chart(ctx, {
                 bottom: 20
             },
         },
+        plugins: {
+            title: {
+                display: true,
+                position: "bottom",
+                text: selectedYear,
+                font: {
+                    size: 22,
+                },
+                color: 'black'
+            },
+            legend: {
+                labels: {
+                    color: "black",
+                    boxWidth: 12
+                },
+                display: true,
+                position: "bottom",
+            },
+            datalabels: {
+                formatter: function( value, context){
+                    return [context.chart.data.labels[context.dataIndex], value + '%'] 
+                },
+                labels: {
+                    value: {
+                        color: 'black'
+                    },
+                },
+            },
+        },
     }
 });
+$('#text').append(`
+<span><b>Minor</b> - Resulted in application of a dressing, ice, cleaning of a wound, limb elevation, topical medication, bruise or abrasion</span><br><br>
+<span><b>Moderate</b> - Resulted in suturing, application of steri-strip/skin glue, splinting, or muscle/joint strain</span><br><br>
+<span><b>Major</b> - Resulted in surgery, casting, traction, required consultation for neurological (basilar skull fracture, small subdural hematoma) or internal injury (rib fracture, small liver laceration) or patients with coagulopathy who receive blood products as a result of the fall</span><br><br>
+<span><b>Death</b> - Patient died as a result of injuries sustained from the fall (not from physiological event causing the fall)</span><br><br>
+<span>% of injury = </span><sup>Type of injury </sup>&frasl;<sub> Total Fall with injury</sub>
+`);

@@ -98,6 +98,7 @@ body{
     text-align: left;
     padding: 10px;
     margin-bottom: 50px;
+    width: 70%;
 }
 .center{
     text-align: center;
@@ -202,6 +203,7 @@ tr .subtotal{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     margin: 0 auto;
+    margin-bottom: 30px;
 }
 #myChart1,
 #myChart2,

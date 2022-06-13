@@ -4,31 +4,30 @@ var lastYear;
 var selectedYear;
 var lastYearData;
 var selectedYearData;
+var lastyrSeverityList;
+var lastyrInjuryList;
+var lastyrInjuryData;
+var selectedyrInjuryList;
+var selectedyrInjuryData;
 //Store calculated percentage 
 formatChartTitle();
 drawChart();
-drawTable();
 fetchData();
 
 function fetchData(){
-    majorList = [];
-    moderateList = [];
-    minorList = [];
     lastyrMinorCount = 0;
     lastyrModerateCount = 0;
     lastyrMajorCount = 0;
     lastyrTotalCount = 0;
-    lastyrMajorListData = [];
-    lastyrModerateListData = [];
-    lastyrMinorListData = [];
+    lastyrInjuryList = [];
+    lastyrInjuryData = [];
 
     selectedyrMinorCount = 0;
     selectedyrModerateCount = 0;
     selectedyrMajorCount = 0;
     selectedyrTotalCount = 0;
-    selectedyrMajorListData = [];
-    selectedyrModerateListData = [];
-    selectedyrMinorListData = [];
+    selectedyrInjuryList = [];
+    selectedyrInjuryData = [];
 
     lastYearData = chartdata.filter( //Get all data from last year of selected month-year
         d => d.a_inccidentDate.includes(lastYear, 0)
@@ -41,111 +40,57 @@ function fetchData(){
         lastyrTotalCount += data.severity_count;
         if(data.l_hpo_outcome == 'Minor'){
             lastyrMinorCount += data.severity_count;
-            filtered = data.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
-            minorList.push(filtered);
         }
         if(data.l_hpo_outcome == 'Moderate'){
             lastyrModerateCount += data.severity_count;
-            filtered = data.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
-            moderateList.push(filtered);
         }
         if(data.l_hpo_outcome == 'Major'){
-            lastyrMajorCount += data.severity_count;
-            filtered = data.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
-            majorList.push(filtered);
-            
+            lastyrMajorCount += data.severity_count;                   
         }
+        filtered = data.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
+        lastyrInjuryList.push(filtered);
     });
     selectedYearData.forEach(data => {
         selectedyrTotalCount += data.severity_count;
         if(data.l_hpo_outcome == 'Minor'){
             selectedyrMinorCount += data.severity_count;
-            filtered = data.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
-            minorList.push(filtered);
         }
         if(data.l_hpo_outcome == 'Moderate'){
             selectedyrModerateCount += data.severity_count;
-            filtered = data.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
-            moderateList.push(filtered);
         }
         if(data.l_hpo_outcome == 'Major'){
             selectedyrMajorCount += data.severity_count;
-            filtered = data.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
-            majorList.push(filtered);
         }
+        filtered = data.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
+        selectedyrInjuryList.push(filtered);
     });
-    //Remove duplicate fields before adding to table
-    majorList = majorList.filter((item,index) => majorList.indexOf(item) === index)
-    moderateList = moderateList.filter((item,index) => moderateList.indexOf(item) === index)
-    minorList = minorList.filter((item,index) => minorList.indexOf(item) === index)
-    majorList.forEach(data =>{
-        lastyrMajorListData.push(0); //Set default value to be 0 for each field
-        selectedyrMajorListData.push(0);
+    //Get all injury type from last year
+    lastyrInjuryList = lastyrInjuryList.filter((item,index) => lastyrInjuryList.indexOf(item) === index)
+    //Get all injury type from selected year
+    selectedyrInjuryList = selectedyrInjuryList.filter((item,index) => selectedyrInjuryList.indexOf(item) === index)
+    lastyrInjuryList.forEach(data => {
+        lastyrInjuryData.push(0); //Default 0 value for each injury type
     });
-    moderateList.forEach(data =>{
-        lastyrModerateListData.push(0); 
-        selectedyrModerateListData.push(0);
+    selectedyrInjuryList.forEach(data => {
+        selectedyrInjuryData.push(0); //Default 0 value for each injury type
     });
-    minorList.forEach(data =>{
-        lastyrMinorListData.push(0); 
-        selectedyrMinorListData.push(0);
+    lastYearData.forEach(data => { //Get severity count of each injury type from last year
+        filtered = data.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
+        index = lastyrInjuryList.indexOf(filtered);
+        lastyrInjuryData[index] += data.severity_count;
     });
-
-    lastYearData.forEach(yearData => { 
-        //Increment count for each injury field in last year respectively
-        filtered = yearData.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
-        if(yearData.l_hpo_outcome == 'Major'){
-            index = majorList.indexOf(filtered);
-            lastyrMajorListData[index] += yearData.severity_count;
-        }
-        if(yearData.l_hpo_outcome == 'Moderate'){
-            index = moderateList.indexOf(filtered);
-            lastyrModerateListData[index] += yearData.severity_count;
-        }
-        if(yearData.l_hpo_outcome == 'Minor'){
-            index = minorList.indexOf(filtered);
-            lastyrMinorListData[index] += yearData.severity_count;
-        }
+    selectedYearData.forEach(data => { //Get severity count of each injury type from selected year
+        filtered = data.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
+        index = selectedyrInjuryList.indexOf(filtered);
+        selectedyrInjuryData[index] += data.severity_count;
     });
-    selectedYearData.forEach(yearData => { 
-        //Increment count for each injury field in selected year respectively
-        filtered = yearData.f_fall_injury_type.replace(/_/g, ' ').replace(/,/g, ' / ');
-        if(yearData.l_hpo_outcome == 'Major'){
-            index = majorList.indexOf(filtered);
-            selectedyrMajorListData[index] += yearData.severity_count;
-        }
-        if(yearData.l_hpo_outcome == 'Moderate'){
-            index = moderateList.indexOf(filtered);
-            selectedyrModerateListData[index] += yearData.severity_count;
-        }
-        if(yearData.l_hpo_outcome == 'Minor'){
-            index = minorList.indexOf(filtered);
-            selectedyrMinorListData[index] += yearData.severity_count;
-        }
+    lastyrInjuryData.forEach((data, index) => { //Get percentage of each injury type from last year
+        percentage = Math.round(( data / lastyrTotalCount ) * 100);
+        lastyrInjuryData[index] = percentage;
     });
-    majorList.forEach((data, index) => {
-        $('#tableBody1').append(`
-        <tr id="major">
-            <td class="align-left">${data}</td>
-            <td>${lastyrMajorListData[index]}</td>
-            <td>${selectedyrMajorListData[index]}</td>
-        </tr>`);
-    });
-    moderateList.forEach((data, index) => {
-        $('#tableBody2').append(`
-        <tr id="moderate">
-            <td class="align-left">${data}</td>
-            <td>${lastyrModerateListData[index]}</td>
-            <td>${selectedyrModerateListData[index]}</td>
-        </tr>`);
-    });
-    minorList.forEach((data, index) => {
-        $('#tableBody3').append(`
-        <tr id="minor">
-            <td class="align-left">${data}</td>
-            <td>${lastyrMinorListData[index]}</td>
-            <td>${selectedyrMinorListData[index]}</td>
-        </tr>`);
+    selectedyrInjuryData.forEach((data, index) => { //Get percentage of each injury type from last year
+        percentage = Math.round(( data / selectedyrTotalCount ) * 100);
+        selectedyrInjuryData[index] = percentage;
     });
 
     lastYearMinor = ( lastyrMinorCount / lastyrTotalCount ) * 100
@@ -172,58 +117,29 @@ function formatdate(date){ //format date to correct format
 function drawChart(){
     //Create 4 new chart because we need to display 4 doughnut charts
     $('.doughnut').append(` 
-        <div class="chart-grid">
-            <canvas id="myChart1"></canvas>
-            <canvas id="myChart2"></canvas>
-            <canvas id="myChart3"></canvas>
-            <canvas id="myChart4"></canvas>
-        </div>
-        <table class="chart11b">
-
-        </table>
+        <canvas id="myChart1"></canvas>
+        <canvas id="myChart2"></canvas>
+        <canvas id="myChart3"></canvas>
+        <canvas id="myChart4"></canvas>
     `);
 }
-function drawTable(){
-    $('.chart11b').empty();
-    $('.chart11b').append(`
-        <thead>
-            <th class="align-left">Major Injury</th>
-            <th>${lastYear}</th>
-            <th>${selectedYear}</th>
-        </thead>
-        <tbody id="tableBody1">
-    
-        </tbody>
-        <thead>
-            <th class="align-left">Moderate Injury</th>
-            <th>${lastYear}</th>
-            <th>${selectedYear}</th>
-        </thead>
-        <tbody id="tableBody2">
-    
-        </tbody>
-        <thead>
-            <th class="align-left">Minor Injury</th>
-            <th>${lastYear}</th>
-            <th>${selectedYear}</th>
-        </thead>
-        <tbody id="tableBody3">
-    
-        </tbody>
-    `);
-};
 $('#date').change(function() { //update chart on change input type month-year
     formatChartTitle();
-    fetchData();
-    drawTable();
     fetchData();
     myChart1.options.plugins.title.text = lastYear;
     myChart1.data.datasets[0].data = [Math.round(lastYearMajor), Math.round(lastYearModerate), Math.round(lastYearMinor)];
     myChart2.options.plugins.title.text = selectedYear;
     myChart2.data.datasets[0].data = [Math.round(selectedYearMajor), Math.round(selectedYearModerate), Math.round(selectedYearMinor)];
+    myChart3.options.plugins.title.text = lastYear;
+    myChart3.data.labels = [...lastyrInjuryList];
+    myChart3.data.datasets[0].data = [...lastyrInjuryData];
+    myChart4.options.plugins.title.text = selectedYear;
+    myChart4.data.labels = [...selectedyrInjuryList];
+    myChart4.data.datasets[0].data = [...selectedyrInjuryData];
     myChart1.update();  
     myChart2.update();  
-
+    myChart3.update();  
+    myChart4.update();  
 });
 var ctx = document.getElementById("myChart1");
 var myChart1 = new Chart(ctx, {
@@ -348,14 +264,12 @@ var myChart3 = new Chart(ctx, {
     type: 'doughnut',
     data: {
         labels: [
-            'Major', 'Moderate', 'Minor'
+            ...lastyrInjuryList
         ],
         datasets: [{
-            data: [1,2,3],
+            data: [...lastyrInjuryData],
             backgroundColor: [
-                '#4f81bd',
-                '#c0504d',
-                '#9bbb59'
+                'rgb(255, 99, 132)',
             ],
             hoverOffset: 4,
           },
@@ -408,14 +322,12 @@ var myChart4 = new Chart(ctx, {
     type: 'doughnut',
     data: {
         labels: [
-            'Major', 'Moderate', 'Minor'
+            ...selectedyrInjuryList
         ],
         datasets: [{
-            data: [1,2,3],
+            data: [...selectedyrInjuryData],
             backgroundColor: [
-                '#4f81bd',
-                '#c0504d',
-                '#9bbb59'
+                'rgb(255, 99, 132)',
             ],
             hoverOffset: 4,
           },

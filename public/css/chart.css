@@ -195,13 +195,34 @@ tr .subtotal{
     font-weight: bold;
 }
 .doughnut{
-    width: 400px;
+    display: flex;
+}
+.chart11b{
+    background-color: aliceblue;
+    border: hidden;
+    display: inline-block;
+}
+.chart11b th, .chart11b td{
+    border: 2px solid aliceblue;
+}
+.chart11b th{
+    color: whitesmoke;
+    background-color: #4f81bd;
+}
+.chart-grid{
+    width: 350px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     margin: 0 auto;
     margin-bottom: 30px;
-    justify-content: center;
-    align-content: center;
+}
+#tableBody1 tr td,
+#tableBody2 tr td,
+#tableBody3 tr td{
+    padding: 5px;
+}
+.align-left{
+    text-align: left;
 }
 #myChart1,
 #myChart2,

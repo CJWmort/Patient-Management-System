@@ -132,8 +132,8 @@
 @endif
 @if ($selectedChart == 8)
 <script> //Display Chart11d
-    $('#filter').append(`<label>Selected Month - Year:</label>
-    <input type="month" name="selectedDate" id="date" value="2021-09" onkeydown="return false" required>`);
+    $('#filter').append(`<label>Selected Year:</label>
+    <input type="number" id="year" min="0" onchange='return true' value="2021" oninput="this.value = Math.abs(this.value)" required>`);
 </script>
 <script src="{{URL::asset('public/js/chart11d.js?v=').time()}}"></script>
 @endif

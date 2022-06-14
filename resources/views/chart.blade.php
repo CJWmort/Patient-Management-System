@@ -71,6 +71,7 @@
 </script>
 <script src="{{URL::asset('public/js/chart8.js?v=').time()}}"></script>
 @endif
+
 @if ($selectedChart == 2)
 <script> //Display Chart10a
     $('#filter').append(`<label>Selected Month - Year:</label>
@@ -81,6 +82,7 @@
 </script>
 <script src="{{URL::asset('public/js/chart10a.js?v=').time()}}"></script>
 @endif
+
 @if ($selectedChart == 3)
 <script> //Display Chart10b
     $('#filter').append(`<label>Sort By Month - Year:</label>
@@ -91,6 +93,7 @@
 </script>
 <script src="{{URL::asset('public/js/chart10b.js?v=').time()}}"></script>
 @endif
+
 @if ($selectedChart == 4)
 <script> //Display Chart10c
     var currentYear= new Date().getFullYear(); //Get current year and set as default value in chart10c
@@ -102,6 +105,7 @@
 </script>
 <script src="{{URL::asset('public/js/chart10c.js?v=').time()}}"></script>
 @endif
+
 @if ($selectedChart == 5)
 <script> //Display Chart11a
     $('#filter').append(`<label>Selected Month - Year:</label>
@@ -111,6 +115,7 @@
 </script>
 <script src="{{URL::asset('public/js/chart11a.js?v=').time()}}"></script>
 @endif
+
 @if ($selectedChart == 6)
 <script> //Display Chart11b
     $('#filter').append(`<label>Selected Month - Year:</label>
@@ -120,6 +125,7 @@
 </script>
 <script src="{{URL::asset('public/js/chart11b.js?v=').time()}}"></script>
 @endif
+
 @if ($selectedChart == 7)
 <script> //Display Chart11c
     $('#filter').append(`<label>Selected Month - Year:</label>
@@ -130,11 +136,16 @@
 </script>
 <script src="{{URL::asset('public/js/chart11c.js?v=').time()}}"></script>
 @endif
+
 @if ($selectedChart == 8)
 <script> //Display Chart11d
-    $('#filter').append(`<label>Selected Year:</label>
-    <input type="number" id="year" min="0" onchange='return true' value="2021" oninput="this.value = Math.abs(this.value)" required>`);
+    var currentYear= new Date().getFullYear(); //Get current year and set as default value in chart11d
+    $('#filter').append(`<label>Enter Selected Year:</label>
+    <input type="number" id="year" min="0" onchange='return true' value="${currentYear}" oninput="this.value = Math.abs(this.value)" required>`);
+    var chartdata = {!! json_encode($chartdata) !!} //Get data from chart11dController
+    var fielddata = {!! json_encode($fielddata) !!} //Get fields from chart11dController
 </script>
 <script src="{{URL::asset('public/js/chart11d.js?v=').time()}}"></script>
 @endif
+
 </html>

@@ -173,7 +173,7 @@ function loadTable() { //function to load and display the table
         </tbody>
 
         <tbody id='tData'>
-            <tr id='Jan'>
+            <tr id='jan'>
                 <th rowspan = "12">${selectedYear}</th>
                 <th>Jan</th>
                 <td></td>
@@ -192,7 +192,7 @@ function loadTable() { //function to load and display the table
                 <td></td>
             </tr>
 
-            <tr id='Feb'>
+            <tr id='feb'>
                 <th>Feb</th>
                 <td></td>
                 <td></td>
@@ -210,7 +210,7 @@ function loadTable() { //function to load and display the table
                 <td></td>
             </tr>
 
-            <tr id='Mar'>
+            <tr id='mar'>
                 <th>Mar</th>
                 <td></td>
                 <td></td>
@@ -228,7 +228,7 @@ function loadTable() { //function to load and display the table
                 <td></td>
             </tr>
 
-            <tr id='Apr'>
+            <tr id='apr'>
                 <th>Apr</th>
                 <td></td>
                 <td></td>
@@ -246,7 +246,7 @@ function loadTable() { //function to load and display the table
                 <td></td>
             </tr>
 
-            <tr id='May'>
+            <tr id='may'>
                 <th>May</th>
                 <td></td>
                 <td></td>
@@ -264,7 +264,7 @@ function loadTable() { //function to load and display the table
                 <td></td>
             </tr>
             
-            <tr id='Jun'>
+            <tr id='jun'>
                 <th>Jun</th>
                 <td></td>
                 <td></td>
@@ -282,7 +282,7 @@ function loadTable() { //function to load and display the table
                 <td></td>
             </tr>
 
-            <tr id='Jul'>
+            <tr id='jul'>
                 <th>Jul</th>
                 <td></td>
                 <td></td>
@@ -300,7 +300,7 @@ function loadTable() { //function to load and display the table
                 <td></td>
             </tr>
 
-            <tr id='Aug'>
+            <tr id='aug'>
                 <th>Aug</th>
                 <td></td>
                 <td></td>
@@ -318,7 +318,7 @@ function loadTable() { //function to load and display the table
                 <td></td>
             </tr>
 
-            <tr id='Sep'>
+            <tr id='sep'>
                 <th>Sep</th>
                 <td></td>
                 <td></td>
@@ -337,7 +337,7 @@ function loadTable() { //function to load and display the table
                
             </tr>
 
-            <tr id='Oct'>
+            <tr id='oct'>
                 <th>Oct</th>
                 <td></td>
                 <td></td>
@@ -355,7 +355,7 @@ function loadTable() { //function to load and display the table
                 <td></td>
             </tr>
 
-            <tr id='Nov'>
+            <tr id='nov'>
                 <th>Nov</th>
                 <td></td>
                 <td></td>
@@ -373,7 +373,7 @@ function loadTable() { //function to load and display the table
                 <td></td>
             </tr>
 
-            <tr id='Dec'>
+            <tr id='dec'>
                 <th>Dec</th>
                 <td></td>
                 <td></td>

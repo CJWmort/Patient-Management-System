@@ -9,15 +9,15 @@
 </head>
 <body>
     <div class="login_div">
-        <form action="login-user" method="POST">
+        <form action="login-user" method="POST" id="loginForm">
         @csrf
             <div>
                 <p><img class="loginlogo" src="{{URL::asset('public/images/thkh-logo.jpg')}}" alt="logo"></p>
                 <p class="logintitle">LOG IN</p>
-                <p><input class="loginID" title="Enter your login id" name="login_id" type="text" placeholder="Login ID" required></p>
-                <p><input class="password" title="Enter your password" name="password" type="password" placeholder="Password" required></p>
+                <p><input class="loginID" title="Enter your login id" id="loginID" name="login_id" type="text" placeholder="Login ID" required></p>
+                <p><input class="password" title="Enter your password" id="password" name="password" type="password" placeholder="Password" required></p>
                 <p class="remember">
-                    <input class="logincheck" name="remember" type="checkbox"><label>Remember Password</label>
+                    <input class="logincheck" id="rememberMe" name="remember" type="checkbox"><label>Remember Me</label>
                     @if($errors->any())
                         <b>{{$errors->first()}}</b>
                     @endif
@@ -28,4 +28,25 @@
         </form>
     </div>
 </body>
+<script src="{{URL::asset('public/js/jquery.min.js?v=').time()}}"></script>
+<script>
+    if(localStorage.getItem('loginID') != null){
+        document.getElementById('loginID').value = localStorage.getItem('loginID');
+    } else{
+        document.getElementById('loginID').value = '';
+    }
+    if(localStorage.rememberMeChecked == 'on'){
+        $('#rememberMe').attr('checked', true);
+    } 
+    $('#loginForm').on('submit', function() {
+        if ($('#rememberMe').is(':checked')) {
+            // save login_id and password
+            localStorage.loginID = $('#loginID').val();
+            localStorage.rememberMeChecked = $('#rememberMe').val();
+        } else {
+            localStorage.loginID = '';
+            localStorage.rememberMeChecked = '';
+        }
+    });
+</script>
 </html>

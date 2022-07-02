@@ -19,6 +19,7 @@
                 <div class="remember">
                     <div><input class="logincheck" id="rememberMe" name="remember" type="checkbox"><label>Remember Me</label></div>
                     @if($errors->any())
+                    <!-- Display error message if invalid login / tried to go to pages without logging in first -->
                         <b>{{$errors->first()}}</b>
                     @endif
                 </div>

@@ -40,14 +40,15 @@ body{
     text-align: left;
 }
 .remember{
+    display: flex;
+    justify-content: space-between;
+}
+.remember div{
     margin-bottom: 15px;
     text-align: left;
-    justify-content: space-around;
 }
 .remember b{
-    text-align: right;
     color: red;
-    margin-left: 75px;
 }
 .forgot{
     font-size: 18px;

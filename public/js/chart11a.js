@@ -17,7 +17,6 @@ formatChartTitle();
 loadTable();
 loadField();
 loadData();
-tableDataToChartData();
 
 function formatdate(date){ //format date to correct format 
     var selectedDate = new Date(date);
@@ -76,28 +75,6 @@ function getPast12MonthsData(){ //get data for the past 12 months based on selec
         return {"x": x, "y": nonInjuryFilteredData[i]}        
     }.bind(this));
 };
-function tableDataToChartData(){ //Function to Update chart data and localStorage when input in the table changes
-    $('.tableInput').change(function() {
-        monthList.forEach(month => {
-            //Set past year average value in localStorage for the specific month-year
-            localStorage.setItem('avg' + month, $('#avg' + month).val());
-            //Set target rate value in localStorage for the specific month-year
-            localStorage.setItem('rate' + month, $('#rate' + month).val());
-            //Set rate per 1000 patient days value in localStorage for the specific month-year
-            localStorage.setItem('patient' + month, $('#patient' + month).val());
-        });
-        //Update rate per 1000 patient days fields with the new values
-        myChart.data.datasets[0].data = [{x: monthList[0], y:localStorage.getItem('patient' + monthList[0])},{x: monthList[1], y:localStorage.getItem('patient' + monthList[1])},{x: monthList[2], y:localStorage.getItem('patient' + monthList[2])},{x: monthList[3], y:localStorage.getItem('patient' + monthList[3])},{x: monthList[4], y:localStorage.getItem('patient' + monthList[4])},{x: monthList[5], y:localStorage.getItem('patient' + monthList[5])},{x: monthList[6], y:localStorage.getItem('patient' + monthList[6])},{x: monthList[7], y:localStorage.getItem('patient' + monthList[7])},{x: monthList[8], y:localStorage.getItem('patient' + monthList[8])},{x: monthList[9], y:localStorage.getItem('patient' + monthList[9])},{x: monthList[10], y:localStorage.getItem('patient' + monthList[10])},{x: monthList[11], y:localStorage.getItem('patient' + monthList[11])}];
-
-        //Update past year average fields with the new values
-        myChart.data.datasets[1].data = [{x: monthList[0], y:localStorage.getItem('avg' + monthList[0])},{x: monthList[1], y:localStorage.getItem('avg' + monthList[1])},{x: monthList[2], y:localStorage.getItem('avg' + monthList[2])},{x: monthList[3], y:localStorage.getItem('avg' + monthList[3])},{x: monthList[4], y:localStorage.getItem('avg' + monthList[4])},{x: monthList[5], y:localStorage.getItem('avg' + monthList[5])},{x: monthList[6], y:localStorage.getItem('avg' + monthList[6])},{x: monthList[7], y:localStorage.getItem('avg' + monthList[7])},{x: monthList[8], y:localStorage.getItem('avg' + monthList[8])},{x: monthList[9], y:localStorage.getItem('avg' + monthList[9])},{x: monthList[10], y:localStorage.getItem('avg' + monthList[10])},{x: monthList[11], y:localStorage.getItem('avg' + monthList[11])}];
-
-        //Update target rate fields with the new values
-        myChart.data.datasets[2].data = [{x: monthList[0], y:localStorage.getItem('rate' + monthList[0])},{x: monthList[1], y:localStorage.getItem('rate' + monthList[1])},{x: monthList[2], y:localStorage.getItem('rate' + monthList[2])},{x: monthList[3], y:localStorage.getItem('rate' + monthList[3])},{x: monthList[4], y:localStorage.getItem('rate' + monthList[4])},{x: monthList[5], y:localStorage.getItem('rate' + monthList[5])},{x: monthList[6], y:localStorage.getItem('rate' + monthList[6])},{x: monthList[7], y:localStorage.getItem('rate' + monthList[7])},{x: monthList[8], y:localStorage.getItem('rate' + monthList[8])},{x: monthList[9], y:localStorage.getItem('rate' + monthList[9])},{x: monthList[10], y:localStorage.getItem('rate' + monthList[10])},{x: monthList[11], y:localStorage.getItem('rate' + monthList[11])}];
-
-        myChart.update();
-    });
-};
 $('#date').change(function() { //update chart on change input type month
     getPast12Months();
     getPast12MonthsData();
@@ -105,15 +82,7 @@ $('#date').change(function() { //update chart on change input type month
     loadTable();
     loadField();
     loadData();
-    tableDataToChartData(); //Allow user to view changes in chart when the fields in the table are changed
     myChart.data.labels = monthList;
-
-    myChart.data.datasets[0].data = [{x: monthList[0], y:localStorage.getItem('patient' + monthList[0])},{x: monthList[1], y:localStorage.getItem('patient' + monthList[1])},{x: monthList[2], y:localStorage.getItem('patient' + monthList[2])},{x: monthList[3], y:localStorage.getItem('patient' + monthList[3])},{x: monthList[4], y:localStorage.getItem('patient' + monthList[4])},{x: monthList[5], y:localStorage.getItem('patient' + monthList[5])},{x: monthList[6], y:localStorage.getItem('patient' + monthList[6])},{x: monthList[7], y:localStorage.getItem('patient' + monthList[7])},{x: monthList[8], y:localStorage.getItem('patient' + monthList[8])},{x: monthList[9], y:localStorage.getItem('patient' + monthList[9])},{x: monthList[10], y:localStorage.getItem('patient' + monthList[10])},{x: monthList[11], y:localStorage.getItem('patient' + monthList[11])}];
-
-    myChart.data.datasets[1].data = [{x: monthList[0], y:localStorage.getItem('avg' + monthList[0])},{x: monthList[1], y:localStorage.getItem('avg' + monthList[1])},{x: monthList[2], y:localStorage.getItem('avg' + monthList[2])},{x: monthList[3], y:localStorage.getItem('avg' + monthList[3])},{x: monthList[4], y:localStorage.getItem('avg' + monthList[4])},{x: monthList[5], y:localStorage.getItem('avg' + monthList[5])},{x: monthList[6], y:localStorage.getItem('avg' + monthList[6])},{x: monthList[7], y:localStorage.getItem('avg' + monthList[7])},{x: monthList[8], y:localStorage.getItem('avg' + monthList[8])},{x: monthList[9], y:localStorage.getItem('avg' + monthList[9])},{x: monthList[10], y:localStorage.getItem('avg' + monthList[10])},{x: monthList[11], y:localStorage.getItem('avg' + monthList[11])},];
-
-    myChart.data.datasets[2].data = [{x: monthList[0], y:localStorage.getItem('rate' + monthList[0])},{x: monthList[1], y:localStorage.getItem('rate' + monthList[1])},{x: monthList[2], y:localStorage.getItem('rate' + monthList[2])},{x: monthList[3], y:localStorage.getItem('rate' + monthList[3])},{x: monthList[4], y:localStorage.getItem('rate' + monthList[4])},{x: monthList[5], y:localStorage.getItem('rate' + monthList[5])},{x: monthList[6], y:localStorage.getItem('rate' + monthList[6])},{x: monthList[7], y:localStorage.getItem('rate' + monthList[7])},{x: monthList[8], y:localStorage.getItem('rate' + monthList[8])},{x: monthList[9], y:localStorage.getItem('rate' + monthList[9])},{x: monthList[10], y:localStorage.getItem('rate' + monthList[10])},{x: monthList[11], y:localStorage.getItem('rate' + monthList[11])}];
-
     myChart.data.datasets[3].data = [...nonInjuryDataset];
     myChart.data.datasets[4].data = [...injuryDataset];
     myChart.options.plugins.title.text = 'Falls (' + firstmonth + ' - ' + lastmonth + ')'
@@ -128,18 +97,7 @@ var myChart = new Chart(ctx, {
             {
                 label: 'Rate per 1000 patient days',
                 data: [
-                    {x: monthList[0], y:localStorage.getItem('patient' + monthList[0])},
-                    {x: monthList[1], y:localStorage.getItem('patient' + monthList[1])},
-                    {x: monthList[2], y:localStorage.getItem('patient' + monthList[2])},
-                    {x: monthList[3], y:localStorage.getItem('patient' + monthList[3])},
-                    {x: monthList[4], y:localStorage.getItem('patient' + monthList[4])},
-                    {x: monthList[5], y:localStorage.getItem('patient' + monthList[5])},
-                    {x: monthList[6], y:localStorage.getItem('patient' + monthList[6])},
-                    {x: monthList[7], y:localStorage.getItem('patient' + monthList[7])},
-                    {x: monthList[8], y:localStorage.getItem('patient' + monthList[8])},
-                    {x: monthList[9], y:localStorage.getItem('patient' + monthList[9])},
-                    {x: monthList[10], y:localStorage.getItem('patient' + monthList[10])},
-                    {x: monthList[11], y:localStorage.getItem('patient' + monthList[11])},
+
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -157,18 +115,7 @@ var myChart = new Chart(ctx, {
             },{
                 label: 'Past year average',
                 data: [
-                    {x: monthList[0], y:localStorage.getItem('avg' + monthList[0])},
-                    {x: monthList[1], y:localStorage.getItem('avg' + monthList[1])},
-                    {x: monthList[2], y:localStorage.getItem('avg' + monthList[2])},
-                    {x: monthList[3], y:localStorage.getItem('avg' + monthList[3])},
-                    {x: monthList[4], y:localStorage.getItem('avg' + monthList[4])},
-                    {x: monthList[5], y:localStorage.getItem('avg' + monthList[5])},
-                    {x: monthList[6], y:localStorage.getItem('avg' + monthList[6])},
-                    {x: monthList[7], y:localStorage.getItem('avg' + monthList[7])},
-                    {x: monthList[8], y:localStorage.getItem('avg' + monthList[8])},
-                    {x: monthList[9], y:localStorage.getItem('avg' + monthList[9])},
-                    {x: monthList[10], y:localStorage.getItem('avg' + monthList[10])},
-                    {x: monthList[11], y:localStorage.getItem('avg' + monthList[11])},
+
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -185,18 +132,7 @@ var myChart = new Chart(ctx, {
             },{
                 label: 'Target rate',
                 data: [
-                    {x: monthList[0], y:localStorage.getItem('rate' + monthList[0])},
-                    {x: monthList[1], y:localStorage.getItem('rate' + monthList[1])},
-                    {x: monthList[2], y:localStorage.getItem('rate' + monthList[2])},
-                    {x: monthList[3], y:localStorage.getItem('rate' + monthList[3])},
-                    {x: monthList[4], y:localStorage.getItem('rate' + monthList[4])},
-                    {x: monthList[5], y:localStorage.getItem('rate' + monthList[5])},
-                    {x: monthList[6], y:localStorage.getItem('rate' + monthList[6])},
-                    {x: monthList[7], y:localStorage.getItem('rate' + monthList[7])},
-                    {x: monthList[8], y:localStorage.getItem('rate' + monthList[8])},
-                    {x: monthList[9], y:localStorage.getItem('rate' + monthList[9])},
-                    {x: monthList[10], y:localStorage.getItem('rate' + monthList[10])},
-                    {x: monthList[11], y:localStorage.getItem('rate' + monthList[11])},
+
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -466,25 +402,6 @@ function loadData(){ //Load data for the fields in the table
         var myElement = document.getElementById('injury' + data.a_inccidentDate);
         if(myElement){ //Check if that field with the correct id exist
             myElement.innerHTML = data.fall_count; //Change innerHTML of selected field to fall_count
-        }
-    });
-    monthList.forEach(month => {
-        if(localStorage.getItem('avg' + month) != null){ //Assign local storage value for past year average if exists
-            document.getElementById('avg' + month).value = localStorage.getItem('avg' + month);
-        } else{ //Default will be blank when entering past year average for the first time
-            document.getElementById('avg' + month).value = '';
-        }
-
-        if(localStorage.getItem('rate' + month) != null){ //Assign local storage value for target rate if exists
-            document.getElementById('rate' + month).value = localStorage.getItem('rate' + month);
-        } else{ //Default will be blank when entering past year average for the first time
-            document.getElementById('rate' + month).value = '';
-        }
-
-        if(localStorage.getItem('patient' + month) != null){ //Assign local storage value for rate per 1000 patient days if exists
-            document.getElementById('patient' + month).value = localStorage.getItem('patient' + month);
-        } else{ //Default will be blank when entering past year average for the first time
-            document.getElementById('patient' + month).value = '';
         }
     });
 }

@@ -135,8 +135,8 @@
 @if ($selectedChart == 5)
 <script> //Display Chart11a
     $('#filter').append(`<label>Selected Month - Year:</label>
-    <input type="month" name="selectedDate" id="date" onkeydown="return false" required>`);
-    getCurrentMonthYear(); //Set starting value for input type month to be current month-year
+    <input type="month" name="selectedDate" value="2021-09" id="date" onkeydown="return false" required>`);
+    //getCurrentMonthYear(); //Set starting value for input type month to be current month-year
     var chartdata = {!! json_encode($chartdata) !!} //Get data from chart11aController
 </script>
 <script src="{{URL::asset('public/js/chart11a.js?v=').time()}}"></script>

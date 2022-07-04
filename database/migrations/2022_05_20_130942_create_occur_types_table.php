@@ -11,6 +11,8 @@ class CreateOccurTypesTable extends Migration
      *
      * @return void
      */
+    //Create occur_types Table in your "thkh" database
+    //Run command "php artisan migrate"
     public function up()
     {
         Schema::create('occur_types', function (Blueprint $table) {

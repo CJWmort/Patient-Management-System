@@ -296,8 +296,16 @@ var myChart1 = new Chart(ctx, {
             },
             datalabels: {
                 formatter: function( value, context){
-                    return [context.chart.data.labels[context.dataIndex], value + '%'] 
+                    isNaN(value) ? value = 0 : value; 
+                    if(value != 0){
+                        var title = context.chart.data.labels[context.dataIndex];
+                        return title + '\n' + value + '%';   
+                    }    
+                    else{
+                        return '';
+                    }
                 },
+                textAlign: 'center',
                 labels: {
                     value: {
                         color: 'black'
@@ -355,8 +363,16 @@ var myChart2 = new Chart(ctx, {
             },
             datalabels: {
                 formatter: function( value, context){
-                    return [context.chart.data.labels[context.dataIndex], value + '%'] 
+                    isNaN(value) ? value = 0 : value; 
+                    if(value != 0){
+                        var title = context.chart.data.labels[context.dataIndex];
+                        return title + '\n' + value + '%';   
+                    }       
+                    else{
+                        return '';
+                    }
                 },
+                textAlign: 'center',
                 labels: {
                     value: {
                         color: 'black'
@@ -369,7 +385,7 @@ var myChart2 = new Chart(ctx, {
 
 var ctx = document.getElementById("myChart3");
 var myChart3 = new Chart(ctx, {
-    type: 'doughnut',
+    type: 'pie',
     data: {
         labels: [
             ...lastyrInjuryList
@@ -389,8 +405,8 @@ var myChart3 = new Chart(ctx, {
             padding: {
                 left: 60,
                 right: 60,
-                top: 20,
-                bottom: 20
+                top: 10,
+                bottom: 10
             },
         },
         plugins: {
@@ -398,26 +414,28 @@ var myChart3 = new Chart(ctx, {
                 display: true,
                 position: "bottom",
                 text: lastYear,
+                padding: {
+                    top: 20,
+                },
                 font: {
                     size: 22,
                 },
                 color: 'black'
             },
             legend: {
-                labels: {
-                    color: "black",
-                    boxWidth: 12
-                },
-                display: true,
-                position: "bottom",
+                display: false,
             },
             datalabels: {
                 formatter: function( value, context){
-                    return [context.chart.data.labels[context.dataIndex], value + '%'] 
+                    var title = context.chart.data.labels[context.dataIndex];
+                    return title.replace(' / ' , "/ ").replace(/\s/g , "\n") + '\n' + value + '%';
                 },
-                labels: {
-                    value: {
-                        color: 'black'
+                textAlign: 'center',
+                labels: {                     
+                    value: {    
+                        align: 'end', 
+                        anchor: 'end',              
+                        color: 'black',
                     },
                 },
             },
@@ -427,7 +445,7 @@ var myChart3 = new Chart(ctx, {
 
 var ctx = document.getElementById("myChart4");
 var myChart4 = new Chart(ctx, {
-    type: 'doughnut',
+    type: 'pie',
     data: {
         labels: [
             ...selectedyrInjuryList
@@ -447,14 +465,17 @@ var myChart4 = new Chart(ctx, {
             padding: {
                 left: 60,
                 right: 60,
-                top: 20,
-                bottom: 20
+                top: 10,
+                bottom: 10
             },
         },
         plugins: {
             title: {
                 display: true,
                 position: "bottom",
+                padding: {
+                    top: 20,
+                },
                 text: selectedYear,
                 font: {
                     size: 22,
@@ -462,19 +483,18 @@ var myChart4 = new Chart(ctx, {
                 color: 'black'
             },
             legend: {
-                labels: {
-                    color: "black",
-                    boxWidth: 12
-                },
-                display: true,
-                position: "bottom",
+                display: false,
             },
             datalabels: {
                 formatter: function( value, context){
-                    return [context.chart.data.labels[context.dataIndex], value + '%'] 
+                    var title = context.chart.data.labels[context.dataIndex];
+                    return title.replace(' / ' , "/ ").replace(/\s/g , "\n") + '\n' + value + '%';
                 },
+                textAlign: 'center',
                 labels: {
                     value: {
+                        align: 'end',   
+                        anchor: 'end',   
                         color: 'black'
                     },
                 },

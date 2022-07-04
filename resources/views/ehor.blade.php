@@ -10,6 +10,35 @@
 <!--Include Nav Bar When Page Loads-->
 @include('layouts/navigation')
 <body>
+    @if($errors->any())
+    <div class="alert">
+        <div class="alert-title error">Error Message</div>
+        <div class="alert-msg">{{$errors->first()}}</div>
+    </div>
+    @endif
+    @if(session()->has('msg'))
+    <div class="alert">
+        <div class="alert-title">Alert Message</div>
+        <div class="alert-msg">{{ session()->get('msg') }}</div>
+    </div>
+    @endif
+    <div class = "btn">
+        <button class="toggleBtn" onclick="openForm();">View Location Of Occurence</button>
+        <button class="toggleBtn" onclick="openForm();">View Site Of Occurence</button>    
+        <button class="toggleBtn" onclick="openForm();">View Type Of Occurence</button> 
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
     <div class="ehortitle">EDIT EHOR FIELDS</div>
     <!-- Form for location of occurrence -->
     <form class="location-title" action="{{route('addlocation')}}" method="POST">

@@ -23,11 +23,37 @@
         <a @if($selectedChart == 7)class="selected"@endif href="{{route('chart11c')}}">11c. Falls Reported by Ward Wing (In-Hospital)</a><br>
         <a @if($selectedChart == 8)class="selected"@endif href="{{route('chart11d')}}">11d. Falls Reported table by Ward Wing (In-Hospital)</a><br>
     </div>
+    <div class="chart-indicator">
+        <!-- Display chart discription for each chart -->
+        @if($selectedChart == 1)
+        <span>Chart 8 - Serious Reportable Event</span>
+        @endif
+        @if($selectedChart == 2)
+        <span>Chart 10a - Monthly Medication related error count by Cat A to I for past 12 months</span>
+        @endif
+        @if($selectedChart == 3)
+        <span>Chart 10b - Medication related error count by Cat A to I for current month</span>
+        @endif
+        @if($selectedChart == 4)
+        <span>Chart 10c - Type of Medication related error count for current year</span>
+        @endif
+        @if($selectedChart == 5)
+        <span>Chart 11a - Monthly Fall-related count by Injury/Non-Injury for past 12 months</span>
+        @endif
+        @if($selectedChart == 6)
+        <span>Chart 11b - Falls Reported (In-Hospital) by severity</span>
+        @endif
+        @if($selectedChart == 7)
+        <span>Chart 11c - Falls Reported (In-Hospital) by ward wing</span>
+        @endif
+        @if($selectedChart == 8)
+        <span>Chart 11d - Falls Reported (In-Hospital) table by ward wing</span>
+        @endif
+    </div>
     <div class="right" onclick="openMenu();"><img id='arrow' src="{{URL::asset('public/images/right.png')}}" alt="arrow"></div>
     <div class="chart">
         <canvas id="myChart" width="1200" height="500"></canvas>
     </div>
-    
     <div class='center'>
         <div id="filter"></div>
         @if($selectedChart == 6)

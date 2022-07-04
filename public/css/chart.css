@@ -1,6 +1,14 @@
 body{
     background-color: #57b2af;
 }
+.chart-indicator{
+    text-align: center;
+    background-color: #88d4d1;
+    font-weight: bold;
+    font-size: 24px;
+    padding-bottom: 10px;
+    user-select: none;
+}
 .right{
     background-color: #88d4d1;
     padding: 10px;
@@ -22,13 +30,13 @@ body{
 .right:hover{
     cursor: pointer;
     background-color: #0D6E6B;
-    padding-left: 100px;
+    padding-left: 80px;
 }
 .side-nav{
     background-color: #88d4d1;
     width: 15%;
     float: left;
-    padding: 100px 10px 0px 10px;
+    padding: 140px 10px 0px 10px;
     left: 0px;
     transform: translateX(-800px);
     transition: 0.5s;

@@ -16,12 +16,13 @@
                 <p class="logintitle">LOG IN</p>
                 <p><input class="loginID" title="Enter your login id" id="loginID" name="login_id" type="text" placeholder="Login ID" required></p>
                 <p><input class="password" title="Enter your password" id="password" name="password" type="password" placeholder="Password" required></p>
-                <p class="remember">
-                    <input class="logincheck" id="rememberMe" name="remember" type="checkbox"><label>Remember Me</label>
+                <div class="remember">
+                    <div><input class="logincheck" id="rememberMe" name="remember" type="checkbox"><label>Remember Me</label></div>
                     @if($errors->any())
+                    <!-- Display error message if invalid login / tried to go to pages without logging in first -->
                         <b>{{$errors->first()}}</b>
                     @endif
-                </p>
+                </div>
                 <p class="forgot"><a href="#">Forgot Password  ?</a></p>
                 <p><input class="login_button" name="login" type="submit" value="Log In"></p>
             </div>

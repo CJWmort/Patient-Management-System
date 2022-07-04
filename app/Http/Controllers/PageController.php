@@ -58,7 +58,7 @@ class PageController extends Controller
             $data = User::where('id', '=', Session::get('loginId'))->first();
             $allLocations = occur_location::all();
             $allSites = occur_site::all();
-            $allTypes = occur_type::all(); //get all the current ehor fields
+            $allTypes = occur_type::orderBy('type')->get(); //get all the current ehor fields & order by the type
         }
         return view('ehor', compact('data', 'allLocations', 'allSites', 'allTypes'));
     }

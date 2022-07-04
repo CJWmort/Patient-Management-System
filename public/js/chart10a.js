@@ -318,7 +318,7 @@ var myChart = new Chart(ctx, {
                     ...catHdataset
                 ],
                 backgroundColor: [
-                    "#f79646"
+                    "#2c4d75"
                 ],   
             },{
                 label: 'Cat I',

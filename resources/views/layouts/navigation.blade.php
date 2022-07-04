@@ -4,13 +4,15 @@
 <div class="navigation">
     <div class="top-nav">
         <a href="{{route('home')}}"><img src="{{URL::asset('public/images/thkh-logo.jpg')}}" class="nav-logo" alt="logo"></a>
-        <form action="#" method="#">
-        @csrf
-            <div class="search">
-                <button class="searchBtn"><img src="{{URL::asset('public/images/search.png')}}" width="40px" alt="search"></button>
-                <input type="text" class="searchInput" placeholder="Search Reports By HOR No. / Year ...">
-            </div>
-        </form>
+        <!-- Display nav bar links for all pages except home page -->
+        @if (Route::currentRouteName() != 'home')
+        <div class="links">
+            <a class="nav-link" href="{{route('chart10a')}}">View Charts</a>
+            <a class="nav-link" href="{{route('ehor')}}">Customise EHOR</a>
+            <a class="nav-link" href="{{route('user')}}">Manage Users</a>
+            <a class="nav-link" href="#">View Reports</a>
+        </div>
+        @endif
         <img onclick="toggleNav();" src="{{URL::asset('public/images/user.png')}}" id="change" class="nav-profile" alt="accountLogo">
     </div>
 </div>
@@ -21,7 +23,6 @@
             <p><b>Role: </b>{{$data->role}}</p>
         </div>
     </div>
-    <a href="{{route('home')}}" id="home">Home</a>
     <a href="{{route('profile')}}" id="view-profile">View Profile</a>
     <a href="{{route('edit-profile', ['id'=>$data->id])}}" id="edit-profile">Edit Profile</a>
     <a href="{{route('logout')}}" id="logout">Logout</a>

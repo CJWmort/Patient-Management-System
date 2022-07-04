@@ -26,13 +26,5 @@ class UsersTableSeeder extends Seeder
             'phone_number'=>'87667653',
             'role'=>6,
         ]);
-        DB::table('users')->insert([
-            'name'=>'Irene Goh',
-            'email'=>'irenegoh@gmail.com',
-            'login_id'=>'irene123',
-            'password'=>Hash::make('1234'),
-            'phone_number'=>'87347658',
-            'role'=>7,
-        ]);
     }
 }

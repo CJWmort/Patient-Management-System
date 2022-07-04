@@ -48,14 +48,13 @@
                 <div>
                     <label>Role:</label>
                     <select name="role" required>
-                        <option value="{{$edituser->role}}" selected>{{$edituser->role}}</option>
-                        <option value="Reporting Staff">Reporting Staff</option>
-                        <option value="Supervisor">Supervisor</option>
-                        <option value="Doctor">Doctor</option>
-                        <option value="Pharmacy">Pharmacy</option>
-                        <option value="Head of Department">Head of Department</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Director">Director</option>
+                        <option {{$edituser->role == 'Reporting Staff' ? 'selected' : ''}} value="Reporting Staff">Reporting Staff</option>
+                        <option {{$edituser->role == 'Supervisor' ? 'selected' : ''}} value="Supervisor">Supervisor</option>
+                        <option {{$edituser->role == 'Doctor' ? 'selected' : ''}} value="Doctor">Doctor</option>
+                        <option {{$edituser->role == 'Pharmacy' ? 'selected' : ''}} value="Pharmacy">Pharmacy</option>
+                        <option {{$edituser->role == 'Head of Department' ? 'selected' : ''}} value="Head of Department">Head of Department</option>
+                        <option {{$edituser->role == 'Admin' ? 'selected' : ''}} value="Admin">Admin</option>
+                        <option {{$edituser->role == 'Director' ? 'selected' : ''}} value="Director">Director</option>
                     </select>
                 </div>
                 <div><button type="button" class="change-password" onclick="openField();">Change Password</button></div>

@@ -40,7 +40,7 @@ var decData = chartdata.filter(
 var fieldData = fielddata.filter(
     d => d.year == selectedYear
 );
-loadTable();
+loadTable(); //call function 
 loadField();
 $('#year').change(function() { //update year on change selected year
     if($('#year').val().length != 4){

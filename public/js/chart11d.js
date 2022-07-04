@@ -8,7 +8,7 @@ $('#text').append(`
 </div>
 `);
 var selectedYear = $('#year').val();
-var janData = chartdata.filter(
+var janData = chartdata.filter( //Change Var name to 1East
     d => d.a_inccidentDate.includes(selectedYear + '-01')
 );
 var febData = chartdata.filter(
@@ -111,12 +111,7 @@ function loadTable() { //function to load and display the table
                 <th colspan = "3"> South </th>
                 <th>2 South </th>
                 <th colspan = "3"> Ward 3</th>
-                <th rowspan = "2">Therapy</th>
-                <th rowspan = "2">Others</th>
-                <th rowspan = "2">Out Pt</th>
                 <th  rowspan = "2" style="color: red">Total Fall</th>
-
-
             </tr>
             <tr>
                 <th>1 East</th>
@@ -176,258 +171,94 @@ function loadTable() { //function to load and display the table
             <tr id='Jan'>
                 <th rowspan = "12">${selectedYear}</th>
                 <th>Jan</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
             </tr>
 
             <tr id='Feb'>
                 <th>Feb</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                
             </tr>
 
             <tr id='Mar'>
                 <th>Mar</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
             </tr>
 
             <tr id='Apr'>
                 <th>Apr</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
             </tr>
 
             <tr id='May'>
                 <th>May</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
             </tr>
             
             <tr id='Jun'>
                 <th>Jun</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
             </tr>
 
             <tr id='Jul'>
                 <th>Jul</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
             </tr>
 
             <tr id='Aug'>
                 <th>Aug</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
             </tr>
 
             <tr id='Sep'>
                 <th>Sep</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
                
             </tr>
 
             <tr id='Oct'>
                 <th>Oct</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
             </tr>
 
             <tr id='Nov'>
                 <th>Nov</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
             </tr>
 
             <tr id='Dec'>
                 <th>Dec</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
             </tr>
 
-            <tr>
-                <th colspan = "2">Total</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+
         </tbody>
+
+        <tbody>
+        <tr>
+        <th colspan = "2">Total</th>
+
+         </tr>
+        </tbody>
+
     </table>
 `);
 }
 
-function loadField(){
-    if(fieldData.length == 0){ //Display message if no data in selected year
+function loadField() {
+    if (fieldData.length == 0) { //Display message if no data in selected year
         $('#nopeD').append(`
                 <td rowspan="12" colspan="14">There are no data related to the selected year : ${selectedYear}</td>
         `);
         $('#tData').hide();
         $('#tableFooter').empty(); //Hide the row that contains totalFall medication error
     }
-    else{
+    else {
         $('#noData').hide();
     }
     var currentFields = []; //Store the current fields displayed
     var id = 1;
     var totalFall;
-    var total = []; 
+    var total = [];
     var totaljan = 0;
     var totalfeb = 0;
     var totalmar = 0;
@@ -444,87 +275,88 @@ function loadField(){
     currentFields.forEach(field => {
         totalFall = 0;
         janData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) { //if (in jan and )
                 $('#jan' + id).html(data.type_count);
                 totalFall += data.type_count;
-                totaljan += data.type_count;   
+                totaljan += data.type_count;
             }
         });
         $('#totaljan').html(totaljan);
+
         febData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) {
                 $('#feb' + id).html(data.type_count);
                 totalFall += data.type_count;
-                totalfeb += data.type_count;  
+                totalfeb += data.type_count;
             }
         });
         $('#totalfeb').html(totalfeb);
         marData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) {
                 $('#mar' + id).html(data.type_count);
                 totalFall += data.type_count;
-                totalmar += data.type_count;  
+                totalmar += data.type_count;
             }
         });
         $('#totalmar').html(totalmar);
         aprData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) {
                 $('#apr' + id).html(data.type_count);
                 totalFall += data.type_count;
-                totalapr += data.type_count;  
+                totalapr += data.type_count;
             }
         });
         $('#totalapr').html(totalapr);
         mayData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) {
                 $('#may' + id).html(data.type_count);
                 totalFall += data.type_count;
-                totalmay += data.type_count; 
+                totalmay += data.type_count;
             }
         });
         $('#totalmay').html(totalmay);
         junData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) {
                 $('#jun' + id).html(data.type_count);
                 totalFall += data.type_count;
-                totaljun += data.type_count; 
+                totaljun += data.type_count;
             }
         });
         $('#totaljun').html(totaljun);
         julData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) {
                 $('#jul' + id).html(data.type_count);
                 totalFall += data.type_count;
-                totaljul += data.type_count; 
+                totaljul += data.type_count;
             }
         });
         $('#totaljul').html(totaljul);
         augData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) {
                 $('#aug' + id).html(data.type_count);
                 totalFall += data.type_count;
-                totalaug += data.type_count; 
+                totalaug += data.type_count;
             }
         });
         $('#totalaug').html(totalaug);
         sepData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) {
                 $('#sep' + id).html(data.type_count);
                 totalFall += data.type_count;
-                totalsep += data.type_count; 
+                totalsep += data.type_count;
             }
         });
         $('#totalsep').html(totalsep);
         octData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) {
                 $('#oct' + id).html(data.type_count);
                 totalFall += data.type_count;
-                totaloct += data.type_count;            
-            }          
+                totaloct += data.type_count;
+            }
         });
         $('#totaloct').html(totaloct);
         novData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) {
                 $('#nov' + id).html(data.type_count);
                 totalFall += data.type_count;
                 totalnov += data.type_count;
@@ -532,7 +364,7 @@ function loadField(){
         });
         $('#totalnov').html(totalnov);
         decData.forEach(data => {
-            if(data.f_medi_error + ' (' + data.j_ph_phase + ')' == field){
+            if (data.f_medi_error + ' (' + data.j_ph_phase + ')' == field) {
                 $('#dec' + id).html(data.type_count);
                 totalFall += data.type_count;
                 totaldec += data.type_count;
@@ -540,7 +372,7 @@ function loadField(){
         });
         $('#totaldec').html(totaldec);
         $('#totalFall' + id).html(totalFall);
-         total.push(totalFall); //Get all totalFall values and push to an array
+        total.push(totalFall); //Get all totalFall values and push to an array
         $(' total').html;
         total.reduce((a, b) => a + b, 0); //Display sum of all totalFall values
         id++;

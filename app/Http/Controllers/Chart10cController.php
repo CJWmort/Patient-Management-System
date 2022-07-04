@@ -24,6 +24,7 @@ class Chart10cController extends Controller
         //get all fields required for chart10c
         $fielddata = DB::table('hors_charts')->select(DB::raw('YEAR(a_inccidentDate) as year'), 'f_medi_error', 'j_ph_phase')->where([['f_medi_error', '!=', ""],['j_ph_phase', '!=', ""]])->groupBy('year','f_medi_error', 'j_ph_phase')->get();
 
+        // send data to chart.blade
         return view('chart',compact('data', 'chartdata', 'fielddata', 'selectedChart'));
     }
 }

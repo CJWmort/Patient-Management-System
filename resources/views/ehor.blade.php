@@ -33,6 +33,8 @@
         </div>
         <input class="update" type="submit" value="Update Location of Occurrence Fields">
     </form>
+
+    
     <!-- Form for site of occurrence -->
     <form class="location-title site" action="{{route('addsite')}}" method="POST">
     @csrf

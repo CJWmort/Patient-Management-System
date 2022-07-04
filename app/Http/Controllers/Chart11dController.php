@@ -25,5 +25,6 @@ class Chart11dController extends Controller
         $fielddata = DB::table('beds')->select('WingLevel')->groupBy('WingLevel')->get();
 
         return view('chart',compact('data', 'chartdata', 'fielddata', 'selectedChart'));
+        // return $chartdata;
     }
 }

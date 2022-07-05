@@ -11,13 +11,13 @@ var injuryData = chartdata.filter( //Get data where fall resulted in injury
 var nonInjuryData = chartdata.filter( //Get data where fall did not result in injury
     d => d.f_fall_injury == 'no'
 );
+
 getPast12Months();
 getPast12MonthsData();
 formatChartTitle();
 loadTable();
 loadField();
 loadData();
-tableDataToChartData();
 
 function formatdate(date){ //format date to correct format 
     var selectedDate = new Date(date);
@@ -27,15 +27,24 @@ function formatdate(date){ //format date to correct format
     return formattedDate;
 };
 function getPast12Months(){ //get past 12 months based on selected starting month
-    monthList = [];
+    monthList = []; //Formatted month list (e.g, Oct-20)
+    defaultMonthList = []; //Unformatted month list (e.g, 2020-10-1)
     selectedDate = $('#date').val();
     var d = new Date(selectedDate);
+    var e = new Date(selectedDate);
     var monthName = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+    var monthNum = new Array("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
     d.setDate(1);
+    e.setDate(1)
     for (i=0; i<=11; i++) {
         var year = d.getFullYear();
         monthList.unshift(monthName[d.getMonth()] + '-' + year.toString().substring(2,4));
         d.setMonth(d.getMonth() - 1);
+    }
+    for (i=0; i<=11; i++) {
+        var year = e.getFullYear();
+        defaultMonthList.unshift(year.toString() + '-' + monthNum[e.getMonth()] + '-1');
+        e.setMonth(e.getMonth() - 1);
     }
 };
 function formatChartTitle(){ //format the date for chart title example(Oct 20 - Sep 21)
@@ -54,10 +63,10 @@ function formatChartTitle(){ //format the date for chart title example(Oct 20 - 
 };
 function createDataSet(data, filtereddate, filtereddata){
     //Check if month is within filtered month-year range, push respective month and fall count if true
-    data.forEach(element => {
-        if(monthList.includes(element.a_inccidentDate)){
-            filtereddate.push(element.a_inccidentDate);
-            filtereddata.push(element.fall_count);
+    data.forEach(data => {
+        if(monthList.includes(data.a_inccidentDate)){
+            filtereddate.push(data.a_inccidentDate);
+            filtereddata.push(data.fall_count);
         };
     });
 };
@@ -66,8 +75,21 @@ function getPast12MonthsData(){ //get data for the past 12 months based on selec
     injuryFilteredData = [];
     nonInjuryFilteredDate = [];
     nonInjuryFilteredData = [];
-    createDataSet(injuryData, injuryFilteredDate, injuryFilteredData)
-    createDataSet(nonInjuryData, nonInjuryFilteredDate, nonInjuryFilteredData)
+    pastYrAverageData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //default will be 0 if no data
+    targetRateData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
+    ratePerPatientData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
+
+    chart11aData = chart11a_data.filter( //Data from chart11a_data table that are in the 12 month range
+        d => monthList.includes(formatdate(d.a_inccidentDate))
+    );
+    chart11aData.forEach(data => {
+        index = monthList.indexOf(formatdate(data.a_inccidentDate)) //Get index to enter data based on monthList
+        pastYrAverageData[index] += data.past_yr_avg;
+        targetRateData[index] += data.target_rate;
+        ratePerPatientData[index] += data.rate_per_1000_patient_days;
+    });  
+    createDataSet(injuryData, injuryFilteredDate, injuryFilteredData);
+    createDataSet(nonInjuryData, nonInjuryFilteredDate, nonInjuryFilteredData);
     //map array data with x(month) and y(fall count) values
     injuryDataset = injuryFilteredDate.map( function(x, i){
         return {"x": x, "y": injuryFilteredData[i]}        
@@ -75,45 +97,53 @@ function getPast12MonthsData(){ //get data for the past 12 months based on selec
     nonInjuryDataset = nonInjuryFilteredDate.map( function(x, i){
         return {"x": x, "y": nonInjuryFilteredData[i]}        
     }.bind(this));
+    //map array data with x(month) and y(past_yr_avg) values
+    pastYrAvgDataset = monthList.map( function(x, i){
+        return {"x": x, "y": pastYrAverageData[i]}        
+    }.bind(this)); 
+    //map array data with x(month) and y(target_rate) values
+    targetRateDataset = monthList.map( function(x, i){
+        return {"x": x, "y": targetRateData[i]}        
+    }.bind(this));
+    //map array data with x(month) and y(rate_per_1000_patient_days) values
+    ratePerPatientDataset = monthList.map( function(x, i){
+        return {"x": x, "y": ratePerPatientData[i]}        
+    }.bind(this));
 };
-function tableDataToChartData(){ //Function to Update chart data and localStorage when input in the table changes
-    $('.tableInput').change(function() {
-        monthList.forEach(month => {
-            //Set past year average value in localStorage for the specific month-year
-            localStorage.setItem('avg' + month, $('#avg' + month).val());
-            //Set target rate value in localStorage for the specific month-year
-            localStorage.setItem('rate' + month, $('#rate' + month).val());
-            //Set rate per 1000 patient days value in localStorage for the specific month-year
-            localStorage.setItem('patient' + month, $('#patient' + month).val());
-        });
-        //Update rate per 1000 patient days fields with the new values
-        myChart.data.datasets[0].data = [{x: monthList[0], y:localStorage.getItem('patient' + monthList[0])},{x: monthList[1], y:localStorage.getItem('patient' + monthList[1])},{x: monthList[2], y:localStorage.getItem('patient' + monthList[2])},{x: monthList[3], y:localStorage.getItem('patient' + monthList[3])},{x: monthList[4], y:localStorage.getItem('patient' + monthList[4])},{x: monthList[5], y:localStorage.getItem('patient' + monthList[5])},{x: monthList[6], y:localStorage.getItem('patient' + monthList[6])},{x: monthList[7], y:localStorage.getItem('patient' + monthList[7])},{x: monthList[8], y:localStorage.getItem('patient' + monthList[8])},{x: monthList[9], y:localStorage.getItem('patient' + monthList[9])},{x: monthList[10], y:localStorage.getItem('patient' + monthList[10])},{x: monthList[11], y:localStorage.getItem('patient' + monthList[11])}];
-
-        //Update past year average fields with the new values
-        myChart.data.datasets[1].data = [{x: monthList[0], y:localStorage.getItem('avg' + monthList[0])},{x: monthList[1], y:localStorage.getItem('avg' + monthList[1])},{x: monthList[2], y:localStorage.getItem('avg' + monthList[2])},{x: monthList[3], y:localStorage.getItem('avg' + monthList[3])},{x: monthList[4], y:localStorage.getItem('avg' + monthList[4])},{x: monthList[5], y:localStorage.getItem('avg' + monthList[5])},{x: monthList[6], y:localStorage.getItem('avg' + monthList[6])},{x: monthList[7], y:localStorage.getItem('avg' + monthList[7])},{x: monthList[8], y:localStorage.getItem('avg' + monthList[8])},{x: monthList[9], y:localStorage.getItem('avg' + monthList[9])},{x: monthList[10], y:localStorage.getItem('avg' + monthList[10])},{x: monthList[11], y:localStorage.getItem('avg' + monthList[11])}];
-
-        //Update target rate fields with the new values
-        myChart.data.datasets[2].data = [{x: monthList[0], y:localStorage.getItem('rate' + monthList[0])},{x: monthList[1], y:localStorage.getItem('rate' + monthList[1])},{x: monthList[2], y:localStorage.getItem('rate' + monthList[2])},{x: monthList[3], y:localStorage.getItem('rate' + monthList[3])},{x: monthList[4], y:localStorage.getItem('rate' + monthList[4])},{x: monthList[5], y:localStorage.getItem('rate' + monthList[5])},{x: monthList[6], y:localStorage.getItem('rate' + monthList[6])},{x: monthList[7], y:localStorage.getItem('rate' + monthList[7])},{x: monthList[8], y:localStorage.getItem('rate' + monthList[8])},{x: monthList[9], y:localStorage.getItem('rate' + monthList[9])},{x: monthList[10], y:localStorage.getItem('rate' + monthList[10])},{x: monthList[11], y:localStorage.getItem('rate' + monthList[11])}];
-
-        myChart.update();
+function loadData(){ //Load data for the fields in the table
+    nonInjuryData.forEach(data => {
+        //Get the field id that matches one of the 12 current selected month-year
+        var myElement = document.getElementById('nonInjury' + data.a_inccidentDate);
+        if(myElement){ //Check if that field with the correct id exist
+            myElement.innerHTML = data.fall_count; //Change innerHTML of selected field to fall_count
+        }
     });
-};
+    injuryData.forEach(data => {
+        //Get the field id that matches one of the 12 current selected month-year
+        var myElement = document.getElementById('injury' + data.a_inccidentDate);
+        if(myElement){ //Check if that field with the correct id exist
+            myElement.innerHTML = data.fall_count; //Change innerHTML of selected field to fall_count
+        }
+    });
+    chart11a_data.forEach(data => {
+        newDateFormat = formatdate(data.a_inccidentDate)
+        $('#avg'+newDateFormat).val(data.past_yr_avg);
+        $('#rate'+newDateFormat).val(data.target_rate);
+        $('#patient'+newDateFormat).val(data.rate_per_1000_patient_days);
+    });
+}
 $('#date').change(function() { //update chart on change input type month
+    localStorage.setItem('chart11aDate', $('#date').val()) //Set current date value in localStorage
     getPast12Months();
     getPast12MonthsData();
     formatChartTitle();
     loadTable();
     loadField();
     loadData();
-    tableDataToChartData(); //Allow user to view changes in chart when the fields in the table are changed
     myChart.data.labels = monthList;
-
-    myChart.data.datasets[0].data = [{x: monthList[0], y:localStorage.getItem('patient' + monthList[0])},{x: monthList[1], y:localStorage.getItem('patient' + monthList[1])},{x: monthList[2], y:localStorage.getItem('patient' + monthList[2])},{x: monthList[3], y:localStorage.getItem('patient' + monthList[3])},{x: monthList[4], y:localStorage.getItem('patient' + monthList[4])},{x: monthList[5], y:localStorage.getItem('patient' + monthList[5])},{x: monthList[6], y:localStorage.getItem('patient' + monthList[6])},{x: monthList[7], y:localStorage.getItem('patient' + monthList[7])},{x: monthList[8], y:localStorage.getItem('patient' + monthList[8])},{x: monthList[9], y:localStorage.getItem('patient' + monthList[9])},{x: monthList[10], y:localStorage.getItem('patient' + monthList[10])},{x: monthList[11], y:localStorage.getItem('patient' + monthList[11])}];
-
-    myChart.data.datasets[1].data = [{x: monthList[0], y:localStorage.getItem('avg' + monthList[0])},{x: monthList[1], y:localStorage.getItem('avg' + monthList[1])},{x: monthList[2], y:localStorage.getItem('avg' + monthList[2])},{x: monthList[3], y:localStorage.getItem('avg' + monthList[3])},{x: monthList[4], y:localStorage.getItem('avg' + monthList[4])},{x: monthList[5], y:localStorage.getItem('avg' + monthList[5])},{x: monthList[6], y:localStorage.getItem('avg' + monthList[6])},{x: monthList[7], y:localStorage.getItem('avg' + monthList[7])},{x: monthList[8], y:localStorage.getItem('avg' + monthList[8])},{x: monthList[9], y:localStorage.getItem('avg' + monthList[9])},{x: monthList[10], y:localStorage.getItem('avg' + monthList[10])},{x: monthList[11], y:localStorage.getItem('avg' + monthList[11])},];
-
-    myChart.data.datasets[2].data = [{x: monthList[0], y:localStorage.getItem('rate' + monthList[0])},{x: monthList[1], y:localStorage.getItem('rate' + monthList[1])},{x: monthList[2], y:localStorage.getItem('rate' + monthList[2])},{x: monthList[3], y:localStorage.getItem('rate' + monthList[3])},{x: monthList[4], y:localStorage.getItem('rate' + monthList[4])},{x: monthList[5], y:localStorage.getItem('rate' + monthList[5])},{x: monthList[6], y:localStorage.getItem('rate' + monthList[6])},{x: monthList[7], y:localStorage.getItem('rate' + monthList[7])},{x: monthList[8], y:localStorage.getItem('rate' + monthList[8])},{x: monthList[9], y:localStorage.getItem('rate' + monthList[9])},{x: monthList[10], y:localStorage.getItem('rate' + monthList[10])},{x: monthList[11], y:localStorage.getItem('rate' + monthList[11])}];
-
+    myChart.data.datasets[0].data = [...ratePerPatientDataset];
+    myChart.data.datasets[1].data = [...pastYrAvgDataset];
+    myChart.data.datasets[2].data = [...targetRateDataset];
     myChart.data.datasets[3].data = [...nonInjuryDataset];
     myChart.data.datasets[4].data = [...injuryDataset];
     myChart.options.plugins.title.text = 'Falls (' + firstmonth + ' - ' + lastmonth + ')'
@@ -128,18 +158,7 @@ var myChart = new Chart(ctx, {
             {
                 label: 'Rate per 1000 patient days',
                 data: [
-                    {x: monthList[0], y:localStorage.getItem('patient' + monthList[0])},
-                    {x: monthList[1], y:localStorage.getItem('patient' + monthList[1])},
-                    {x: monthList[2], y:localStorage.getItem('patient' + monthList[2])},
-                    {x: monthList[3], y:localStorage.getItem('patient' + monthList[3])},
-                    {x: monthList[4], y:localStorage.getItem('patient' + monthList[4])},
-                    {x: monthList[5], y:localStorage.getItem('patient' + monthList[5])},
-                    {x: monthList[6], y:localStorage.getItem('patient' + monthList[6])},
-                    {x: monthList[7], y:localStorage.getItem('patient' + monthList[7])},
-                    {x: monthList[8], y:localStorage.getItem('patient' + monthList[8])},
-                    {x: monthList[9], y:localStorage.getItem('patient' + monthList[9])},
-                    {x: monthList[10], y:localStorage.getItem('patient' + monthList[10])},
-                    {x: monthList[11], y:localStorage.getItem('patient' + monthList[11])},
+                    ...ratePerPatientDataset
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -157,18 +176,7 @@ var myChart = new Chart(ctx, {
             },{
                 label: 'Past year average',
                 data: [
-                    {x: monthList[0], y:localStorage.getItem('avg' + monthList[0])},
-                    {x: monthList[1], y:localStorage.getItem('avg' + monthList[1])},
-                    {x: monthList[2], y:localStorage.getItem('avg' + monthList[2])},
-                    {x: monthList[3], y:localStorage.getItem('avg' + monthList[3])},
-                    {x: monthList[4], y:localStorage.getItem('avg' + monthList[4])},
-                    {x: monthList[5], y:localStorage.getItem('avg' + monthList[5])},
-                    {x: monthList[6], y:localStorage.getItem('avg' + monthList[6])},
-                    {x: monthList[7], y:localStorage.getItem('avg' + monthList[7])},
-                    {x: monthList[8], y:localStorage.getItem('avg' + monthList[8])},
-                    {x: monthList[9], y:localStorage.getItem('avg' + monthList[9])},
-                    {x: monthList[10], y:localStorage.getItem('avg' + monthList[10])},
-                    {x: monthList[11], y:localStorage.getItem('avg' + monthList[11])},
+                    ...pastYrAvgDataset
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -185,18 +193,7 @@ var myChart = new Chart(ctx, {
             },{
                 label: 'Target rate',
                 data: [
-                    {x: monthList[0], y:localStorage.getItem('rate' + monthList[0])},
-                    {x: monthList[1], y:localStorage.getItem('rate' + monthList[1])},
-                    {x: monthList[2], y:localStorage.getItem('rate' + monthList[2])},
-                    {x: monthList[3], y:localStorage.getItem('rate' + monthList[3])},
-                    {x: monthList[4], y:localStorage.getItem('rate' + monthList[4])},
-                    {x: monthList[5], y:localStorage.getItem('rate' + monthList[5])},
-                    {x: monthList[6], y:localStorage.getItem('rate' + monthList[6])},
-                    {x: monthList[7], y:localStorage.getItem('rate' + monthList[7])},
-                    {x: monthList[8], y:localStorage.getItem('rate' + monthList[8])},
-                    {x: monthList[9], y:localStorage.getItem('rate' + monthList[9])},
-                    {x: monthList[10], y:localStorage.getItem('rate' + monthList[10])},
-                    {x: monthList[11], y:localStorage.getItem('rate' + monthList[11])},
+                    ...targetRateDataset
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -371,6 +368,20 @@ $('#table').append(`
     <tbody id="tableBody">
 
     </tbody>
+    <input type="hidden" name="date[]" value=${defaultMonthList[0]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[1]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[2]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[3]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[4]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[5]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[6]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[7]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[8]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[9]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[10]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[11]}>
+    <input class="updateBtn" type="submit" value="Save Changes" 
+    onclick="return confirm('All fall-related data from ${monthList[0]} to ${monthList[11]} will be updated. Proceed with Update?')">
 </table>
 `);
 }
@@ -408,83 +419,49 @@ $('#tableBody').append(`
     </tr>
     <tr class="average">
         <td class="field">Past year average</td>
-        <td><input class="tableInput" id="avg${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
     </tr>
     <tr class="rate">
         <td class="field">Target rate</td>
-        <td><input class="tableInput" id="rate${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
     </tr>
     <tr class="patientDay">
         <td class="field">Rate per 1000 patient days</td>
-        <td><input class="tableInput" id="patient${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
     </tr>
 `);        
 };
-function loadData(){ //Load data for the fields in the table
-    nonInjuryData.forEach(data => {
-        //Get the field id that matches one of the 12 current selected month-year
-        var myElement = document.getElementById('nonInjury' + data.a_inccidentDate);
-        if(myElement){ //Check if that field with the correct id exist
-            myElement.innerHTML = data.fall_count; //Change innerHTML of selected field to fall_count
-        }
-    });
-    injuryData.forEach(data => {
-        //Get the field id that matches one of the 12 current selected month-year
-        var myElement = document.getElementById('injury' + data.a_inccidentDate);
-        if(myElement){ //Check if that field with the correct id exist
-            myElement.innerHTML = data.fall_count; //Change innerHTML of selected field to fall_count
-        }
-    });
-    monthList.forEach(month => {
-        if(localStorage.getItem('avg' + month) != null){ //Assign local storage value for past year average if exists
-            document.getElementById('avg' + month).value = localStorage.getItem('avg' + month);
-        } else{ //Default will be blank when entering past year average for the first time
-            document.getElementById('avg' + month).value = '';
-        }
 
-        if(localStorage.getItem('rate' + month) != null){ //Assign local storage value for target rate if exists
-            document.getElementById('rate' + month).value = localStorage.getItem('rate' + month);
-        } else{ //Default will be blank when entering past year average for the first time
-            document.getElementById('rate' + month).value = '';
-        }
-
-        if(localStorage.getItem('patient' + month) != null){ //Assign local storage value for rate per 1000 patient days if exists
-            document.getElementById('patient' + month).value = localStorage.getItem('patient' + month);
-        } else{ //Default will be blank when entering past year average for the first time
-            document.getElementById('patient' + month).value = '';
-        }
-    });
-}

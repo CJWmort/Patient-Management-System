@@ -61,7 +61,19 @@
          <div class="chartsubtitle"></div><br>
          <div class="doughnut"></div>
         @endif
+        @if($selectedChart == 5)
+        <form class="table11a-form" action="{{route('editData')}}" method="POST">
+            @csrf
+            @if(session()->has('msg'))
+            <div class="updateMsg">
+                {{ session()->get('msg') }}
+            </div>
+            @endif
+            <div id="table"></div>          
+        </form>
+        @else
         <div id="table"></div>
+        @endif
         <div id="text"></div>
     </div>
 </body>
@@ -135,8 +147,12 @@
 @if ($selectedChart == 5)
 <script> //Display Chart11a
     $('#filter').append(`<label>Selected Month - Year:</label>
-    <input type="month" name="selectedDate" value="2021-09" id="date" onkeydown="return false" required>`);
-    //getCurrentMonthYear(); //Set starting value for input type month to be current month-year
+    <input type="month" name="selectedDate" id="date" onkeydown="return false" required>`);
+    if(localStorage.getItem('chart11aDate') != null){ //Assign date for chart11a if exists
+        document.getElementById('date').value = localStorage.getItem('chart11aDate');
+    } else{ //Default date will be current month-year if no chart11a date in localStorage
+        getCurrentMonthYear();
+    }
     var chartdata = {!! json_encode($chartdata) !!} //Get data from chart11aController
     var chart11a_data = {!! json_encode($chart11a_data) !!} //Get data from chart11a_data table
 </script>

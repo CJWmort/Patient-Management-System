@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChart11aDataTable extends Migration
+class CreateChart11aDatasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateChart11aDataTable extends Migration
     //Run command "php artisan migrate"
     public function up()
     {
-        Schema::create('chart11a_data', function (Blueprint $table) {
+        Schema::create('chart11a_datas', function (Blueprint $table) {
             $table->id();
             $table->string('a_inccidentDate');
             $table->double('past_yr_avg', 8, 2);
@@ -31,6 +31,6 @@ class CreateChart11aDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chart11a_data');
+        Schema::dropIfExists('chart11a_datas');
     }
 }

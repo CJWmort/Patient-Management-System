@@ -27,15 +27,24 @@ function formatdate(date){ //format date to correct format
     return formattedDate;
 };
 function getPast12Months(){ //get past 12 months based on selected starting month
-    monthList = [];
+    monthList = []; //Formatted month list (e.g, Oct-20)
+    defaultMonthList = []; //Unformatted month list (e.g, 2020-10-1)
     selectedDate = $('#date').val();
     var d = new Date(selectedDate);
+    var e = new Date(selectedDate);
     var monthName = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+    var monthNum = new Array("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12");
     d.setDate(1);
+    e.setDate(1)
     for (i=0; i<=11; i++) {
         var year = d.getFullYear();
         monthList.unshift(monthName[d.getMonth()] + '-' + year.toString().substring(2,4));
         d.setMonth(d.getMonth() - 1);
+    }
+    for (i=0; i<=11; i++) {
+        var year = e.getFullYear();
+        defaultMonthList.unshift(year.toString() + '-' + monthNum[e.getMonth()] + '-1');
+        e.setMonth(e.getMonth() - 1);
     }
 };
 function formatChartTitle(){ //format the date for chart title example(Oct 20 - Sep 21)
@@ -124,6 +133,7 @@ function loadData(){ //Load data for the fields in the table
     });
 }
 $('#date').change(function() { //update chart on change input type month
+    localStorage.setItem('chart11aDate', $('#date').val()) //Set current date value in localStorage
     getPast12Months();
     getPast12MonthsData();
     formatChartTitle();
@@ -358,6 +368,20 @@ $('#table').append(`
     <tbody id="tableBody">
 
     </tbody>
+    <input type="hidden" name="date[]" value=${defaultMonthList[0]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[1]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[2]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[3]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[4]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[5]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[6]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[7]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[8]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[9]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[10]}>
+    <input type="hidden" name="date[]" value=${defaultMonthList[11]}>
+    <input class="updateBtn" type="submit" value="Save Changes" 
+    onclick="return confirm('All fall-related data from ${monthList[0]} to ${monthList[11]} will be updated. Proceed with Update?')">
 </table>
 `);
 }
@@ -395,48 +419,48 @@ $('#tableBody').append(`
     </tr>
     <tr class="average">
         <td class="field">Past year average</td>
-        <td><input class="tableInput" id="avg${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="avg${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="avg[]" class="tableInput" id="avg${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
     </tr>
     <tr class="rate">
         <td class="field">Target rate</td>
-        <td><input class="tableInput" id="rate${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="rate${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="rate[]" class="tableInput" id="rate${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
     </tr>
     <tr class="patientDay">
         <td class="field">Rate per 1000 patient days</td>
-        <td><input class="tableInput" id="patient${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
-        <td><input class="tableInput" id="patient${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.1"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[0]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[1]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[2]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[3]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[4]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[5]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[6]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[7]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[8]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[9]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[10]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
+        <td><input name="patient[]" class="tableInput" id="patient${monthList[11]}" type="number" min="0" onchange='return true' oninput="Math.abs(this.value)" step="0.01" value="0"></td>
     </tr>
 `);        
 };

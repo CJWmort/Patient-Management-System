@@ -25,15 +25,74 @@
     <div class = "btn">
         <button class="toggleBtn" onclick="openForm();">View Location Of Occurence</button>
         <button class="toggleBtn" onclick="openForm();">View Site Of Occurence</button>    
-        <button class="toggleBtn" onclick="openForm();">View Type Of Occurence</button> 
+        <button class="toggleBtn type" onclick="toggleTypeOccurence();">View Type Of Occurence</button> 
     </div>
+
+
+    <div id="displaytable" style="visibility: none">
+        <table class="typeTable" cellspacing="0">
+            <tr class="tablehead">
+                <th><input type="text" name="name[]" placeholder="Add New Type Occurence"></th>
+                <th>
+                    <select name="type" required>
+                        <option value="" disabled selected>Select Occurrence Type</option>
+                        <option value="Fall Related">Fall Related</option>
+                        <option value="Medication Related">Medication Related</option>
+                        <option value="Other Incidents">Other Incidents</option>
+                    </select>
+                </th>
+                <th colspan = "2"><a href="" class="add">Add</a></th>
+            </tr>
+            <form class="location-title filter" action="{{route('filtertype')}}" method="POST">
+            @csrf
+                <tr class="tablehead">
+                    <th colspan="4">
+                        <input type="radio" name="type" value="fall">
+                        <label>Fall Related</label>
+                        <input type="radio" name="type" value="medic">
+                        <label>Medication Related</label>
+                        <input type="radio" name="type" value="other">
+                        <label>Other Incidents</label>
+                        <input type="radio" name="type" value="all" checked="checked">
+                        <label>All Types</label>
+                        <input type="submit" class="filterBtn" value="Filter By Type">
+                    </th>
+                </tr>
+            </form>
+            <tr class="tablehead">
+                <th>NAME</th>
+                <th>TYPE</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
+            @foreach($allTypes as $types)
+            <tr class="tablerow">
+                <td><input type="text" name="name[]" value="{{$types->name}}" required></td>
+                    <td>
+                        <select name="type" required>
+                            <option {{$types->type == 'Fall Related' ? 'selected' : ''}} value="Fall Related">Fall Related</option>
+                            <option {{$types->type == 'Medication Related' ? 'selected' : ''}} value="Medication Related">Medication Related</option>
+                            <option {{$types->type == 'Other Incidents' ? 'selected' : ''}} value="Other Incidents">Other Incidents</option>
+                        </select>
+                    </td>      
+                <td><a href="" class="update">Update</a></td>
+                <td><a href="" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$types->name}} ({{$types->type}}) ?')" alt="delete">Delete</a>
+            </tr>
+            @endforeach
+        </table>
+    </div>
+
+
     
-
-
-
-
-
-
+    <script>
+        function toggleTypeOccurence(){
+            if (document.getElementById("displaytable").style.display === "none")
+                document.getElementById("displaytable").style.display="block";
+            else
+                document.getElementById("displaytable").style.display="none";
+        }
+    </script>
+    
 
 
 

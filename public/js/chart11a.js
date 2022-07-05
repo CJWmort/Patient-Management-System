@@ -11,6 +11,7 @@ var injuryData = chartdata.filter( //Get data where fall resulted in injury
 var nonInjuryData = chartdata.filter( //Get data where fall did not result in injury
     d => d.f_fall_injury == 'no'
 );
+
 getPast12Months();
 getPast12MonthsData();
 formatChartTitle();
@@ -53,10 +54,10 @@ function formatChartTitle(){ //format the date for chart title example(Oct 20 - 
 };
 function createDataSet(data, filtereddate, filtereddata){
     //Check if month is within filtered month-year range, push respective month and fall count if true
-    data.forEach(element => {
-        if(monthList.includes(element.a_inccidentDate)){
-            filtereddate.push(element.a_inccidentDate);
-            filtereddata.push(element.fall_count);
+    data.forEach(data => {
+        if(monthList.includes(data.a_inccidentDate)){
+            filtereddate.push(data.a_inccidentDate);
+            filtereddata.push(data.fall_count);
         };
     });
 };
@@ -65,8 +66,21 @@ function getPast12MonthsData(){ //get data for the past 12 months based on selec
     injuryFilteredData = [];
     nonInjuryFilteredDate = [];
     nonInjuryFilteredData = [];
-    createDataSet(injuryData, injuryFilteredDate, injuryFilteredData)
-    createDataSet(nonInjuryData, nonInjuryFilteredDate, nonInjuryFilteredData)
+    pastYrAverageData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //default will be 0 if no data
+    targetRateData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
+    ratePerPatientData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; 
+
+    chart11aData = chart11a_data.filter( //Data from chart11a_data table that are in the 12 month range
+        d => monthList.includes(formatdate(d.a_inccidentDate))
+    );
+    chart11aData.forEach(data => {
+        index = monthList.indexOf(formatdate(data.a_inccidentDate)) //Get index to enter data based on monthList
+        pastYrAverageData[index] += data.past_yr_avg;
+        targetRateData[index] += data.target_rate;
+        ratePerPatientData[index] += data.rate_per_1000_patient_days;
+    });  
+    createDataSet(injuryData, injuryFilteredDate, injuryFilteredData);
+    createDataSet(nonInjuryData, nonInjuryFilteredDate, nonInjuryFilteredData);
     //map array data with x(month) and y(fall count) values
     injuryDataset = injuryFilteredDate.map( function(x, i){
         return {"x": x, "y": injuryFilteredData[i]}        
@@ -74,7 +88,41 @@ function getPast12MonthsData(){ //get data for the past 12 months based on selec
     nonInjuryDataset = nonInjuryFilteredDate.map( function(x, i){
         return {"x": x, "y": nonInjuryFilteredData[i]}        
     }.bind(this));
+    //map array data with x(month) and y(past_yr_avg) values
+    pastYrAvgDataset = monthList.map( function(x, i){
+        return {"x": x, "y": pastYrAverageData[i]}        
+    }.bind(this)); 
+    //map array data with x(month) and y(target_rate) values
+    targetRateDataset = monthList.map( function(x, i){
+        return {"x": x, "y": targetRateData[i]}        
+    }.bind(this));
+    //map array data with x(month) and y(rate_per_1000_patient_days) values
+    ratePerPatientDataset = monthList.map( function(x, i){
+        return {"x": x, "y": ratePerPatientData[i]}        
+    }.bind(this));
 };
+function loadData(){ //Load data for the fields in the table
+    nonInjuryData.forEach(data => {
+        //Get the field id that matches one of the 12 current selected month-year
+        var myElement = document.getElementById('nonInjury' + data.a_inccidentDate);
+        if(myElement){ //Check if that field with the correct id exist
+            myElement.innerHTML = data.fall_count; //Change innerHTML of selected field to fall_count
+        }
+    });
+    injuryData.forEach(data => {
+        //Get the field id that matches one of the 12 current selected month-year
+        var myElement = document.getElementById('injury' + data.a_inccidentDate);
+        if(myElement){ //Check if that field with the correct id exist
+            myElement.innerHTML = data.fall_count; //Change innerHTML of selected field to fall_count
+        }
+    });
+    chart11a_data.forEach(data => {
+        newDateFormat = formatdate(data.a_inccidentDate)
+        $('#avg'+newDateFormat).val(data.past_yr_avg);
+        $('#rate'+newDateFormat).val(data.target_rate);
+        $('#patient'+newDateFormat).val(data.rate_per_1000_patient_days);
+    });
+}
 $('#date').change(function() { //update chart on change input type month
     getPast12Months();
     getPast12MonthsData();
@@ -83,6 +131,9 @@ $('#date').change(function() { //update chart on change input type month
     loadField();
     loadData();
     myChart.data.labels = monthList;
+    myChart.data.datasets[0].data = [...ratePerPatientDataset];
+    myChart.data.datasets[1].data = [...pastYrAvgDataset];
+    myChart.data.datasets[2].data = [...targetRateDataset];
     myChart.data.datasets[3].data = [...nonInjuryDataset];
     myChart.data.datasets[4].data = [...injuryDataset];
     myChart.options.plugins.title.text = 'Falls (' + firstmonth + ' - ' + lastmonth + ')'
@@ -97,7 +148,7 @@ var myChart = new Chart(ctx, {
             {
                 label: 'Rate per 1000 patient days',
                 data: [
-
+                    ...ratePerPatientDataset
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -115,7 +166,7 @@ var myChart = new Chart(ctx, {
             },{
                 label: 'Past year average',
                 data: [
-
+                    ...pastYrAvgDataset
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -132,7 +183,7 @@ var myChart = new Chart(ctx, {
             },{
                 label: 'Target rate',
                 data: [
-
+                    ...targetRateDataset
                 ],
                 type: 'line',
                 backgroundColor: [
@@ -389,19 +440,4 @@ $('#tableBody').append(`
     </tr>
 `);        
 };
-function loadData(){ //Load data for the fields in the table
-    nonInjuryData.forEach(data => {
-        //Get the field id that matches one of the 12 current selected month-year
-        var myElement = document.getElementById('nonInjury' + data.a_inccidentDate);
-        if(myElement){ //Check if that field with the correct id exist
-            myElement.innerHTML = data.fall_count; //Change innerHTML of selected field to fall_count
-        }
-    });
-    injuryData.forEach(data => {
-        //Get the field id that matches one of the 12 current selected month-year
-        var myElement = document.getElementById('injury' + data.a_inccidentDate);
-        if(myElement){ //Check if that field with the correct id exist
-            myElement.innerHTML = data.fall_count; //Change innerHTML of selected field to fall_count
-        }
-    });
-}
+

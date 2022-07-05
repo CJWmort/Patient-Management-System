@@ -138,6 +138,7 @@
     <input type="month" name="selectedDate" value="2021-09" id="date" onkeydown="return false" required>`);
     //getCurrentMonthYear(); //Set starting value for input type month to be current month-year
     var chartdata = {!! json_encode($chartdata) !!} //Get data from chart11aController
+    var chart11a_data = {!! json_encode($chart11a_data) !!} //Get data from chart11a_data table
 </script>
 <script src="{{URL::asset('public/js/chart11a.js?v=').time()}}"></script>
 @endif

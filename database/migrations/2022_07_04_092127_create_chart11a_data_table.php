@@ -17,11 +17,10 @@ class CreateChart11aDataTable extends Migration
     {
         Schema::create('chart11a_data', function (Blueprint $table) {
             $table->id();
-            $table->date('a_inccidentDate');
+            $table->string('a_inccidentDate');
             $table->double('past_yr_avg', 8, 2);
             $table->double('target_rate', 8, 2);
             $table->double('rate_per_1000_patient_days', 8, 2);
-            $table->timestamps();
         });
     }
 

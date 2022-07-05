@@ -21,6 +21,9 @@ class Chart11aController extends Controller
         //get all data required for chart11a
         $chartdata = DB::table('hors_charts')->select('a_inccidentDate', 'f_occurType', 'f_fall_injury', DB::raw('COUNT(f_occurType) as fall_count'))->where('f_occurType', '=', 'fall')->groupBy('a_inccidentDate','f_fall_injury')->get();
 
-        return view('chart',compact('data', 'chartdata', 'selectedChart'));
+        //get all data from the table "chart11a_data"
+        $chart11a_data = DB::table('chart11a_data')->orderBy('a_inccidentDate', 'asc')->get();
+
+        return view('chart',compact('data', 'chartdata', 'chart11a_data', 'selectedChart'));
     }
 }

@@ -38,6 +38,7 @@ Route::get('/profile', [PageController::class, 'profile'])->middleware('isLogged
 Route::get('/edit-profile/{id}', [PageController::class, 'editprofile'])->middleware('isLoggedIn')->name('edit-profile');
 Route::get('/user', [PageController::class, 'manageuser'])->middleware('isLoggedIn')->name('user');
 Route::get('/ehor', [PageController::class, 'ehor'])->middleware('isLoggedIn')->name('ehor');
+Route::get('/reports', [PageController::class, 'reports'])->middleware('isLoggedIn')->name('reports');
 
 //Route For Location of Occurrence Customization
 Route::get('/deletelocation/{id}', [EhorController::class, 'deletelocation'])->name('deletelocation');

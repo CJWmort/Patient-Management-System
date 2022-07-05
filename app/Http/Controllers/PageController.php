@@ -62,4 +62,12 @@ class PageController extends Controller
         }
         return view('ehor', compact('data', 'allLocations', 'allSites', 'allTypes'));
     }
+    public function reports()
+    {
+        $data = array();
+        if (Session::has('loginId')){
+            $data = User::where('id', '=', Session::get('loginId'))->first();
+        }
+        return view('reports', compact('data'));
+    }
 }

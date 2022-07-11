@@ -32,16 +32,20 @@
     <div id="displaytable" style="visibility: none">
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
-                <th><input type="text" name="name[]" placeholder="Add New Type Occurence"></th>
-                <th>
-                    <select name="type" required>
-                        <option value="" disabled selected>Select Occurrence Type</option>
-                        <option value="Fall Related">Fall Related</option>
-                        <option value="Medication Related">Medication Related</option>
-                        <option value="Other Incidents">Other Incidents</option>
-                    </select>
-                </th>
-                <th colspan = "2"><a href="" class="add">Add</a></th>
+                <form action="{{route('addtype')}}" method="post">
+                @csrf
+                    <th><input type="text" name="name" placeholder="Add New Type Occurence"></th>
+                    <th>
+                        <select name="type" required>
+                            <option value="" disabled selected>Select Occurrence Type</option>
+                            <option value="Fall Related">Fall Related</option>
+                            <option value="Medication Related">Medication Related</option>
+                            <option value="Other Incidents">Other Incidents</option>
+                        </select>
+                    </th>
+                    <th colspan = "2"><input type="submit" class="add" value="Add"></th>
+                </form>
+                
             </tr>
             <form class="location-title filter" action="{{route('filtertype')}}" method="POST">
             @csrf
@@ -76,7 +80,7 @@
                         </select>
                     </td>      
                 <td><a href="" class="update">Update</a></td>
-                <td><a href="" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$types->name}} ({{$types->type}}) ?')" alt="delete">Delete</a>
+                <td><a href="{{route('deletetype', ['id'=>$types->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$types->name}} ({{$types->type}}) ?')" alt="delete">Delete</a></td>
             </tr>
             @endforeach
         </table>

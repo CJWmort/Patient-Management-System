@@ -231,10 +231,11 @@ td{
 .add{
     font-weight: bold;
     transition: 0.5s;
-    padding: 10px 20px;
-    width: 50px;
+    padding: 10px 30px;
+    width: 70px;
     border-radius: 20px;
     display: inline-block;
+    border: none;
     background-color: #6eff6e;
 }
 .add:hover{

@@ -10,7 +10,7 @@
             <a class="nav-link" href="{{route('chart10a')}}">View Charts</a>
             <a class="nav-link" href="{{route('ehor')}}">Customise EHOR</a>
             <a class="nav-link" href="{{route('user')}}">Manage Users</a>
-            <a class="nav-link" href="#">View Reports</a>
+            <a class="nav-link" href="{{route('reports')}}">View Reports</a>
         </div>
         @endif
         <img onclick="toggleNav();" src="{{URL::asset('public/images/user.png')}}" id="change" class="nav-profile" alt="accountLogo">

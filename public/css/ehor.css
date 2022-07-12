@@ -42,7 +42,7 @@ body{
 .addfield{
     padding-left: 20px;
 }
-.update{
+/* .update{
     background-color: #ffe3d6;
     cursor: pointer;
     font-weight: bold;
@@ -56,7 +56,7 @@ body{
 .update:hover{
     background-color: #d7baad;
     color: white;
-}
+} */
 .location-grid div{
     text-align: center;
     transition: 0.3s;
@@ -122,7 +122,9 @@ body{
 .filterBtn{
     padding: 5px 10px;
     border: none;
-    background-color: lightskyblue;
+    background-color: #2e4450;
+    cursor: pointer;
+    color: white;
     font-weight: bold;
     border-radius: 10px;
     font-size: 14px;
@@ -150,8 +152,7 @@ body{
 .toggleBtn{
     /* background-color: #ffe3d6; */
     background-color: aliceblue;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-radius: 20px;
     border: none;
     cursor: pointer;
     font-weight: bold;
@@ -159,12 +160,84 @@ body{
     padding: 10px;
     width: 400px;
     transition: 0.3s;
-    margin-top: 20px;
+    margin: 20px 10px;
+    border: 1px solid #000000;
 }
 .toggleBtn:hover{
     color: white;
     background-color: #d7baad;
+    border: 1px solid #000000;
 }
 .btn{
+    display: flex;
+    justify-content: center;
+}
+.typeTable{
     margin: 0 auto;
+}
+th{
+    padding: 10px 20px;
+    user-select: none;
+    background-color: aliceblue;
+}
+td{
+    padding: 5px 15px;
+    user-select: none;
+    background-color: aliceblue;
+}
+.tablehead th{
+    background-color: #88d4d1;
+    color: #333;
+}
+.tablehead input,.tablehead select, .tablerow input,.tablerow select{
+    border-radius: 15px;
+    padding: 10px;
+    border: none;
+}
+.tablehead label{
+    margin-right: 20px;
+}
+.tablerow:hover > td{
+    background-color: #527c88;
+    color: whitesmoke;
+}
+.update{
+    /* background-color: rgb(248, 196, 99); */
+    background-color: #88d4d1;
+}
+.delete{
+    /* background-color: rgb(246, 99, 99); */
+    background-color: #88d4d1;
+}
+.update,
+.delete{
+    font-weight: bold;
+    transition: 0.5s;
+    display: block;
+    padding: 10px 20px;
+    width: 50px;
+    border-radius: 20px;
+}
+.update:hover{
+    color: white;
+    background-color: #57b2af;
+    /* background-color: darkorange; */
+}
+.delete:hover{
+    color: white;
+    background-color: #57b2af;
+    /* background-color: rgb(215, 54, 54) */
+}
+.add{
+    font-weight: bold;
+    transition: 0.5s;
+    padding: 10px 30px;
+    width: 70px;
+    border-radius: 20px;
+    display: inline-block;
+    border: none;
+    background-color: #6eff6e;
+}
+.add:hover{
+    background-color: rgb(23, 197, 23);
 }

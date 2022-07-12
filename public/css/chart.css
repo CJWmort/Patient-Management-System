@@ -250,3 +250,25 @@ tr .subtotal{
     display: inline-block;
     padding: 8px;
 }
+.updateMsg{
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+    user-select: none;
+}
+.updateBtn{
+    background-color: #88d4d1;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 16px;
+    border: none;
+    padding: 10px 30px;
+    cursor: pointer;
+    border: 3px solid black;
+    border-radius: 40px;
+}
+.updateBtn:hover{
+    color: white;
+    background-color: #0D6E6B;
+}

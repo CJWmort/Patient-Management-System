@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+<div id="displaytable" style="visibility: none">
+=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,15 +28,81 @@
     <div class = "btn">
         <button class="toggleBtn" onclick="openForm();">View Location Of Occurence</button>
         <button class="toggleBtn" onclick="openForm();">View Site Of Occurence</button>    
-        <button class="toggleBtn" onclick="openForm();">View Type Of Occurence</button> 
+        <button class="toggleBtn type" onclick="toggleTypeOccurence();">View Type Of Occurence</button> 
     </div>
+
+
+    <div id="displaytable" style="visibility: none">
+>>>>>>> 2bcaa1caf790c15e9c53a685e004915b357fbd8b
+        <table class="typeTable" cellspacing="0">
+            <tr class="tablehead">
+                <form action="{{route('addtype')}}" method="post">
+                @csrf
+                    <th><input type="text" name="name" placeholder="Add New Type Occurence"></th>
+                    <th>
+                        <select name="type" required>
+                            <option value="" disabled selected>Select Occurrence Type</option>
+                            <option value="Fall Related">Fall Related</option>
+                            <option value="Medication Related">Medication Related</option>
+                            <option value="Other Incidents">Other Incidents</option>
+                        </select>
+                    </th>
+                    <th colspan = "2"><input type="submit" class="add" value="Add"></th>
+                </form>
+                
+            </tr>
+            <form class="location-title filter" action="{{route('filtertype')}}" method="POST">
+            @csrf
+                <tr class="tablehead">
+                    <th colspan="4">
+                        <input type="radio" name="type" value="fall">
+                        <label>Fall Related</label>
+                        <input type="radio" name="type" value="medic">
+                        <label>Medication Related</label>
+                        <input type="radio" name="type" value="other">
+                        <label>Other Incidents</label>
+                        <input type="radio" name="type" value="all" checked="checked">
+                        <label>All Types</label>
+                        <input type="submit" class="filterBtn" value="Filter By Type">
+                    </th>
+                </tr>
+            </form>
+            <tr class="tablehead">
+                <th>NAME</th>
+                <th>TYPE</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
+<<<<<<< HEAD
+=======
+            @foreach($allTypes as $types)
+            <tr class="tablerow">
+                <td><input type="text" name="name[]" value="{{$types->name}}" required></td>
+                    <td>
+                        <select name="type" required>
+                            <option {{$types->type == 'Fall Related' ? 'selected' : ''}} value="Fall Related">Fall Related</option>
+                            <option {{$types->type == 'Medication Related' ? 'selected' : ''}} value="Medication Related">Medication Related</option>
+                            <option {{$types->type == 'Other Incidents' ? 'selected' : ''}} value="Other Incidents">Other Incidents</option>
+                        </select>
+                    </td>      
+                <td><a href="" class="update">Update</a></td>
+                <td><a href="{{route('deletetype', ['id'=>$types->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$types->name}} ({{$types->type}}) ?')" alt="delete">Delete</a></td>
+            </tr>
+            @endforeach
+        </table>
+    </div>
+
+
     
-
-
-
-
-
-
+    <script>
+        function toggleTypeOccurence(){
+            if (document.getElementById("displaytable").style.display === "none")
+                document.getElementById("displaytable").style.display="block";
+            else
+                document.getElementById("displaytable").style.display="none";
+        }
+    </script>
+    
 
 
 
@@ -120,19 +189,31 @@
     <form class="location" action="{{route('updatetype')}}" method="POST">
     @csrf
         <div class="location-grid">
+>>>>>>> 2bcaa1caf790c15e9c53a685e004915b357fbd8b
             @foreach($allTypes as $types)
-            <div>
-                <div class="typeinfo">{{$types->type}}</div>
-                <a class="deleteBtn" href="{{route('deletetype', ['id'=>$types->id])}}"><img src="{{URL::asset('public/images/minus.png')}}" onclick="return confirm('Are you sure that you want to delete the field {{$types->name}} ({{$types->type}}) ?')" alt="delete"></a><input type="text" name="name[]" value="{{$types->name}}" required>
-                <input type="hidden" name="typeid[]" value="{{$types->id}}">                 
-            </div>
+            <tr class="tablerow">
+                <td><input type="text" name="name[]" value="{{$types->name}}" required></td>
+                    <td>
+                        <select name="type" required>
+                            <option {{$types->type == 'Fall Related' ? 'selected' : ''}} value="Fall Related">Fall Related</option>
+                            <option {{$types->type == 'Medication Related' ? 'selected' : ''}} value="Medication Related">Medication Related</option>
+                            <option {{$types->type == 'Other Incidents' ? 'selected' : ''}} value="Other Incidents">Other Incidents</option>
+                        </select>
+                    </td>      
+                <td><a href="" class="update">Update</a></td>
+                <td><a href="{{route('deletetype', ['id'=>$types->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$types->name}} ({{$types->type}}) ?')" alt="delete">Delete</a></td>
+            </tr>
             @endforeach
-        </div>
-        <input class="update" type="submit" value="Update Type of Occurrence Fields">
-    </form>
-    <br><br>
-</body>
-<script>
+        </table>
+    </div>
 
-</script>
-</html>
+
+    
+    <script>
+        function toggleTypeOccurence(){
+            if (document.getElementById("displaytable").style.display === "none")
+                document.getElementById("displaytable").style.display="block";
+            else
+                document.getElementById("displaytable").style.display="none";
+        }
+    </script>

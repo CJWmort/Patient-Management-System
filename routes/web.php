@@ -38,6 +38,7 @@ Route::get('/profile', [PageController::class, 'profile'])->middleware('isLogged
 Route::get('/edit-profile/{id}', [PageController::class, 'editprofile'])->middleware('isLoggedIn')->name('edit-profile');
 Route::get('/user', [PageController::class, 'manageuser'])->middleware('isLoggedIn')->name('user');
 Route::get('/ehor', [PageController::class, 'ehor'])->middleware('isLoggedIn')->name('ehor');
+Route::get('/reports', [PageController::class, 'reports'])->middleware('isLoggedIn')->name('reports');
 
 //Route For Location of Occurrence Customization
 Route::get('/deletelocation/{id}', [EhorController::class, 'deletelocation'])->name('deletelocation');
@@ -61,6 +62,7 @@ Route::get('/chart10a', [Chart10aController::class, 'chart10a'])->middleware('is
 Route::get('/chart10b', [Chart10bController::class, 'chart10b'])->middleware('isLoggedIn')->name('chart10b');
 Route::get('/chart10c', [Chart10cController::class, 'chart10c'])->middleware('isLoggedIn')->name('chart10c');
 Route::get('/chart11a', [Chart11aController::class, 'chart11a'])->middleware('isLoggedIn')->name('chart11a');
+Route::post('/editData', [Chart11aController::class, 'editData'])->name('editData');
 Route::get('/chart11b', [Chart11bController::class, 'chart11b'])->middleware('isLoggedIn')->name('chart11b');
 Route::get('/chart11c', [Chart11cController::class, 'chart11c'])->middleware('isLoggedIn')->name('chart11c');
 Route::get('/chart11d', [Chart11dController::class, 'chart11d'])->middleware('isLoggedIn')->name('chart11d');

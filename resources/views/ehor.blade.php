@@ -1,6 +1,3 @@
-
-<div id="displaytable" style="visibility: none">
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -241,14 +238,3 @@
             @endforeach
         </table>
     </div>
-
-
-    
-    <script>
-        function toggleTypeOccurence(){
-            if (document.getElementById("displaytable").style.display === "none")
-                document.getElementById("displaytable").style.display="block";
-            else
-                document.getElementById("displaytable").style.display="none";
-        }
-    </script>

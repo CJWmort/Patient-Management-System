@@ -33,10 +33,6 @@
 
 
     <div id="displaytable" style="visibility: none">
-<<<<<<< HEAD
->>>>>>> 2bcaa1caf790c15e9c53a685e004915b357fbd8b
-=======
->>>>>>> 2bcaa1caf790c15e9c53a685e004915b357fbd8b
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
                 <form action="{{route('addtype')}}" method="post">

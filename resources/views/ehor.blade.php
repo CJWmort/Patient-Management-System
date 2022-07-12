@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 <div id="displaytable" style="visibility: none">
-=======
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,11 +72,7 @@
                 <th>UPDATE</th>
                 <th>DELETE</th>
             </tr>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 2bcaa1caf790c15e9c53a685e004915b357fbd8b
+
             @foreach($allTypes as $types)
             <tr class="tablerow">
                 <td><input type="text" name="name[]" value="{{$types->name}}" required></td>
@@ -191,7 +187,7 @@
     <form class="location" action="{{route('updatetype')}}" method="POST">
     @csrf
         <div class="location-grid">
->>>>>>> 2bcaa1caf790c15e9c53a685e004915b357fbd8b
+
             @foreach($allTypes as $types)
             <tr class="tablerow">
                 <td><input type="text" name="name[]" value="{{$types->name}}" required></td>

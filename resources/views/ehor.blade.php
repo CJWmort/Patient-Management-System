@@ -106,8 +106,8 @@
 
 
 
-    <div class="ehortitle">EDIT EHOR FIELDS</div>
-    <!-- Form for location of occurrence -->
+    <!-- <div class="ehortitle">EDIT EHOR FIELDS</div>
+    Form for location of occurrence
     <form class="location-title" action="{{route('addlocation')}}" method="POST">
     @csrf
         <span class="addfield">
@@ -128,7 +128,7 @@
             @endforeach
         </div>
         <input class="update" type="submit" value="Update Location of Occurrence Fields">
-    </form>
+    </form> -->
 
     
     <!-- Form for site of occurrence -->
@@ -153,6 +153,43 @@
         </div>
         <input class="update" type="submit" value="Update Site of Occurrence Fields">
     </form>
+
+    
+
+
+
+
+
+
+    
+
+<!-- NEW ONE -->
+<form class="location-title type" action="{{route('addlocation')}}" method="POST">
+    @csrf
+        <span class="addfield">
+            Location of Occurrence
+            <button class="addBtn" type="submit"><img src="{{URL::asset('public/images/add.png')}}" alt="add"></button>
+            <input class="newlocation" type="text" name="location" placeholder="enter new location" required>  
+        </span> 
+        <span class="alert-msg">{{ session()->get('msg') }}</span>
+    </form>
+    <form class="location" action="{{route('updatelocation')}}" method="POST">
+    @csrf
+        <div class="location-grid2">
+                @foreach($allLocations as $locations)
+                <tr class="tablerow">
+                    <td><input type="text" name="name[]" value="{{$locations->location}}" required></td>
+                    <td><a href="" class="update">Update</a></td>
+                    <td><a href="{{route('deletelocation', ['id'=>$locations->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$locations->location}} ?')" alt="delete">Delete</a></td>
+                </tr>
+                @endforeach
+        </div>
+    </form>
+
+    <!--End-->
+
+
+
 
     <!-- Form for type of occurrence -->
     <form class="location-title type" action="{{route('addtype')}}" method="POST">

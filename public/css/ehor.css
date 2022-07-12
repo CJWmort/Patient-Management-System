@@ -29,6 +29,12 @@ body{
     background-color: #2e4450;
     outline: 4px solid transparent;
 }
+.location-grid2{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: #2e4450;
+    outline: 4px solid transparent;
+}
 .location-title{
     margin: 0 auto;
     width: 80%;

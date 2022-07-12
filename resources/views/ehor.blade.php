@@ -33,6 +33,9 @@
 
 
     <div id="displaytable" style="visibility: none">
+<<<<<<< HEAD
+>>>>>>> 2bcaa1caf790c15e9c53a685e004915b357fbd8b
+=======
 >>>>>>> 2bcaa1caf790c15e9c53a685e004915b357fbd8b
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
@@ -74,7 +77,10 @@
                 <th>DELETE</th>
             </tr>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 2bcaa1caf790c15e9c53a685e004915b357fbd8b
             @foreach($allTypes as $types)
             <tr class="tablerow">
                 <td><input type="text" name="name[]" value="{{$types->name}}" required></td>

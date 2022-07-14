@@ -24,7 +24,7 @@
     @endif
     <div class = "btn">
         <button class="toggleBtn" onclick="toggleLocationOccurence();">View Location Of Occurence</button>
-        <button class="toggleBtn" onclick="openForm();">View Site Of Occurence</button>    
+        <button class="toggleBtn" onclick="toggleSiteOccurence();">View Site Of Occurence</button>    
         <button class="toggleBtn type" onclick="toggleTypeOccurence();">View Type Of Occurence</button> 
     </div>
 
@@ -41,7 +41,7 @@
                 </form>
                 
             </tr>
-            <form class="location-title filter" action="{{route('addlocation')}}" method="POST">
+            <form class="location-title location" action="{{route('addlocation')}}" method="POST">
             @csrf
             </form>
             <tr class="tablehead">
@@ -60,8 +60,66 @@
             @endforeach
         </table>
     </div>
-    <br> 
+    
     <!-- location end -->
+
+    <!-- <form class="location-title site" action="{{route('addsite')}}" method="POST">
+    @csrf
+        <span class="addfield">
+            Site of Occurrence
+            <button class="addBtn" type="submit"><img src="{{URL::asset('public/images/add.png')}}" alt="add"></button>
+            <input class="newlocation" type="text" name="site" placeholder="enter new site" required>  
+        </span> 
+        <span class="alert-msg">{{ session()->get('msg2') }}</span>
+    </form>
+    <form class="location" action="{{route('updatesite')}}" method="POST">
+    @csrf
+        <div class="location-grid">
+            @foreach($allSites as $sites)
+            <div>
+                <a class="deleteBtn" href="{{route('deletesite', ['id'=>$sites->id])}}"><img src="{{URL::asset('public/images/minus.png')}}" onclick="return confirm('Are you sure that you want to delete the field {{$sites->site}} ?')" alt="delete"></a><input type="text" name="site[]" value="{{$sites->site}}" required>
+                <input type="hidden" name="siteid[]" value="{{$sites->id}}">                 
+            </div>
+            @endforeach
+        </div>
+        <input class="update" type="submit" value="Update Site of Occurrence Fields">
+    </form> -->
+    <!-- Site -->
+<br>
+    <div id="displaytable_site" style="visibility: none">
+        <table class="typeTable" cellspacing="0">
+            <tr class="tablehead">
+                <form action="{{route('addsite')}}" method="post">
+                @csrf
+                    <th><input type="text" name="site" placeholder="Add New Site"></th>
+ 
+                    <th colspan = "4"><input type="submit" class="add" value="Add"></th>
+                </form>
+                
+            </tr>
+            <form class="location-title site" action="{{route('addsite')}}" method="POST">
+            @csrf
+            </form>
+            <tr class="tablehead">
+                <th>SITE</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
+
+            @foreach($allSites as $sites)
+            <tr class="tablerow">
+                <td><input type="text" name="name[]" value="{{$sites->site}}" required></td>
+
+                <td><a href="" class="update">Update</a></td>
+                <td><a href="{{route('deletesite', ['id'=>$sites->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$sites->site}} ?')"  alt="delete">Delete</a></td>
+            </tr>
+            @endforeach
+        </table>
+    </div>
+    <br>    
+    <!-- site end -->
+
+
 
     <div id="displaytable1" style="visibility: none">
         <table class="typeTable" cellspacing="0">
@@ -141,6 +199,16 @@
                 document.getElementById("displaytable_location").style.display="block";
             else
                 document.getElementById("displaytable_location").style.display="none";
+        }
+    </script>
+
+<!-- Site Type -->
+<script>
+        function toggleSiteOccurence(){
+            if (document.getElementById("displaytable_site").style.display === "none")
+                document.getElementById("displaytable_site").style.display="block";
+            else
+                document.getElementById("displaytable_site").style.display="none";
         }
     </script>
 

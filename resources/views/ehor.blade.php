@@ -1,6 +1,3 @@
-
-<div id="displaytable" style="visibility: none">
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +23,47 @@
     </div>
     @endif
     <div class = "btn">
-        <button class="toggleBtn" onclick="openForm();">View Location Of Occurence</button>
+        <button class="toggleBtn" onclick="toggleLocationOccurence();">View Location Of Occurence</button>
         <button class="toggleBtn" onclick="openForm();">View Site Of Occurence</button>    
         <button class="toggleBtn type" onclick="toggleTypeOccurence();">View Type Of Occurence</button> 
     </div>
 
+<!-- Location -->
+<br>
+    <div id="displaytable_location" style="visibility: none">
+        <table class="typeTable" cellspacing="0">
+            <tr class="tablehead">
+                <form action="{{route('addlocation')}}" method="post">
+                @csrf
+                    <th><input type="text" name="location" placeholder="Add New Location"></th>
+ 
+                    <th colspan = "4"><input type="submit" class="add" value="Add"></th>
+                </form>
+                
+            </tr>
+            <form class="location-title filter" action="{{route('addlocation')}}" method="POST">
+            @csrf
+            </form>
+            <tr class="tablehead">
+                <th>LOCATION</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
 
-    <div id="displaytable" style="visibility: none">
+            @foreach($allLocations as $locations)
+            <tr class="tablerow">
+                <td><input type="text" name="name[]" value="{{$locations->location}}" required></td>
+
+                <td><a href="" class="update">Update</a></td>
+                <td><a href="{{route('deletelocation', ['id'=>$locations->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$locations->location}} ?')" alt="delete">Delete</a></td>
+            </tr>
+            @endforeach
+        </table>
+    </div>
+    <br> 
+    <!-- location end -->
+
+    <div id="displaytable1" style="visibility: none">
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
                 <form action="{{route('addtype')}}" method="post">
@@ -91,17 +122,27 @@
     </div>
 
 
-    
+
+    <!-- Occurence Type  -->
     <script>
         function toggleTypeOccurence(){
-            if (document.getElementById("displaytable").style.display === "none")
-                document.getElementById("displaytable").style.display="block";
+            if (document.getElementById("displaytable1").style.display === "none")
+                document.getElementById("displaytable1").style.display="block";
             else
-                document.getElementById("displaytable").style.display="none";
+                document.getElementById("displaytable1").style.display="none";
         }
     </script>
     
 
+<!-- Location Type -->
+    <script>
+        function toggleLocationOccurence(){
+            if (document.getElementById("displaytable_location").style.display === "none")
+                document.getElementById("displaytable_location").style.display="block";
+            else
+                document.getElementById("displaytable_location").style.display="none";
+        }
+    </script>
 
 
 
@@ -132,7 +173,7 @@
 
     
     <!-- Form for site of occurrence -->
-    <form class="location-title site" action="{{route('addsite')}}" method="POST">
+    <!-- <form class="location-title site" action="{{route('addsite')}}" method="POST">
     @csrf
         <span class="addfield">
             Site of Occurrence
@@ -152,7 +193,7 @@
             @endforeach
         </div>
         <input class="update" type="submit" value="Update Site of Occurrence Fields">
-    </form>
+    </form> -->
 
     
 
@@ -164,7 +205,7 @@
     
 
 <!-- NEW ONE -->
-<form class="location-title type" action="{{route('addlocation')}}" method="POST">
+<!-- <form class="location-title type" action="{{route('addlocation')}}" method="POST">
     @csrf
         <span class="addfield">
             Location of Occurrence
@@ -184,7 +225,7 @@
                 </tr>
                 @endforeach
         </div>
-    </form>
+    </form> -->
 
     <!--End-->
 
@@ -192,7 +233,7 @@
 
 
     <!-- Form for type of occurrence -->
-    <form class="location-title type" action="{{route('addtype')}}" method="POST">
+    <!-- <form class="location-title type" action="{{route('addtype')}}" method="POST">
     @csrf
         <span class="addfield">
             Type of Occurrence
@@ -206,8 +247,8 @@
             </select>
             <span class="alert-msg">{{ session()->get('msg3') }}</span>
         </span> 
-    </form>
-    <form class="location-title filter" action="{{route('filtertype')}}" method="POST">
+    </form> -->
+    <!-- <form class="location-title filter" action="{{route('filtertype')}}" method="POST">
     @csrf
         <div class="selectType">
             <input type="radio" name="type" value="fall">
@@ -220,8 +261,8 @@
             <label>All Types</label>
             <input type="submit" class="filterBtn" value="Filter By Type">
         </div>
-    </form>
-    <form class="location" action="{{route('updatetype')}}" method="POST">
+    </form> -->
+    <!-- <form class="location" action="{{route('updatetype')}}" method="POST">
     @csrf
         <div class="location-grid">
 
@@ -240,15 +281,4 @@
             </tr>
             @endforeach
         </table>
-    </div>
-
-
-    
-    <script>
-        function toggleTypeOccurence(){
-            if (document.getElementById("displaytable").style.display === "none")
-                document.getElementById("displaytable").style.display="block";
-            else
-                document.getElementById("displaytable").style.display="none";
-        }
-    </script>
+    </div> -->

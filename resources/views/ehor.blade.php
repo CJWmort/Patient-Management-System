@@ -177,38 +177,37 @@
             </tr>
             @endforeach
         </table>
+        <br><br><br>
     </div>
 
-
-
-    <!-- Occurence Type  -->
     <script>
+        //Initially display type of occurrence
+        document.getElementById("displaytable1").style.display="block"; 
+        document.getElementById("displaytable_site").style.display="none";
+        document.getElementById("displaytable_location").style.display="none";
+        // Type of Occurrence
         function toggleTypeOccurence(){
-            if (document.getElementById("displaytable1").style.display === "none")
+            if (document.getElementById("displaytable1").style.display === "none"){
                 document.getElementById("displaytable1").style.display="block";
-            else
-                document.getElementById("displaytable1").style.display="none";
-        }
-    </script>
-    
-
-<!-- Location Type -->
-    <script>
-        function toggleLocationOccurence(){
-            if (document.getElementById("displaytable_location").style.display === "none")
-                document.getElementById("displaytable_location").style.display="block";
-            else
-                document.getElementById("displaytable_location").style.display="none";
-        }
-    </script>
-
-<!-- Site Type -->
-<script>
-        function toggleSiteOccurence(){
-            if (document.getElementById("displaytable_site").style.display === "none")
-                document.getElementById("displaytable_site").style.display="block";
-            else
                 document.getElementById("displaytable_site").style.display="none";
+                document.getElementById("displaytable_location").style.display="none";
+            }     
+        }
+        // Location of Occurrence
+        function toggleLocationOccurence(){
+            if (document.getElementById("displaytable_location").style.display === "none"){
+                document.getElementById("displaytable_location").style.display="block";
+                document.getElementById("displaytable1").style.display="none";
+                document.getElementById("displaytable_site").style.display="none";
+            } 
+        }
+        //Site of Occurrence
+        function toggleSiteOccurence(){
+            if (document.getElementById("displaytable_site").style.display === "none"){
+                document.getElementById("displaytable_site").style.display="block";
+                document.getElementById("displaytable_location").style.display="none";
+                document.getElementById("displaytable1").style.display="none";
+            }  
         }
     </script>
 

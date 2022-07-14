@@ -123,7 +123,7 @@
 
 @if ($selectedChart == 3)
 <script> //Display Chart10b
-    $('#filter').append(`<label>Sort By Month - Year:</label>
+    $('#filter').append(`<label>Selected Month - Year:</label>
     <input type="month" name="selectedDate" id="date" onkeydown="return false" required>
     <span id="total"></span>`);
     getCurrentMonthYear(); //Set starting value for input type month to be current month-year

@@ -29,7 +29,6 @@
     </div>
 
 <!-- Location -->
-<br>
     <div id="displaytable_location" style="visibility: none">
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
@@ -85,7 +84,6 @@
         <input class="update" type="submit" value="Update Site of Occurrence Fields">
     </form> -->
     <!-- Site -->
-<br>
     <div id="displaytable_site" style="visibility: none">
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
@@ -116,10 +114,6 @@
             @endforeach
         </table>
     </div>
-    <br>    
-    <!-- site end -->
-
-
 
     <div id="displaytable1" style="visibility: none">
         <table class="typeTable" cellspacing="0">
@@ -144,13 +138,13 @@
                 <tr class="tablehead">
                     <th colspan="4">
                         <input type="radio" name="type" value="fall">
-                        <label>Fall Related</label>
+                        <label class="spacing">Fall Related</label>
                         <input type="radio" name="type" value="medic">
-                        <label>Medication Related</label>
+                        <label class="spacing">Medication Related</label>
                         <input type="radio" name="type" value="other">
-                        <label>Other Incidents</label>
+                        <label class="spacing">Other Incidents</label>
                         <input type="radio" name="type" value="all" checked="checked">
-                        <label>All Types</label>
+                        <label class="spacing">All Types</label>
                         <input type="submit" class="filterBtn" value="Filter By Type">
                     </th>
                 </tr>
@@ -175,7 +169,7 @@
                                 <option {{$types->type == 'Other Incidents' ? 'selected' : ''}} value="Other Incidents">Other Incidents</option>
                             </select>
                         </td>      
-                    <td><input type="submit" class="update" value="Update"></td>
+                    <td><input type="submit" class="update updatebtn" value="Update"></td>
                     <td><a href="{{route('deletetype', ['id'=>$types->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$types->name}} ({{$types->type}}) ?')" alt="delete">Delete</a></td>
                 </tr>
             </form>

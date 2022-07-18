@@ -8,6 +8,7 @@ use App\Models\occur_location;
 use App\Models\occur_site;
 use App\Models\occur_type;
 use Session;
+use Redirect;
 
 class EhorController extends Controller
 {
@@ -132,7 +133,8 @@ class EhorController extends Controller
         $updatetype->type=$req->type;
         $result = $updatetype->save();
         if($result){
-            return redirect ('ehor')->with('msg3', 'Type of Occurrence has been updated.');
+            return view('ehor',compact('selectedEhor'));
+            //return redirect ('ehor')->with('msg3', 'Type of Occurrence has been updated.');
         }
         else{
             return redirect ('ehor')->with('msg3', 'Failed to update Type of Occurrence fields.');

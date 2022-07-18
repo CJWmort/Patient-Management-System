@@ -48,21 +48,6 @@ body{
 .addfield{
     padding-left: 20px;
 }
-/* .update{
-    background-color: #ffe3d6;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    transition: 0.3s;
-    height: 50px;
-    width: 100%;
-    border: none;
-    outline: 4px solid #333;
-}
-.update:hover{
-    background-color: #d7baad;
-    color: white;
-} */
 .location-grid div{
     text-align: center;
     transition: 0.3s;
@@ -195,34 +180,33 @@ td{
     background-color: #88d4d1;
     color: #333;
 }
-.tablehead input,.tablehead select, .tablerow input,.tablerow select{
+.tablehead input,.tablehead select, .tablerow input:not([type="submit"]),.tablerow select{
     border-radius: 15px;
     padding: 10px;
     border: none;
 }
-.tablehead label{
-    margin-right: 20px;
+.spacing{
+    margin-right: 10px;
 }
 .tablerow:hover > td{
     background-color: #527c88;
     color: whitesmoke;
 }
-.update{
-    /* background-color: rgb(248, 196, 99); */
+.update,
+.delete{
     background-color: #88d4d1;
 }
-.delete{
-    /* background-color: rgb(246, 99, 99); */
-    background-color: #88d4d1;
+.updatebtn{
+    font-size: 16px;
+    border: none;
 }
 .update,
 .delete{
     font-weight: bold;
     transition: 0.5s;
-    display: block;
     padding: 10px 20px;
-    width: 50px;
     border-radius: 20px;
+    cursor: pointer;
 }
 .update:hover{
     color: white;

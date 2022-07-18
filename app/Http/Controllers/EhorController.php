@@ -133,8 +133,7 @@ class EhorController extends Controller
         $updatetype->type=$req->type;
         $result = $updatetype->save();
         if($result){
-            return view('ehor',compact('selectedEhor'));
-            //return redirect ('ehor')->with('msg3', 'Type of Occurrence has been updated.');
+            return redirect ('ehor')->with('msg3', 'Type of Occurrence has been updated.');
         }
         else{
             return redirect ('ehor')->with('msg3', 'Failed to update Type of Occurrence fields.');

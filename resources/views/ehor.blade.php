@@ -23,9 +23,9 @@
     </div>
     @endif
     <div class = "btn">
-        <button class="toggleBtn" onclick="toggleLocationOccurence();">View Location Of Occurence</button>
-        <button class="toggleBtn" onclick="toggleSiteOccurence();">View Site Of Occurence</button>    
-        <button class="toggleBtn type" onclick="toggleTypeOccurence();">View Type Of Occurence</button> 
+        <button id="locationbtn" class="toggleBtn" onclick="toggleLocationOccurence();">View Location Of Occurence</button>
+        <button id="sitebtn" class="toggleBtn" onclick="toggleSiteOccurence();">View Site Of Occurence</button>    
+        <button id="typebtn" class="toggleBtn type" onclick="toggleTypeOccurence();">View Type Of Occurence</button> 
     </div>
 
 <!-- Location -->
@@ -177,12 +177,12 @@
         </table>
         <br><br><br>
     </div>
-
+   
     <script>
         //Initially display type of occurrence
-        document.getElementById("displaytable1").style.display="none"; 
+        document.getElementById("displaytable1").style.display="block"; 
         document.getElementById("displaytable_site").style.display="none";
-        document.getElementById("displaytable_location").style.display="block";
+        document.getElementById("displaytable_location").style.display="none";
 
         //Site of Occurrence
         function toggleSiteOccurence(){
@@ -190,6 +190,9 @@
                 document.getElementById("displaytable_site").style.display="block";
                 document.getElementById("displaytable_location").style.display="none";
                 document.getElementById("displaytable1").style.display="none";
+                document.getElementById("sitebtn").style.backgroundColor = '#d7baad'; 
+                document.getElementById("typebtn").style.backgroundColor = 'white';
+                document.getElementById("locationbtn").style.backgroundColor = 'white';
             }  
         }
         // Location of Occurrence
@@ -198,6 +201,9 @@
                 document.getElementById("displaytable_location").style.display="block";
                 document.getElementById("displaytable1").style.display="none";
                 document.getElementById("displaytable_site").style.display="none";
+                document.getElementById("sitebtn").style.backgroundColor = 'white'; 
+                document.getElementById("typebtn").style.backgroundColor = 'white';
+                document.getElementById("locationbtn").style.backgroundColor = '#d7baad';
             } 
         }
         // Type of Occurrence
@@ -206,6 +212,9 @@
                 document.getElementById("displaytable1").style.display="block";
                 document.getElementById("displaytable_site").style.display="none";
                 document.getElementById("displaytable_location").style.display="none";
+                document.getElementById("sitebtn").style.backgroundColor = 'white'; 
+                document.getElementById("typebtn").style.backgroundColor = '#d7baad';
+                document.getElementById("locationbtn").style.backgroundColor = 'white';
             }     
         }
     </script>

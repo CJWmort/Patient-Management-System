@@ -127,14 +127,12 @@ class EhorController extends Controller
         }
     }
     public function updatetype(Request $req){
-        //function to update all type fields
-        for($i = 0; $i < count($req->input('typeid')); $i++) {
-            $types = occur_type::find($req->input('typeid')[$i]);
-            $types->name = $req->input('name')[$i];
-            $result = $types->save();
-        }
+        $updatetype = occur_type::find($req->typeid);
+        $updatetype->name=$req->input('name');
+        $updatetype->type=$req->type;
+        $result = $updatetype->save();
         if($result){
-            return redirect ('ehor')->with('msg3', 'All Type of Occurrence fields have been updated.');
+            return redirect ('ehor')->with('msg3', 'Type of Occurrence has been updated.');
         }
         else{
             return redirect ('ehor')->with('msg3', 'Failed to update Type of Occurrence fields.');

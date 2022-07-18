@@ -126,7 +126,7 @@
             <tr class="tablehead">
                 <form action="{{route('addtype')}}" method="post">
                 @csrf
-                    <th><input type="text" name="name" placeholder="Add New Type Occurence"></th>
+                    <th><input type="text" name="name" placeholder="Add New Type Occurence" required></th>
                     <th>
                         <select name="type" required>
                             <option value="" disabled selected>Select Occurrence Type</option>
@@ -163,18 +163,22 @@
             </tr>
 
             @foreach($allTypes as $types)
-            <tr class="tablerow">
-                <td><input type="text" name="name[]" value="{{$types->name}}" required></td>
-                    <td>
-                        <select name="type" required>
-                            <option {{$types->type == 'Fall Related' ? 'selected' : ''}} value="Fall Related">Fall Related</option>
-                            <option {{$types->type == 'Medication Related' ? 'selected' : ''}} value="Medication Related">Medication Related</option>
-                            <option {{$types->type == 'Other Incidents' ? 'selected' : ''}} value="Other Incidents">Other Incidents</option>
-                        </select>
-                    </td>      
-                <td><a href="" class="update">Update</a></td>
-                <td><a href="{{route('deletetype', ['id'=>$types->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$types->name}} ({{$types->type}}) ?')" alt="delete">Delete</a></td>
-            </tr>
+            <form class="location-title filter" action="{{route('updatetype')}}" method="POST">
+            @csrf
+                <tr class="tablerow">
+                    <input type="hidden" name="typeid" value="{{$types->id}}">
+                    <td><input type="text" name="name" value="{{$types->name}}" required></td>
+                        <td>
+                            <select name="type" required>
+                                <option {{$types->type == 'Fall Related' ? 'selected' : ''}} value="Fall Related">Fall Related</option>
+                                <option {{$types->type == 'Medication Related' ? 'selected' : ''}} value="Medication Related">Medication Related</option>
+                                <option {{$types->type == 'Other Incidents' ? 'selected' : ''}} value="Other Incidents">Other Incidents</option>
+                            </select>
+                        </td>      
+                    <td><input type="submit" class="update" value="Update"></td>
+                    <td><a href="{{route('deletetype', ['id'=>$types->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$types->name}} ({{$types->type}}) ?')" alt="delete">Delete</a></td>
+                </tr>
+            </form>
             @endforeach
         </table>
         <br><br><br>
@@ -182,16 +186,17 @@
 
     <script>
         //Initially display type of occurrence
-        document.getElementById("displaytable1").style.display="block"; 
+        document.getElementById("displaytable1").style.display="none"; 
         document.getElementById("displaytable_site").style.display="none";
-        document.getElementById("displaytable_location").style.display="none";
-        // Type of Occurrence
-        function toggleTypeOccurence(){
-            if (document.getElementById("displaytable1").style.display === "none"){
-                document.getElementById("displaytable1").style.display="block";
-                document.getElementById("displaytable_site").style.display="none";
+        document.getElementById("displaytable_location").style.display="block";
+
+        //Site of Occurrence
+        function toggleSiteOccurence(){
+            if (document.getElementById("displaytable_site").style.display === "none"){
+                document.getElementById("displaytable_site").style.display="block";
                 document.getElementById("displaytable_location").style.display="none";
-            }     
+                document.getElementById("displaytable1").style.display="none";
+            }  
         }
         // Location of Occurrence
         function toggleLocationOccurence(){
@@ -201,13 +206,13 @@
                 document.getElementById("displaytable_site").style.display="none";
             } 
         }
-        //Site of Occurrence
-        function toggleSiteOccurence(){
-            if (document.getElementById("displaytable_site").style.display === "none"){
-                document.getElementById("displaytable_site").style.display="block";
+        // Type of Occurrence
+        function toggleTypeOccurence(){
+            if (document.getElementById("displaytable1").style.display === "none"){
+                document.getElementById("displaytable1").style.display="block";
+                document.getElementById("displaytable_site").style.display="none";
                 document.getElementById("displaytable_location").style.display="none";
-                document.getElementById("displaytable1").style.display="none";
-            }  
+            }     
         }
     </script>
 

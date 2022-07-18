@@ -183,6 +183,9 @@
         document.getElementById("displaytable1").style.display="block"; 
         document.getElementById("displaytable_site").style.display="none";
         document.getElementById("displaytable_location").style.display="none";
+        document.getElementById("sitebtn").style.backgroundColor = 'white'; 
+        document.getElementById("typebtn").style.backgroundColor = '#d7baad';
+        document.getElementById("locationbtn").style.backgroundColor = 'white';
 
         //Site of Occurrence
         function toggleSiteOccurence(){

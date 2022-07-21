@@ -19,8 +19,8 @@
 <div class="user-nav">
     <div class="first-row">
         <div class="user-detail">
-            <p><b>Name: </b>{{$data->name}}</p>
-            <p><b>Role: </b>{{$data->role}}</p>
+            <p><Strong>Name: </Strong>{{$data->name}}</p>
+            <p><Strong>Role: </Strong>{{$data->role}}</p>
         </div>
     </div>
     <a href="{{route('profile')}}" id="view-profile">View Profile</a>

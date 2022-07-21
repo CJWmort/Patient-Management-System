@@ -26,11 +26,11 @@ class UserController extends Controller
                 return redirect('main');
             }
             else{
-                return back()->withErrors(['msg' => ['Invaid Login Details']]);
+                return back()->withErrors('Invaid Login Details');
             }
         }
         else{
-            return back()->withErrors(['msg' => ['Invaid Login Details']]);
+            return back()->withErrors('Invaid Login Details');
         }
     }
     public function main()
@@ -57,11 +57,11 @@ class UserController extends Controller
         $result = $user->delete();
         if ($result)
         {
-            return redirect ('user')->with('msg', $user->name . ' (' . $user->role .') Has Been Removed From The Records.');
+            return redirect('user')->with('msg', '<b>' . $user->name . ' (' . $user->role .')</b> has been removed as a user.');
         }
         else
         {
-            return redirect ('user')->withErrors(['msg' => ['Failed To Remove User From The Records.']]);
+            return redirect('user')->withErrors('Failed to delete user.');
         }
     }
     public function add(Request $req)
@@ -80,22 +80,22 @@ class UserController extends Controller
             if (User::where([['login_id', '=', $req->login_id],
             ['role', '=', $req->role]])->exists()) {
                 // don't allow admin to create user with same login_id and role
-                return redirect ('user')->withErrors(['msg' => ['User with the same role already exists in the records. Pick another role or login id.']]);
+                return redirect('user')->withErrors('Another user with the same role already exists in the records. Create with another role or login id.');
              }
             else{
                 $newuser->password = Hash::make($req->password);
                 $result = $newuser->save();
                 if($result){
-                    return redirect ('user')->with('msg', $newuser->name . ' (' . $newuser->role .') Has Been Added To The Records.');
+                    return redirect('user')->with('msg', '<b>' . $newuser->name . ' (' . $newuser->role .')</b> has been created as a new user.');
                 }
                 else{
-                    return redirect ('user')->withErrors(['msg' => ['Failed To Add User To The Records.']]);
+                    return redirect('user')->withErrors('Failed to create new user.');
                 }
             }
         }
         else
         {
-            return redirect ('user')->withErrors(['msg' => ['Incorrect Password. Please ensure password and confirm password are the same.']]);
+            return redirect('user')->withErrors('Incorrect Password. Please ensure password and confirm password are the same.');
         }
     }
     public function update(Request $req){
@@ -106,23 +106,25 @@ class UserController extends Controller
         $updateuser->phone_number=$req->phone_number;
         $updateuser->role=$req->role;
         if (User::where([['login_id', '=', $req->login_id],
-            ['role', '=', $req->role]])->exists()) {
+            ['role', '=', $req->role],['id', '!=', $req->userid]])->exists()){
             //don't allow admin to duplicate user with same login id and role
-            return back()->withErrors(['msg' => ['User with the same role already exists in the records. Pick another role or login id.']]);
+            return back()->withErrors('Another user with the same role already exists in the records. Create with another role or login id.');
         }
         else{
             if ($req->password != '' && $req->cfm_password == $req->password){
                 $updateuser->password = Hash::make($req->password);
                 $result = $updateuser->save();
                 if($result){
-                    return redirect('user')->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
+                    return redirect('user')->with('msg', 'Profile of <b>' . $updateuser->name . ' (' . $updateuser->role .')</b>
+                    has been updated.');
                 }
                 else{
-                    return back()->withErrors(['msg' => ['Failed To Update User In The Records.']]);
+                    return back()->withErrors('Failed to update user.');
                 }
             }
             $updateuser->save();
-            return redirect('user')->with('msg', $updateuser->name . ' (' . $updateuser->role .') Has Been Updated In The Records.');
+            return redirect('user')->with('msg', 'Profile of <b>' . $updateuser->name . ' (' . $updateuser->role .')</b>
+            has been updated.');
         }
     }
     

@@ -1,6 +1,9 @@
 body{
     background-color: #57b2af;
 }
+b{
+    color:#ffe3d6;
+}
 .table-title{
     background-color: #2e4450;
 }
@@ -17,6 +20,7 @@ td{
 .users{
     text-align: center;
     margin: 0 auto;
+    margin-bottom: 20px;
 }
 .alert{
     background-color: #57b2af;
@@ -81,8 +85,9 @@ td{
     background-color: aliceblue;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    border: none;
     cursor: pointer;
+    border: 4px solid #2e4450;
+    border-bottom: none;
     font-weight: bold;
     font-size: 24px;
     padding: 10px;
@@ -91,8 +96,8 @@ td{
     margin-top: 20px;
 }
 .toggleBtn:hover{
-    color: white;
-    background-color: #d7baad;
+    background-color: #8BD4D1;
+    padding-bottom: 20px;
 }
 .createuser{
     background-color: #57b2af;
@@ -100,10 +105,12 @@ td{
 }
 .hide-form{
     display: none;
-    background-color: #d7baad;
+    background-color: #8BD4D1;
+    border: 4px solid #2e4450;
     text-align: center;
     width: 600px;
     margin: 0 auto;
+    margin-bottom: 10px;
     border-radius: 20px;
 }
 .form-grid{
@@ -111,6 +118,9 @@ td{
     grid-template-columns: repeat(2, 1fr);
     padding: 20px;
     margin-bottom: 20px;
+}
+#cpassword{
+    margin-bottom: 0px;
 }
 .hide-form label{
     display: inline-block;
@@ -123,8 +133,9 @@ td{
 .hide-form select{
     width: 200px;
     margin-bottom: 10px;
-    padding: 5px;
+    padding: 10px 5px;
     outline: none;
+    border: none;
 }
 .hide-form select{
     width: 210px;
@@ -134,10 +145,10 @@ td{
 }
 .createBtn{
     font-weight: bold;
-    margin-top: 16px;
-    font-size: 20px;
+    height: 100%;
+    font-size: 18px;
     background-color: #6eff6e;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
@@ -151,13 +162,12 @@ td{
     color: #ff3c3c;
 }
 #message{
-    transform: translate(30px);
     user-select: none;
     font-weight: bold;
     padding: 5px;
-    text-align: left;
+    display: inline-block;
+    margin-bottom: 10px;
     border-radius: 15px;
-    width: 200px;
 }
 .search-field{
     width: 300px;

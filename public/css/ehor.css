@@ -4,6 +4,9 @@ body{
 b{
   color:#ffe3d6;
 }
+input{
+    outline: none;
+}
 .alert{
     background-color: #57b2af;
 }
@@ -106,15 +109,6 @@ b{
     transform: translate(2px,4px);
     cursor: pointer;
     margin-left: 10px;
-}
-.addBtn img{
-    width: 30px;
-    background-color: #6eff6e;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-.addBtn img:hover{
-    background-color: rgb(23, 197, 23);
 }
 .site,
 .type{
@@ -241,9 +235,9 @@ td{
 }
 .add{
     font-weight: bold;
-    transition: 0.5s;
+    transition: 0.3s;
     padding: 10px 30px;
-    width: 120px;
+    width: 70%;
     border-radius: 20px;
     font-size: 16px;
     border: none;

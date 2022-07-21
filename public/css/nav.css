@@ -26,7 +26,7 @@
     align-items: center;
 }
 .nav-link{
-    background-color: #ffe3d6;
+    background-color: #57B2AF;
     padding: 15px 20px;
     font-size: 18px;
     font-weight: bold;
@@ -34,7 +34,7 @@
     transition: 0.3s;
 }
 .nav-link:hover{
-    background-color: #d7baad;
+    background-color: #359692;
     box-shadow: 4px 4px 12px #333;
     color: white;
 }

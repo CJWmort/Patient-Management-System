@@ -23,12 +23,19 @@
     </div>
     @endif
     <div class = "btn">
-        <button id="locationbtn" class="toggleBtn" onclick="toggleLocationOccurence();">Location of Occurrence</button>
-        <button id="sitebtn" class="toggleBtn" onclick="toggleSiteOccurence();">Site of Occurrence</button>    
-        <button id="typebtn" class="toggleBtn type" onclick="toggleTypeOccurence();">Type of Occurrence</button> 
+        <button 
+            onclick="window.location='{{ route('location') }}'" id="locationbtn" class="toggleBtn">Location of Occurrence
+        </button>
+        <button 
+            onclick="window.location='{{ route('site') }}'" id="sitebtn" class="toggleBtn">Site of Occurrence
+        </button>    
+        <button 
+            onclick="window.location='{{ route('type') }}'" id="typebtn" class="toggleBtn">Type of Occurrence
+        </button> 
     </div>
+    @if($selectedOccurrence == 'location')
     <!-- Location of Occurrence fields Table -->
-    <div id="displaytable_location" style="visibility: none">
+    <div id="displaytable_location">
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
                 <form action="{{route('addlocation')}}" method="post">
@@ -56,7 +63,7 @@
             @endforeach
         </table>
     </div>
-    
+    @endif
     <!-- location end -->
 
     <!-- <form class="location-title site" action="{{route('addsite')}}" method="POST">
@@ -80,8 +87,10 @@
         </div>
         <input class="update" type="submit" value="Update Site of Occurrence Fields">
     </form> -->
+
     <!-- Site of Occurrence fields Table -->
-    <div id="displaytable_site" style="visibility: none">
+    @if($selectedOccurrence == 'site')
+    <div id="displaytable_site">
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
                 <form action="{{route('addsite')}}" method="post">
@@ -108,8 +117,11 @@
             @endforeach
         </table>
     </div>
+    @endif
+
+    @if($selectedOccurrence == 'type')
     <!-- Type of Occurrence fields Table -->
-    <div id="displaytable1" style="visibility: none">
+    <div id="displaytable_type">
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
                 <form action="{{route('addtype')}}" method="post">
@@ -171,50 +183,16 @@
         </table>
         <br><br><br>
     </div>
-   
-    <script>
-        alert(document.referrer);
-        //Initially display type of occurrence
-        document.getElementById("displaytable1").style.display="block"; 
-        document.getElementById("displaytable_site").style.display="none";
-        document.getElementById("displaytable_location").style.display="none";
-        document.getElementById("sitebtn").style.backgroundColor = 'white'; 
-        document.getElementById("typebtn").style.backgroundColor = '#d7baad';
-        document.getElementById("locationbtn").style.backgroundColor = 'white';
-
-        //Site of Occurrence
-        function toggleSiteOccurence(){
-            if (document.getElementById("displaytable_site").style.display === "none"){
-                document.getElementById("displaytable_site").style.display="block";
-                document.getElementById("displaytable_location").style.display="none";
-                document.getElementById("displaytable1").style.display="none";
-                document.getElementById("sitebtn").style.backgroundColor = '#d7baad'; 
-                document.getElementById("typebtn").style.backgroundColor = 'white';
-                document.getElementById("locationbtn").style.backgroundColor = 'white';
-            }  
-        }
-        // Location of Occurrence
-        function toggleLocationOccurence(){
-            if (document.getElementById("displaytable_location").style.display === "none"){
-                document.getElementById("displaytable_location").style.display="block";
-                document.getElementById("displaytable1").style.display="none";
-                document.getElementById("displaytable_site").style.display="none";
-                document.getElementById("sitebtn").style.backgroundColor = 'white'; 
-                document.getElementById("typebtn").style.backgroundColor = 'white';
-                document.getElementById("locationbtn").style.backgroundColor = '#d7baad';
-            } 
-        }
-        // Type of Occurrence
-        function toggleTypeOccurence(){
-            if (document.getElementById("displaytable1").style.display === "none"){
-                document.getElementById("displaytable1").style.display="block";
-                document.getElementById("displaytable_site").style.display="none";
-                document.getElementById("displaytable_location").style.display="none";
-                document.getElementById("sitebtn").style.backgroundColor = 'white'; 
-                document.getElementById("typebtn").style.backgroundColor = '#d7baad';
-                document.getElementById("locationbtn").style.backgroundColor = 'white';
-            }     
-        }
+    @endif
+    <script src="{{URL::asset('public/js/jquery.min.js?v=').time()}}"></script>
+    <script> //Highlight current occurrence that the admin is viewing
+        @if($selectedOccurrence == 'type')
+            $('#typebtn').css({backgroundColor: '#0D6E6B', color: 'whitesmoke'})
+        @elseif($selectedOccurrence == 'site')
+            $('#sitebtn').css({backgroundColor: '#0D6E6B', color: 'whitesmoke'})
+        @elseif($selectedOccurrence == 'location')
+            $('#locationbtn').css({backgroundColor: '#0D6E6B', color: 'whitesmoke'})
+        @endif
     </script>
 
 

@@ -48,8 +48,9 @@ class PageController extends Controller
         }
         return view('user', compact('data', 'allusers'));
     }
-    public function ehor()
+    public function ehorType()
     {
+        $selectedOccurrence = 'type';
         $data = array();
         $allLocations = array();
         $allSites = array();
@@ -60,7 +61,37 @@ class PageController extends Controller
             $allSites = occur_site::all();
             $allTypes = occur_type::orderBy('type')->get(); //get all the current ehor fields & order by the type
         }
-        return view('ehor', compact('data', 'allLocations', 'allSites', 'allTypes'));
+        return view('ehor', compact('data', 'selectedOccurrence', 'allLocations', 'allSites', 'allTypes'));
+    }
+    public function ehorSite()
+    {
+        $selectedOccurrence = 'site';
+        $data = array();
+        $allLocations = array();
+        $allSites = array();
+        $allTypes = array();
+        if (Session::has('loginId')){
+            $data = User::where('id', '=', Session::get('loginId'))->first();
+            $allLocations = occur_location::all();
+            $allSites = occur_site::all();
+            $allTypes = occur_type::orderBy('type')->get(); //get all the current ehor fields & order by the type
+        }
+        return view('ehor', compact('data', 'selectedOccurrence', 'allLocations', 'allSites', 'allTypes'));
+    }
+    public function ehorLocation()
+    {
+        $selectedOccurrence = 'location';
+        $data = array();
+        $allLocations = array();
+        $allSites = array();
+        $allTypes = array();
+        if (Session::has('loginId')){
+            $data = User::where('id', '=', Session::get('loginId'))->first();
+            $allLocations = occur_location::all();
+            $allSites = occur_site::all();
+            $allTypes = occur_type::orderBy('type')->get(); //get all the current ehor fields & order by the type
+        }
+        return view('ehor', compact('data', 'selectedOccurrence', 'allLocations', 'allSites', 'allTypes'));
     }
     public function reports()
     {

@@ -254,3 +254,15 @@ td{
     color: white;
     background-color: rgb(23, 197, 23);
 }
+#sitebtn,
+#locationbtn,
+#typebtn{
+    background-color: #8BD4D1;
+    color: #333;
+}
+#sitebtn:hover,
+#locationbtn:hover,
+#typebtn:hover{
+    background-color: #1E8884;
+    color: whitesmoke;
+}

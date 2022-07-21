@@ -21,12 +21,12 @@ class EhorController extends Controller
         $result = $field->delete();
         if ($result)
         {
-            return redirect ('ehor')->with('msg',  '<b>' . $oldOccurrence . '</b> field has been removed
+            return redirect ('location')->with('msg',  '<b>' . $oldOccurrence . '</b> field has been removed
             from Location of Occurrence.');
         }
         else
         {
-            return redirect ('ehor')->withErrors('Failed to delete Location of Occurrence field.');
+            return redirect ('location')->withErrors('Failed to delete Location of Occurrence field.');
         }
     }
     public function addlocation(Request $req)
@@ -37,11 +37,11 @@ class EhorController extends Controller
         $newLocation->location=$req->location;
         $result = $newLocation->save();
         if($result){
-            return redirect ('ehor')->with('msg',  '<b>' . $newOccurrence 
+            return redirect('location')->with('msg',  '<b>' . $newOccurrence 
             . '</b> has been addded as a new Location of Occurrence field.');
         }
         else{
-            return redirect ('ehor')->withErrors('Failed to add new Location of Occurrence field.');
+            return redirect('location')->withErrors('Failed to add new Location of Occurrence field.');
         }
     }
     public function updatelocation(Request $req){
@@ -51,11 +51,11 @@ class EhorController extends Controller
         $updatelocation->location=$req->input('name');
         $result = $updatelocation->save();
         if($result){
-            return redirect ('ehor')->with('msg', 'Location of Occurrence field <b>' . $oldOccurrence 
+            return redirect('location')->with('msg', 'Location of Occurrence field <b>' . $oldOccurrence 
             . '</b> has been updated to <b>' . $newOccurrence . '</b>.');                
         }
         else{
-            return redirect ('ehor')->withErrors('Failed to update Location of Occurrence field.');
+            return redirect('location')->withErrors('Failed to update Location of Occurrence field.');
         }
     }
 
@@ -68,12 +68,12 @@ class EhorController extends Controller
         $result = $field->delete();
         if ($result)
         {
-            return redirect ('ehor')->with('msg',  '<b>' . $oldOccurrence . '</b> field has been removed
+            return redirect('site')->with('msg',  '<b>' . $oldOccurrence . '</b> field has been removed
             from Site of Occurrence.');
         }
         else
         {
-            return redirect ('ehor')->withErrors('Failed to delete Site of Occurrence field.');
+            return redirect('site')->withErrors('Failed to delete Site of Occurrence field.');
         }
     }
     public function addsite(Request $req)
@@ -84,11 +84,11 @@ class EhorController extends Controller
         $newSite->site=$req->site;
         $result = $newSite->save();
         if($result){
-            return redirect ('ehor')->with('msg',  '<b>' . $newOccurrence 
+            return redirect('site')->with('msg',  '<b>' . $newOccurrence 
             . '</b> has been addded as a new Site of Occurrence field.');
         }
         else{
-            return redirect ('ehor')->withErrors('Failed to add new Site of Occurrence field.');
+            return redirect('site')->withErrors('Failed to add new Site of Occurrence field.');
         }
     }
     public function updatesite(Request $req){
@@ -98,11 +98,11 @@ class EhorController extends Controller
         $updatesite->site=$req->input('name');
         $result = $updatesite->save();
         if($result){
-            return redirect ('ehor')->with('msg', 'Site of Occurrence field <b>' . $oldOccurrence 
+            return redirect('site')->with('msg', 'Site of Occurrence field <b>' . $oldOccurrence 
             . '</b> has been updated to <b>' . $newOccurrence . '</b>.');                
         }
         else{
-            return redirect ('ehor')->withErrors('Failed to update Type of Occurrence field.');
+            return redirect('site')->withErrors('Failed to update Type of Occurrence field.');
         }
     }
 
@@ -115,12 +115,12 @@ class EhorController extends Controller
         $result = $field->delete();
         if ($result)
         {
-            return redirect ('ehor')->with('msg',  '<b>' . $oldOccurrence . '</b> field has been removed
+            return redirect('type')->with('msg',  '<b>' . $oldOccurrence . '</b> field has been removed
             from Type of Occurrence.');
         }
         else
         {
-            return redirect ('ehor')->withErrors('Failed to delete Type of Occurrence field.');
+            return redirect('type')->withErrors('Failed to delete Type of Occurrence field.');
         }
     }
     public function addtype(Request $req)
@@ -132,11 +132,11 @@ class EhorController extends Controller
         $newType->name=$req->name;
         $result = $newType->save();
         if($result){
-            return redirect ('ehor')->with('msg',  '<b>' . $newOccurrence 
+            return redirect('type')->with('msg',  '<b>' . $newOccurrence 
             . '</b> has been addded as a new Type of Occurrence field.');
         }
         else{
-            return redirect ('ehor')->withErrors('Failed to add new Type of Occurrence field.');
+            return redirect('type')->withErrors('Failed to add new Type of Occurrence field.');
         }
     }
     public function updatetype(Request $req){
@@ -147,15 +147,16 @@ class EhorController extends Controller
         $updatetype->type=$req->type;
         $result = $updatetype->save();
         if($result){
-            return redirect ('ehor')->with('msg', 'Type of Occurrence field <b>' . $oldOccurrence 
+            return redirect('type')->with('msg', 'Type of Occurrence field <b>' . $oldOccurrence 
             . '</b> has been updated to <b>' . $newOccurrence . '</b>.');                
         }
         else{
-            return redirect ('ehor')->withErrors('Failed to update Type of Occurrence field.');
+            return redirect('type')->withErrors('Failed to update Type of Occurrence field.');
         }
     }
     public function filtertype(Request $req)
     {
+        $selectedOccurrence = 'type';
         $data = array();
         $allLocations = array();
         $allSites = array();
@@ -178,6 +179,6 @@ class EhorController extends Controller
                 $allTypes = occur_type::all(); //get all the current ehor fields
             }
         }
-        return view('ehor', compact('data', 'allLocations', 'allSites', 'allTypes'));
+        return view('ehor', compact('data', 'selectedOccurrence', 'allLocations', 'allSites', 'allTypes'));
     }
 }

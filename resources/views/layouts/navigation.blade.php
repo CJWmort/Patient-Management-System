@@ -8,7 +8,7 @@
         @if (Route::currentRouteName() != 'home')
         <div class="links">
             <a class="nav-link" href="{{route('chart10a')}}">View Charts</a>
-            <a class="nav-link" href="{{route('ehor')}}">Customise EHOR</a>
+            <a class="nav-link" href="{{route('type')}}">Customise EHOR</a>
             <a class="nav-link" href="{{route('user')}}">Manage Users</a>
             <a class="nav-link" href="{{route('reports')}}">View Reports</a>
         </div>

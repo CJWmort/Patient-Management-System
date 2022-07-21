@@ -19,30 +19,24 @@
     @if(session()->has('msg'))
     <div class="alert">
         <div class="alert-title">Alert Message</div>
-        <div class="alert-msg">{{ session()->get('msg') }}</div>
+        <div class="alert-msg">{!! session()->get('msg') !!}</div>
     </div>
     @endif
     <div class = "btn">
-        <button id="locationbtn" class="toggleBtn" onclick="toggleLocationOccurence();">View Location Of Occurence</button>
-        <button id="sitebtn" class="toggleBtn" onclick="toggleSiteOccurence();">View Site Of Occurence</button>    
-        <button id="typebtn" class="toggleBtn type" onclick="toggleTypeOccurence();">View Type Of Occurence</button> 
+        <button id="locationbtn" class="toggleBtn" onclick="toggleLocationOccurence();">Location of Occurrence</button>
+        <button id="sitebtn" class="toggleBtn" onclick="toggleSiteOccurence();">Site of Occurrence</button>    
+        <button id="typebtn" class="toggleBtn type" onclick="toggleTypeOccurence();">Type of Occurrence</button> 
     </div>
-
-<!-- Location -->
+    <!-- Location of Occurrence fields Table -->
     <div id="displaytable_location" style="visibility: none">
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
                 <form action="{{route('addlocation')}}" method="post">
                 @csrf
-                    <th><input type="text" name="location" placeholder="Add New Location"></th>
- 
+                    <th><input type="text" name="location" placeholder="Add New Location" required></th>
                     <th colspan = "4"><input type="submit" class="add" value="Add"></th>
                 </form>
-                
             </tr>
-            <form class="location-title location" action="{{route('addlocation')}}" method="POST">
-            @csrf
-            </form>
             <tr class="tablehead">
                 <th>LOCATION</th>
                 <th>UPDATE</th>
@@ -50,12 +44,15 @@
             </tr>
 
             @foreach($allLocations as $locations)
+            <form class="location-title location" action="{{route('updatelocation')}}" method="POST">
+            @csrf
             <tr class="tablerow">
-                <td><input type="text" name="name[]" value="{{$locations->location}}" required></td>
-
-                <td><a href="" class="update">Update</a></td>
+                <input type="hidden" name="locationid" value="{{$locations->id}}">
+                <td><input type="text" name="name" value="{{$locations->location}}" required></td>
+                <td><input type="submit" class="update updatebtn" value="Update"></td>
                 <td><a href="{{route('deletelocation', ['id'=>$locations->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$locations->location}} ?')" alt="delete">Delete</a></td>
             </tr>
+            </form>
             @endforeach
         </table>
     </div>
@@ -83,38 +80,35 @@
         </div>
         <input class="update" type="submit" value="Update Site of Occurrence Fields">
     </form> -->
-    <!-- Site -->
+    <!-- Site of Occurrence fields Table -->
     <div id="displaytable_site" style="visibility: none">
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
                 <form action="{{route('addsite')}}" method="post">
                 @csrf
-                    <th><input type="text" name="site" placeholder="Add New Site"></th>
- 
+                    <th><input type="text" name="site" placeholder="Add New Site" required></th>
                     <th colspan = "4"><input type="submit" class="add" value="Add"></th>
-                </form>
-                
+                </form>        
             </tr>
-            <form class="location-title site" action="{{route('addsite')}}" method="POST">
-            @csrf
-            </form>
             <tr class="tablehead">
                 <th>SITE</th>
                 <th>UPDATE</th>
                 <th>DELETE</th>
             </tr>
-
             @foreach($allSites as $sites)
-            <tr class="tablerow">
-                <td><input type="text" name="name[]" value="{{$sites->site}}" required></td>
-
-                <td><a href="" class="update">Update</a></td>
-                <td><a href="{{route('deletesite', ['id'=>$sites->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$sites->site}} ?')"  alt="delete">Delete</a></td>
-            </tr>
+            <form class="location-title site" action="{{route('updatesite')}}" method="POST">
+            @csrf
+                <tr class="tablerow">
+                    <input type="hidden" name="siteid" value="{{$sites->id}}">
+                    <td><input type="text" name="name" value="{{$sites->site}}" required></td>
+                    <td><input type="submit" class="update updatebtn" value="Update"></td>
+                    <td><a href="{{route('deletesite', ['id'=>$sites->id])}}" class="delete" onclick="return confirm('Are you sure that you want to delete the field {{$sites->site}} ?')"  alt="delete">Delete</a></td>
+                </tr>
+            </form>
             @endforeach
         </table>
     </div>
-
+    <!-- Type of Occurrence fields Table -->
     <div id="displaytable1" style="visibility: none">
         <table class="typeTable" cellspacing="0">
             <tr class="tablehead">
@@ -179,6 +173,7 @@
     </div>
    
     <script>
+        alert(document.referrer);
         //Initially display type of occurrence
         document.getElementById("displaytable1").style.display="block"; 
         document.getElementById("displaytable_site").style.display="none";

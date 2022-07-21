@@ -12,131 +12,146 @@ use Redirect;
 
 class EhorController extends Controller
 {
-    //Below are the functions for add, delete and update LOCATIONS
+    //Below are the functions for add, delete and update for LOCATION OF OCCURRENCE
     public function deletelocation($id)
     {
         //function to delete location field
         $field = occur_location::find($id);
+        $oldOccurrence = $field->location;
         $result = $field->delete();
         if ($result)
         {
-            return redirect ('ehor')->with('msg',  '"'.$field->location . '"' . ' field has been removed from Location of Occurrence section.');
+            return redirect ('ehor')->with('msg',  '<b>' . $oldOccurrence . '</b> field has been removed
+            from Location of Occurrence.');
         }
         else
         {
-            return redirect ('ehor')->with('msg', 'Failed to remove location field from Location of Occurrence section.');
+            return redirect ('ehor')->withErrors('Failed to delete Location of Occurrence field.');
         }
     }
     public function addlocation(Request $req)
     {
         //function to add new location field
         $newLocation = new occur_location;
+        $newOccurrence = $req->location;
         $newLocation->location=$req->location;
         $result = $newLocation->save();
         if($result){
-            return redirect ('ehor')->with('msg',  '"'. $newLocation->location . '"' . ' field has been added to Location of Occurrence section.');
+            return redirect ('ehor')->with('msg',  '<b>' . $newOccurrence 
+            . '</b> has been addded as a new Location of Occurrence field.');
         }
         else{
-            return redirect ('ehor')->with('msg', 'Failed to add location field into Location of Occurrence section.');
+            return redirect ('ehor')->withErrors('Failed to add new Location of Occurrence field.');
         }
     }
     public function updatelocation(Request $req){
-        //function to update all location fields
-        for($i = 0; $i < count($req->input('locationid')); $i++) {
-            $locations = occur_location::find($req->input('locationid')[$i]);
-            $locations->location = $req->input('location')[$i];
-            $result = $locations->save();
-        }
+        $updatelocation = occur_location::find($req->locationid);
+        $oldOccurrence = $updatelocation->location;
+        $newOccurrence = $req->input('name');
+        $updatelocation->location=$req->input('name');
+        $result = $updatelocation->save();
         if($result){
-            return redirect ('ehor')->with('msg', 'All Location of Occurrence fields have been updated.');
+            return redirect ('ehor')->with('msg', 'Location of Occurrence field <b>' . $oldOccurrence 
+            . '</b> has been updated to <b>' . $newOccurrence . '</b>.');                
         }
         else{
-            return redirect ('ehor')->with('msg', 'Failed to update Location of Occurrence fields.');
+            return redirect ('ehor')->withErrors('Failed to update Location of Occurrence field.');
         }
     }
 
-    //Below are the functions for add, delete and update SITES
+    //Below are the functions for add, delete and update for SITE OF OCCURRENCE
     public function deletesite($id)
     {
         //function to delete site field
         $field = occur_site::find($id);
+        $oldOccurrence = $field->site;
         $result = $field->delete();
         if ($result)
         {
-            return redirect ('ehor')->with('msg2',  '"'.$field->site . '"' . ' site has been removed from Site of Occurrence section.');
+            return redirect ('ehor')->with('msg',  '<b>' . $oldOccurrence . '</b> field has been removed
+            from Site of Occurrence.');
         }
         else
         {
-            return redirect ('ehor')->with('msg2', 'Failed to remove site field from Site of Occurrence section.');
+            return redirect ('ehor')->withErrors('Failed to delete Site of Occurrence field.');
         }
     }
     public function addsite(Request $req)
     {
         //function to add new site field
         $newSite = new occur_site;
+        $newOccurrence = $req->site;
         $newSite->site=$req->site;
         $result = $newSite->save();
         if($result){
-            return redirect ('ehor')->with('msg2',  '"'. $newSite->site . '"' . ' field has been added to Site of Occurrence section.');
+            return redirect ('ehor')->with('msg',  '<b>' . $newOccurrence 
+            . '</b> has been addded as a new Site of Occurrence field.');
         }
         else{
-            return redirect ('ehor')->with('msg2', 'Failed to add site field into Site of Occurrence section.');
+            return redirect ('ehor')->withErrors('Failed to add new Site of Occurrence field.');
         }
     }
     public function updatesite(Request $req){
-        //function to update all site fields
-        for($i = 0; $i < count($req->input('siteid')); $i++) {
-            $sites = occur_site::find($req->input('siteid')[$i]);
-            $sites->site = $req->input('site')[$i];
-            $result = $sites->save();
-        }
+        $updatesite = occur_site::find($req->siteid);
+        $oldOccurrence = $updatesite->site;
+        $newOccurrence = $req->input('name');
+        $updatesite->site=$req->input('name');
+        $result = $updatesite->save();
         if($result){
-            return redirect ('ehor')->with('msg2', 'All Site of Occurrence fields have been updated.');
+            return redirect ('ehor')->with('msg', 'Site of Occurrence field <b>' . $oldOccurrence 
+            . '</b> has been updated to <b>' . $newOccurrence . '</b>.');                
         }
         else{
-            return redirect ('ehor')->with('msg2', 'Failed to update Site of Occurrence fields.');
+            return redirect ('ehor')->withErrors('Failed to update Type of Occurrence field.');
         }
     }
 
-    //Below are the functions for add, delete, filter and update TYPES
+    //Below are the functions for add, delete, filter and update for TYPE OF OCCURRENCE
     public function deletetype($id)
     {
         //function to delete type field
         $field = occur_type::find($id);
+        $oldOccurrence = $field->name . ' (' . $field->type . ')';
         $result = $field->delete();
         if ($result)
         {
-            return redirect ('ehor')->with('msg3',  '"'.$field->name . '"' . ' (' . $field->type . ')' . ' has been removed from Type of Occurrence section.');
+            return redirect ('ehor')->with('msg',  '<b>' . $oldOccurrence . '</b> field has been removed
+            from Type of Occurrence.');
         }
         else
         {
-            return redirect ('ehor')->with('msg3', 'Failed to remove type field from Type of Occurrence section.');
+            return redirect ('ehor')->withErrors('Failed to delete Type of Occurrence field.');
         }
     }
     public function addtype(Request $req)
     {
         //function to add new site field
         $newType = new occur_type;
+        $newOccurrence = $req->name . ' (' . $req->type . ')';
         $newType->type=$req->type;
         $newType->name=$req->name;
         $result = $newType->save();
         if($result){
-            return redirect ('ehor')->with('msg3',  '"'. $newType->name . '"' . ' (' . $newType->type . ')' . ' has been added to Type of Occurrence section.');
+            return redirect ('ehor')->with('msg',  '<b>' . $newOccurrence 
+            . '</b> has been addded as a new Type of Occurrence field.');
         }
         else{
-            return redirect ('ehor')->with('msg3', 'Failed to add type field into Type of Occurrence section.');
+            return redirect ('ehor')->withErrors('Failed to add new Type of Occurrence field.');
         }
     }
     public function updatetype(Request $req){
         $updatetype = occur_type::find($req->typeid);
+        $oldOccurrence = $updatetype->name . ' (' . $updatetype->type . ')';
+        $newOccurrence = $req->input('name') . ' (' . $req->type . ')';
         $updatetype->name=$req->input('name');
         $updatetype->type=$req->type;
         $result = $updatetype->save();
         if($result){
-            return redirect ('ehor')->with('msg3', 'Type of Occurrence has been updated.');
+            return redirect ('ehor')->with('msg', 'Type of Occurrence field <b>' . $oldOccurrence 
+            . '</b> has been updated to <b>' . $newOccurrence . '</b>.');                
         }
         else{
-            return redirect ('ehor')->with('msg3', 'Failed to update Type of Occurrence fields.');
+            return redirect ('ehor')->withErrors('Failed to update Type of Occurrence field.');
         }
     }
     public function filtertype(Request $req)

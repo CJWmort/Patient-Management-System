@@ -19,6 +19,7 @@ body{
     transition: 0.3s;
     margin-top: 10px;
     padding-left: 50px;
+    z-index: 1;
 }
 .moveRight{
     background-color: #57b2af;
@@ -42,6 +43,7 @@ body{
     transition: 0.5s;
     overflow-wrap: break-word;
     position: absolute;
+    z-index: 1;
 }
 .showSideNav{
     transform: translateX(0px);

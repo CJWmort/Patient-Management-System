@@ -14,8 +14,6 @@ function fetchData(){
     fallData = [];
     fielddata.forEach(data => {
         currentFields.push(data.WingLevel); //Get all existing Wing Level and store into array
-    });
-    currentFields.forEach(data => {
         fallData.push(0); //Set each Wing Level's default fall count to be 0
     });
     selectedData = chartdata.filter( //Get all data from selected month-year
@@ -23,9 +21,9 @@ function fetchData(){
     );
     selectedData.forEach(data => {
         index = currentFields.indexOf(data.WingLevel); //Find the index where Wing Level name matches with Wing Level array
-        fallData[index] += data.fall_count; //Increment the fall count of the respective Wing Level
+        fallData[index] += 1; //Increment the fall count of the respective Wing Level for each record
     });
-    totalFallCount = fallData.reduce((a,b) => a + b, 0);
+    totalFallCount = fallData.reduce((a,b) => a + b, 0); //get total fall count from all Wing Level
     $('#total').html('<b>Total: </b>' + totalFallCount);
 }
 $('#date').change(function() { //update chart on change input type month-year

@@ -51,30 +51,32 @@
         @endif
     </div>
     <div class="right" onclick="openMenu();"><img id='arrow' src="{{URL::asset('public/images/right.png')}}" alt="arrow"></div>
-    <div class="chart">
-        <canvas id="myChart" width="1200" height="500"></canvas>
-    </div>
-    <div class='center'>
-        <div id="filter"></div>
-        @if($selectedChart == 6)
-         <div class="charttitle">Fall with injury %</div>
-         <div class="chartsubtitle"></div><br>
-         <div class="doughnut"></div>
-        @endif
-        @if($selectedChart == 5)
-        <form class="table11a-form" action="{{route('editData')}}" method="POST">
-            @csrf
-            @if(session()->has('msg'))
-            <div class="updateMsg">
-                {{ session()->get('msg') }}
-            </div>
+    <div id="blurChart">
+        <div class="chart">
+            <canvas id="myChart" width="1200" height="500"></canvas>
+        </div>
+        <div class='center'>
+            <div id="filter"></div>
+            @if($selectedChart == 6)
+            <div class="charttitle">Fall with injury %</div>
+            <div class="chartsubtitle"></div><br>
+            <div class="doughnut"></div>
             @endif
-            <div id="table"></div>          
-        </form>
-        @else
-        <div id="table"></div>
-        @endif
-        <div id="text"></div>
+            @if($selectedChart == 5)
+            <form class="table11a-form" action="{{route('editData')}}" method="POST">
+                @csrf
+                @if(session()->has('msg'))
+                <div class="updateMsg">
+                    {{ session()->get('msg') }}
+                </div>
+                @endif
+                <div id="table"></div>          
+            </form>
+            @else
+            <div id="table"></div>
+            @endif
+            <div id="text"></div>
+        </div>
     </div>
 </body>
 <script src="{{URL::asset('public/js/jquery.min.js?v=').time()}}"></script>
@@ -92,9 +94,11 @@
         document.querySelector(".side-nav").classList.toggle('showSideNav');
         document.querySelector(".right").classList.toggle('moveRight');
         if ($('#arrow').attr('src') == '{{URL::asset('public/images/right.png')}}') {
-            $('#arrow').attr('src', "{{URL::asset('public/images/left.png')}}")
+            $('#arrow').attr('src', "{{URL::asset('public/images/left.png')}}");          
+            $('#blurChart').css({'filter': 'blur(2px)'});
         } else {
-            $('#arrow').attr('src', "{{URL::asset('public/images/right.png')}}")
+            $('#arrow').attr('src', "{{URL::asset('public/images/right.png')}}");
+            $('#blurChart').css({'filter': 'blur(0)'});
         }
     }
 </script>

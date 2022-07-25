@@ -20,7 +20,7 @@ class Chart11cController extends Controller
             $data = User::where('id', '=', Session::get('loginId'))->first();
         }
         //get all data required for chart11c
-        $chartdata = DB::table('hors_charts')->select('a_inccidentDate', 'WingLevel', 'f_occurType', DB::raw('COUNT(f_occurType) as fall_count'))->join('beds', 'beds.ward', '=', 'hors_charts.d_occurWard')->where('hors_charts.f_occurType', '=', 'fall')->groupBy('hors_charts.a_inccidentDate','beds.WingLevel')->get();
+        $chartdata = DB::table('hors_charts')->select('a_inccidentDate', 'wardwing', 'WingLevel')->join('beds', 'beds.wardwing', '=', 'hors_charts.d_occurWardWing')->where('hors_charts.f_occurType', '=', 'fall')->groupBy('hors_charts.id','beds.wardwing')->get();
 
         //get all Wing Level that exists in the database currently
         $fielddata = DB::table('beds')->select('WingLevel')->groupBy('WingLevel')->get();

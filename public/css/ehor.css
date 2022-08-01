@@ -242,11 +242,11 @@ td{
     font-size: 16px;
     border: none;
     cursor: pointer;
-    background-color: #6eff6e;
+    background-color: rgb(84, 216, 84);
 }
 .add:hover{
     color: white;
-    background-color: rgb(23, 197, 23);
+    background-color: rgb(66, 168, 66);
 }
 #sitebtn,
 #locationbtn,

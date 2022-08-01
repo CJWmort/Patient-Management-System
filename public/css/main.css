@@ -13,16 +13,16 @@ body{
 .griditem{
     background-color: #8BD4D1;
     padding: 50px 0px;
-    transition: 0.3s;
     font-weight: bold;
     font-size: 30px;
     border-radius: 30px;
+    background: linear-gradient(to left, #8BD4D1 50%, #359692 50%) right;
+    background-size: 200%;
+    transition: 0.3s ease-out;
 }
 .griditem:hover{
     color: white;
-    box-shadow: 4px 4px 12px #333;
-    transform: scale(1.02);
-    border-radius: 50%;
+    background-position: left;
 }
 .chart,
 .manage,

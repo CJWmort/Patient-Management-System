@@ -191,6 +191,7 @@
     <input type="number" id="year" min="0" onchange='return true' value="${currentYear}" oninput="this.value = Math.abs(this.value)" required>`);
     var chartdata = {!! json_encode($chartdata) !!} //Get data from chart11dController
     var fielddata = {!! json_encode($fielddata) !!} //Get fields from chart11dController
+    var subfielddata = {!! json_encode($subfielddata) !!} //Get sub-fields from chart11dController
 </script>
 <script src="{{URL::asset('public/js/chart11d.js?v=').time()}}"></script>
 @endif

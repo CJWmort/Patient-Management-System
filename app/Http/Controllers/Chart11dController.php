@@ -19,12 +19,13 @@ class Chart11dController extends Controller
             $data = User::where('id', '=', Session::get('loginId'))->first();
         }
         //get all data required for chart11d
-        $chartdata = DB::table('hors_charts')->select('a_inccidentDate', 'WingLevel', 'f_occurType', DB::raw('COUNT(f_occurType) as fall_count'))->join('beds', 'beds.ward', '=', 'hors_charts.d_occurWard')->where('hors_charts.f_occurType', '=', 'fall')->groupBy('hors_charts.a_inccidentDate','beds.WingLevel')->get();
+        $chartdata = DB::table('hors_charts')->select('a_inccidentDate', 'wardNo', 'WingLevel')->join('beds', 'beds.wardwing', '=', 'hors_charts.d_occurWardWing')->where('hors_charts.f_occurType', '=', 'fall')->groupBy('hors_charts.id','beds.wardwing')->orderBy('a_inccidentDate', 'asc')->get();        
 
-        //get all Wing Level that exists in the database currently
-        $fielddata = DB::table('beds')->select('WingLevel')->groupBy('WingLevel')->get();
+        //get all Ward Number that exists in the database currently
+        $fielddata = DB::table('hors_charts')->select(DB::raw('year(a_inccidentDate) as year'), 'wardNo')->join('beds', 'beds.ward', '=', 'hors_charts.d_occurWard')->where('hors_charts.f_occurType', '=', 'fall')->groupBy(DB::raw('year(a_inccidentDate)'),'beds.wardNo')->orderBy('WingLevel', 'asc')->get();
+        
+        $subfielddata = DB::table('hors_charts')->select(DB::raw('year(a_inccidentDate) as year'), 'wardNo', 'WingLevel')->join('beds', 'beds.ward', '=', 'hors_charts.d_occurWard')->where('hors_charts.f_occurType', '=', 'fall')->groupBy(DB::raw('year(a_inccidentDate)'),'beds.WingLevel')->orderBy('WingLevel', 'asc')->get();
 
-        return view('chart',compact('data', 'chartdata', 'fielddata', 'selectedChart'));
-        // return $chartdata;
+        return view('chart',compact('data', 'chartdata', 'fielddata', 'subfielddata', 'selectedChart'));
     }
 }

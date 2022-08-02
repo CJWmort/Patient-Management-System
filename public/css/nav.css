@@ -31,11 +31,12 @@
     font-size: 18px;
     font-weight: bold;
     border-radius: 15px;
-    transition: 0.3s;
+    background: linear-gradient(to left, #57B2AF 50%, #359692 50%) right;
+    background-size: 200%;
+    transition: 0.3s ease-out;
 }
 .nav-link:hover{
-    background-color: #359692;
-    box-shadow: 4px 4px 12px #333;
+    background-position: left;
     color: white;
 }
 .nav-profile{

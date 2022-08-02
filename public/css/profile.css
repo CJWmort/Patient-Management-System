@@ -10,7 +10,7 @@ h2{
     margin-bottom: 20px;
 }
 .profile{
-    background-color: #ffe3d6;
+    background-color: #8BD4D1;
     margin-top: 50px;
     display: inline-block;
     width: 1000px;
@@ -34,7 +34,7 @@ h2{
 }
 .edit-profile{
     padding: 10px 40px;
-    background-color: rgb(251, 189, 76);
+    background-color: #57B2AF;
     display: inline-block;
     font-weight: bold;
     margin-top: 20px;
@@ -42,6 +42,6 @@ h2{
     transition: 0.3s;
 }
 .edit-profile:hover{
-    background-color: darkorange;
+    background-color: #359692;
     color: white;
 }

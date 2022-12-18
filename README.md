@@ -37,14 +37,15 @@ Implemented CRUD for fields used in the Hospital Occurrence Report(HOR)
 - Delete existing fields from the HOR.
 
 Generate 8 charts/tables using the hospital data retrieved from the THKH database that are customizable by date
-a)     Serious Reportable Event
+a)      Serious Reportable Event
 b)     Monthly Medication related error count by Cat A to I for past 12 months
-c)     Medication related error count by Cat A to I for current month
+c)      Medication related error count by Cat A to I for current month
 d)     Type of Medication related error count for current year
-e)     Monthly Fall-related count by Injury/Non-Injury for past 12 months
-f)     Falls Reported (In-Hospital) by severity
+e)      Monthly Fall-related count by Injury/Non-Injury for past 12 months
+f)      Falls Reported (In-Hospital) by severity
 g)     Falls Reported (In-Hospital) by ward wing
 h)     Falls Reported (In-Hospital) table by ward wing
+
 
 View reports generated from the EHOR application
 

@@ -1,6 +1,6 @@
 # Infocomm System Project (ISP)
 
-Year 3, Semester 1 ISP module industry project working with Thye Hua Kwan Hospital (THKH)
+Industry project working with Thye Hua Kwan Hospital (THKH)
 
 ## Statement of Purpose
 

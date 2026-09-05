@@ -1,6 +1,4 @@
-# Infocomm System Project (ISP)
-
-Industry project working with Thye Hua Kwan Hospital (THKH)
+# Industry project working with Thye Hua Kwan Hospital (THKH)
 
 ## Statement of Purpose
 
